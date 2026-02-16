@@ -19,13 +19,14 @@ public class AttendanceManagementCLI {
 
 
     void initCLI() {
-        System.out.println();
-        System.out.println();
         int decision = 0;
 
 
 
         while (decision != 4) {
+            System.out.println();
+            System.out.println("-------Attendance Management CLI-------");
+
             System.out.println("1. Create Attendance");
             System.out.println("2. Delete Attendance");
             System.out.println("3. List Attendances");
@@ -59,6 +60,7 @@ public class AttendanceManagementCLI {
 
     private void createAttendance() {
         System.out.println();
+        System.out.println("-------Create Attendance-------");
         System.out.print("Enter date with format yyyy-MM-dd: ");
         String date = stdin.nextLine();
 
@@ -80,6 +82,7 @@ public class AttendanceManagementCLI {
 
     private void deleteAttendance() {
         System.out.println();
+        System.out.println("-------Delete Attendance-------");
 
         System.out.print("Enter date with format yyyy-MM-dd: ");
         String date = stdin.nextLine();
@@ -102,7 +105,7 @@ public class AttendanceManagementCLI {
 
     private void listAttendances() {
         System.out.println();
-        System.out.println();
+        System.out.println("-------List Attendances-------");
         List<String> attendances = systemController.attendanceDateLists();
         int i = 0;
 

@@ -27,13 +27,12 @@ public class AttendanceSystemCLI {
 
 
     void initCLI() {
-        System.out.println();
+        System.out.println("-------Attendance System CLI-------");
 
         List<String> attendanceLists = systemController.attendanceDateLists();
         int i = 0, decision;
 
 
-        System.out.println();
         System.out.println();
         if (attendanceLists.isEmpty()) {
             System.out.println("There are no registered attendances.");
@@ -42,6 +41,7 @@ public class AttendanceSystemCLI {
 
 
 
+        System.out.println("-------Date List-------");
         for (String attendanceDate : attendanceLists) {
             System.out.println(++i + ". " + attendanceDate);
         }
@@ -70,6 +70,7 @@ public class AttendanceSystemCLI {
 
         i = 0;
 
+        System.out.println("-------Attendance Student List-------");
         for (Map.Entry<String, String> student : rosterList.entrySet()) {
             System.out.println(++i + ". " + student.getValue() + "\t " + student.getKey() + " " + systemController.isPresent(student.getKey(), date) );
         }
@@ -101,12 +102,12 @@ public class AttendanceSystemCLI {
 
     public void attendanceMode() {
         System.out.println();
+        System.out.println("-------Attendance Mode-------");
 
         List<String> attendanceLists = systemController.attendanceDateLists();
         int i = 0, decision;
 
 
-        System.out.println();
         System.out.println();
         if (attendanceLists.isEmpty()) {
             System.out.println("There are no registered attendances.");
@@ -115,6 +116,7 @@ public class AttendanceSystemCLI {
 
 
 
+        System.out.println("-------Attendance Date List-------");
         for (String attendanceDate : attendanceLists) {
             System.out.println(++i + ". " + attendanceDate);
         }
@@ -137,7 +139,7 @@ public class AttendanceSystemCLI {
 
         AttendanceSheet sheet = systemController.queryAttendance(date);
         System.out.println();
-        System.out.println("Attendance Mode : " + date);
+        System.out.println("-------Attendance Mode : " + date + "-------");
 
 
         int parsedUid;

@@ -18,13 +18,13 @@ public class StudentManagementCLI {
     }
 
     void initCLI() {
-        System.out.println();
-        System.out.println();
 
         int decision = 0;
 
 
         while (decision != 4) {
+            System.out.println();
+            System.out.println("-------Student Management CLI-------");
             System.out.println("1. Enroll Student");
             System.out.println("2. Drop Student");
             System.out.println("3. List Roster");
@@ -56,6 +56,7 @@ public class StudentManagementCLI {
 
     private void addStudent() {
         System.out.println();
+        System.out.println("-------Enroll Student-------");
 
         System.out.print("Enter name: ");
         String name = stdin.nextLine();
@@ -80,6 +81,7 @@ public class StudentManagementCLI {
 
     private void dropStudent() {
         System.out.println();
+        System.out.println("-------Drop Student-------");
 
         System.out.print("Enter valid uid: ");
         String uid = stdin.nextLine();
@@ -102,7 +104,7 @@ public class StudentManagementCLI {
     private void listStudentNames() {
 
         System.out.println();
-        System.out.println();
+        System.out.println("-------Student Roster List-------");
         Map<String, String> roster = systemController.rosterLists();
         int i = 0;
         for (Map.Entry<String, String> student : roster.entrySet()) {
