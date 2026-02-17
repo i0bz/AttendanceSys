@@ -1,6 +1,7 @@
 import controllers.AttendanceControllerFactory;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
+import ui.gui.Frame;
 import utility.Persist;
 
 public class Main {
@@ -18,6 +19,8 @@ public class Main {
                 cli.init();
             }
         }
+
+        Frame frame = new Frame();
 
         Persist.saveRosterFile(attendanceFactory.roster());
         Persist.saveRegistry(attendanceFactory.registry());
