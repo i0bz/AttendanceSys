@@ -24,9 +24,9 @@ public class StudentManagementService {
 
     //Query functions
     public List<String> queryAllStudentName() {
-        return roster.queryAllStudent().entrySet()
+        return roster.queryAllStudent().values()
                 .stream()
-                .map(entry -> entry.getValue().name())
+                .map(Student::name)
                 .sorted()
                 .toList();
     }

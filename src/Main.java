@@ -1,7 +1,7 @@
 import controllers.AttendanceControllerFactory;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
-import ui.gui.Frame;
+import ui.gui.SystemWindows;
 import utility.Persist;
 
 public class Main {
@@ -12,15 +12,19 @@ public class Main {
 
 
 
+        if (args.length == 0) {
+            SystemWindows frame = new SystemWindows();
+        }
 
         for (String arg : args) {
             if (arg.equals("--cli")) {
                 CLIHandler cli = new CLIHandler(controller);
                 cli.init();
+            } else {
+                SystemWindows frame = new SystemWindows();
             }
         }
 
-        Frame frame = new Frame();
 
         Persist.saveRosterFile(attendanceFactory.roster());
         Persist.saveRegistry(attendanceFactory.registry());
