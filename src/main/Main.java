@@ -7,7 +7,7 @@ import utility.Persist;
 import javax.swing.*;
 
 public class  Main {
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         AttendanceControllerFactory attendanceFactory = new AttendanceControllerFactory();
         AttendanceSystemController controller = attendanceFactory.createController();
