@@ -4,7 +4,9 @@ import ui.cli.CLIHandler;
 import ui.gui.GuiApplication;
 import utility.Persist;
 
-public class Main {
+import javax.swing.*;
+
+public class  Main {
     static void main(String[] args) {
 
         AttendanceControllerFactory attendanceFactory = new AttendanceControllerFactory();
@@ -13,7 +15,7 @@ public class Main {
 
 
         if (args.length == 0) {
-            GuiApplication frame = new GuiApplication();
+            SwingUtilities.invokeLater(GuiApplication::new);
         }
 
         for (String arg : args) {
@@ -21,7 +23,7 @@ public class Main {
                 CLIHandler cli = new CLIHandler(controller);
                 cli.init();
             } else {
-                GuiApplication frame = new GuiApplication();
+                SwingUtilities.invokeLater(GuiApplication::new);
             }
         }
 
