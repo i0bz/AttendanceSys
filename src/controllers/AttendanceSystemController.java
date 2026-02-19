@@ -6,8 +6,8 @@ package controllers;
 import entity.AttendanceSheet;
 
 //Services
-import services.StudentAttendanceService;
-import services.StudentManagementService;
+import services.AttendanceService;
+import services.StudentService;
 
 //Utilities
 import utility.ParseUtility;
@@ -18,8 +18,8 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 public class AttendanceSystemController {
-    private final StudentManagementService studentManagement;
-    private final StudentAttendanceService attendanceService;
+    private final StudentService studentManagement;
+    private final AttendanceService attendanceService;
 
     /**
      * Instantiates a new Attendance system controller.
@@ -27,7 +27,7 @@ public class AttendanceSystemController {
      * @param managementService the student management service
      * @param attendanceService the attendance service
      */
-    AttendanceSystemController(StudentManagementService managementService, StudentAttendanceService attendanceService) {
+    AttendanceSystemController(StudentService managementService, AttendanceService attendanceService) {
         this.studentManagement = managementService;
         this.attendanceService = attendanceService;
     }

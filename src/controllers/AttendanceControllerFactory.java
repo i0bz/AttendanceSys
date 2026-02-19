@@ -2,8 +2,8 @@ package controllers;
 
 import repository.AttendanceRegistry;
 import repository.StudentRoster;
-import services.StudentAttendanceService;
-import services.StudentManagementService;
+import services.AttendanceService;
+import services.StudentService;
 import utility.Persist;
 
 public class AttendanceControllerFactory {
@@ -16,8 +16,8 @@ public class AttendanceControllerFactory {
     }
 
     public AttendanceSystemController createController() {
-        StudentAttendanceService attendanceService = new StudentAttendanceService(registry, roster);
-        StudentManagementService managementService = new StudentManagementService(roster);
+        AttendanceService attendanceService = new AttendanceService(registry, roster);
+        StudentService managementService = new StudentService(roster);
         return new AttendanceSystemController(managementService, attendanceService);
     }
 

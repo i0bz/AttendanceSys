@@ -5,21 +5,21 @@ import repository.StudentRoster;
 
 import java.util.*;
 
-public class StudentManagementService {
+public class StudentService {
 
     private final StudentRoster roster;
 
-    public StudentManagementService(StudentRoster roster) {
+    public StudentService(StudentRoster roster) {
         this.roster = roster;
     }
 
 
     //Student Management
     public void enrollStudent(String name, int uid) {
-        roster.addStudentToRoster(new Student(name, uid));
+        roster.enroll(new Student(name, uid));
     }
     public void dropStudent(int uid) {
-        roster.dropStudentFromRoster(uid);
+        roster.drop(uid);
     }
 
     //Query functions

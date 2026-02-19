@@ -4,7 +4,6 @@ import entity.Student;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class StudentRoster implements Serializable {
     private final HashMap<Integer, Student> studentRoster;
@@ -14,10 +13,10 @@ public class StudentRoster implements Serializable {
     }
 
     //Student Roster Management
-    public void addStudentToRoster(Student student) {
+    public void enroll(Student student) {
         studentRoster.putIfAbsent(student.uid(), student);
     }
-    public void dropStudentFromRoster(int uid) {
+    public void drop(int uid) {
         studentRoster.remove(uid);
     }
 

@@ -9,12 +9,12 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class StudentAttendanceService {
+public class AttendanceService {
 
     private final AttendanceRegistry registry;
     private final StudentRoster roster;
 
-    public StudentAttendanceService(AttendanceRegistry registry, StudentRoster roster) {
+    public AttendanceService(AttendanceRegistry registry, StudentRoster roster) {
         this.registry = registry;
         this.roster = roster;
     }

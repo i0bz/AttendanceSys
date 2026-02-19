@@ -1,7 +1,7 @@
 import controllers.AttendanceControllerFactory;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
-import ui.gui.SystemWindows;
+import ui.gui.GuiApplication;
 import utility.Persist;
 
 public class Main {
@@ -13,7 +13,7 @@ public class Main {
 
 
         if (args.length == 0) {
-            SystemWindows frame = new SystemWindows();
+            GuiApplication frame = new GuiApplication();
         }
 
         for (String arg : args) {
@@ -21,7 +21,7 @@ public class Main {
                 CLIHandler cli = new CLIHandler(controller);
                 cli.init();
             } else {
-                SystemWindows frame = new SystemWindows();
+                GuiApplication frame = new GuiApplication();
             }
         }
 

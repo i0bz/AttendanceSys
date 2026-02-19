@@ -37,14 +37,22 @@ public class Persist {
     Loading
      */
     public static AttendanceRegistry loadRegistry(StudentRoster roster) {
+
         AttendanceRegistry reg = null;
+
         try (FileInputStream ifs = new FileInputStream(attendanceFile);
              ObjectInputStream objectStream = new ObjectInputStream(ifs)) {
+
             reg = (AttendanceRegistry) objectStream.readObject();
             reg.setRoster(roster);
-        }   catch (IOException e) {
+
+        }
+
+        catch (IOException e) {
             reg = new AttendanceRegistry(roster);
-        } catch (ClassNotFoundException e2) {
+        }
+
+        catch (ClassNotFoundException e2) {
             e2.printStackTrace();
         }
 
@@ -52,12 +60,21 @@ public class Persist {
     }
     public static StudentRoster loadRoster() {
         StudentRoster reg = null;
+
+
         try (FileInputStream ifs = new FileInputStream(studentRosterFile);
              ObjectInputStream objectStream = new ObjectInputStream(ifs)) {
+
+
             reg = (StudentRoster) objectStream.readObject();
-        }   catch (IOException e) {
+
+        }
+
+        catch (IOException e) {
             reg = new StudentRoster();
-        }   catch (ClassNotFoundException e2) {
+        }
+
+        catch (ClassNotFoundException e2) {
             e2.printStackTrace();
         }
 
