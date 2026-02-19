@@ -1,7 +1,7 @@
 import controllers.AttendanceControllerFactory;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
-import ui.gui.GuiApplication;
+import ui.gui.App;
 import utility.Persist;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ public class  Main {
 
 
         if (args.length == 0) {
-            SwingUtilities.invokeLater(GuiApplication::new);
+            SwingUtilities.invokeLater(App::new);
         }
 
         for (String arg : args) {
@@ -23,7 +23,7 @@ public class  Main {
                 CLIHandler cli = new CLIHandler(controller);
                 cli.init();
             } else {
-                SwingUtilities.invokeLater(GuiApplication::new);
+                SwingUtilities.invokeLater(App::new);
             }
         }
 
