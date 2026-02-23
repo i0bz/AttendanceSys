@@ -1,0 +1,19 @@
+package services;
+
+import entity.AttendanceSheet;
+import entity.Student;
+
+import java.time.LocalDate;
+import java.util.Set;
+import java.util.SortedSet;
+
+public interface IAttendanceService {
+
+    void createAttendance(LocalDate date);
+    void removeAttendance(LocalDate date);
+
+    void toggleAttendance(LocalDate date, int uid);
+
+    SortedSet<AttendanceSheet> getAttendanceList();
+    Set<Student> getPresent(LocalDate date);
+}

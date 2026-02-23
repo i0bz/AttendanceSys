@@ -1,30 +1,75 @@
 package ui.gui.bars;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.ui.FlatEmptyBorder;
+import com.formdev.flatlaf.ui.FlatLineBorder;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class NavBar extends JPanel {
+public class NavBar {
 
+    JPanel mainPanel = new JPanel();
+    JPanel contentPanel = new JPanel();
+    ArrayList<JButton> buttons = new ArrayList<>();
+    String[] labels = {"Student Management", "Attendance Management", "Attendance System", "Attendance Mode"};
 
     public NavBar(BorderLayout layout, JPanel container) {
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        JPanel nest = new JPanel(new GridLayout(0, 1, 0, 10));
-
-
-        JButton studentManagementMenu = new JButton("Student Management");
-        JButton attendanceManagementMenu = new JButton("Attendance Management");
-        JButton attendanceSystemMenu = new JButton("Attendance System");
+        initializePanel();
+        createButtons();
+        addComponents();
+    }
 
 
+    void initializePanel() {
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
-        nest.add(studentManagementMenu);
-        nest.add(attendanceManagementMenu);
-        nest.add(attendanceSystemMenu);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setOpaque(false);
+        mainPanel.setBorder(BorderFactory.createMatteBorder(0,0,0,1, Color.decode("#cecfd1")));
+
+        mainPanel.add(contentPanel, BorderLayout.WEST);
+
+    }
+
+    public void createButtons() {
+        Dimension buttonSize = new Dimension(200, 70);
+        for (String label : labels) {
+            buttons.add(new JButton(label));
+        }
+
+        for (JButton button : buttons) {
+            button.setMinimumSize(buttonSize);
+            button.setMaximumSize(buttonSize);
+            button.setPreferredSize(buttonSize);
+            button.putClientProperty("Jbutton.buttonType", "rountRect");
+            button.putClientProperty(FlatClientProperties.STYLE, "arc: 10");
+        }
 
 
-        add(nest);
-        add(Box.createVerticalGlue());
+    }
+
+    void addComponents() {
+        contentPanel.setOpaque(false);
+        for (JButton button : buttons) {
+            JPanel container = new JPanel(new BorderLayout());
+
+            container.setOpaque(false);
+            container.setMaximumSize(new Dimension(Integer.MAX_VALUE, button.getHeight() + 10));
+
+            container.add(button, BorderLayout.CENTER);
+
+
+            contentPanel.add(container);
+            contentPanel.add(Box.createVerticalStrut(10));
+        }
+        contentPanel.add(Box.createVerticalGlue());
+    }
+
+
+
+    public JPanel getPanel() {
+        return mainPanel;
     }
 }

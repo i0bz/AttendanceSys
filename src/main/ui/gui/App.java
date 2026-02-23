@@ -28,9 +28,9 @@ public class App {
         NavBar navBar = new NavBar(borderLayout, mainContainer);
         TitleBar titleBar = new TitleBar();
 
-        mainContainer.add(titleBar, BorderLayout.NORTH);
+        mainContainer.add(titleBar.getPanel(), BorderLayout.NORTH);
         mainContainer.add(contentPanel, BorderLayout.CENTER);
-        mainContainer.add(navBar, BorderLayout.WEST);
+        mainContainer.add(navBar.getPanel(), BorderLayout.WEST);
 
 
 
