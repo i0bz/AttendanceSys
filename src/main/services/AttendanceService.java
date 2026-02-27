@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AttendanceService {
+public class AttendanceService implements IAttendanceService {
 
     private final AttendanceRegistry registry;
     private final StudentRoster roster;
@@ -24,7 +24,7 @@ public class AttendanceService {
     public void createAttendance(LocalDate date) {
         registry.addAttendance(date);
     }
-    public void deleteAttendance(LocalDate date) {
+    public void removeAttendance(LocalDate date) {
         registry.removeAttendance(date);
     }
 
@@ -39,14 +39,27 @@ public class AttendanceService {
 
 
     //Query functions
-    public SortedSet<LocalDate> queryAttendanceDateList() {
+    public SortedSet<LocalDate> getDates() {
         return registry.attendanceDateList();
     }
-    public AttendanceSheet queryAttendance(LocalDate date) {
+    public AttendanceSheet getAttendance(LocalDate date) {
         return registry.queryAttendance(date);
     }
+
+    public SortedSet<Student> getPresent(LocalDate date) {
+        AttendanceSheet sheet = registry.queryAttendance(date);
+        return roster.queryAllStudent()
+                .entrySet()
+                .stream()
+                .filter(entry -> sheet.attendanceStudentsSet().contains(entry.getKey()))
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+
+
     public List<String> queryAttendanceNames(LocalDate date) {
-        AttendanceSheet sheet = queryAttendance(date);
+        AttendanceSheet sheet = getAttendance(date);
         return roster.queryAllStudent()
                 .entrySet()
                 .stream()
@@ -56,11 +69,11 @@ public class AttendanceService {
                 .collect(Collectors.toList());
     }
     public SortedSet<Integer> queryAttendanceIDs(LocalDate date) {
-        AttendanceSheet sheet = queryAttendance(date);
+        AttendanceSheet sheet = getAttendance(date);
         return new TreeSet<>(sheet.attendanceStudentsSet());
     }
     public Set<Student> queryAttendanceStudents(LocalDate date) {
-        AttendanceSheet sheet = queryAttendance(date);
+        AttendanceSheet sheet = getAttendance(date);
         return roster.queryAllStudent()
                 .entrySet()
                 .stream()

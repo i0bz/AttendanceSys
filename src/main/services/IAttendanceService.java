@@ -14,6 +14,8 @@ public interface IAttendanceService {
 
     void toggleAttendance(LocalDate date, int uid);
 
-    SortedSet<AttendanceSheet> getAttendanceList();
-    Set<Student> getPresent(LocalDate date);
+
+    SortedSet<LocalDate> getDates();
+    AttendanceSheet getAttendance(LocalDate date);
+    SortedSet<Student> getPresent(LocalDate date);
 }

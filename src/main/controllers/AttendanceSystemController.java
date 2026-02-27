@@ -6,8 +6,8 @@ package controllers;
 import entity.AttendanceSheet;
 
 //Services
-import services.AttendanceService;
-import services.StudentService;
+import services.IAttendanceService;
+import services.IStudentService;
 
 //Utilities
 import utility.ParseUtility;
@@ -18,8 +18,8 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 public class AttendanceSystemController {
-    private final StudentService studentManagement;
-    private final AttendanceService attendanceService;
+    private final IStudentService studentManagement;
+    private final IAttendanceService attendanceService;
 
     /**
      * Instantiates a new Attendance system controller.
@@ -27,7 +27,7 @@ public class AttendanceSystemController {
      * @param managementService the student management service
      * @param attendanceService the attendance service
      */
-    AttendanceSystemController(StudentService managementService, AttendanceService attendanceService) {
+    AttendanceSystemController(IStudentService managementService, IAttendanceService attendanceService) {
         this.studentManagement = managementService;
         this.attendanceService = attendanceService;
     }
@@ -42,7 +42,7 @@ public class AttendanceSystemController {
      * @param uid School ID number of the student
      */
     public void dropStudent(String uid) {
-        studentManagement.dropStudent(ParseUtility.parseUID(uid));
+        studentManagement.drop(ParseUtility.parseUID(uid));
     }
     /**
      * Enroll student.
@@ -51,7 +51,7 @@ public class AttendanceSystemController {
      * @param uid  School ID number of the student
      */
     public void enrollStudent(String name, String uid) {
-        studentManagement.enrollStudent(name, ParseUtility.parseUID(uid));
+        studentManagement.enroll(name, ParseUtility.parseUID(uid));
     }
 
 
@@ -72,7 +72,7 @@ public class AttendanceSystemController {
      * @param date Date in yyyy-MM-dd format
      */
     public void removeAttendance(String date) {
-        attendanceService.deleteAttendance(ParseUtility.parseDate(date));
+        attendanceService.removeAttendance(ParseUtility.parseDate(date));
     }
 
 
@@ -92,7 +92,7 @@ public class AttendanceSystemController {
         LocalDate parsedDate = ParseUtility.parseDate(date);
         int studentID = ParseUtility.parseUID(uid);
 
-        AttendanceSheet sheet = attendanceService.queryAttendance(parsedDate);
+        AttendanceSheet sheet = attendanceService.getAttendance(parsedDate);
 
         return sheet.isPresent(studentID);
     }
@@ -102,10 +102,10 @@ public class AttendanceSystemController {
 
     //Querying (Student Management specific)
     public List<String> rosterNameLists() {
-        return studentManagement.queryAllStudentName();
+        return studentManagement.getAllNames();
     }
     public Map<String, String> rosterLists() {
-        return new TreeMap<>(studentManagement.queryAllStudent()
+        return new TreeMap<>(studentManagement.getAllStudents()
                 .entrySet()
                 .stream()
                 .collect(Collectors
@@ -117,16 +117,16 @@ public class AttendanceSystemController {
     //Querying (Attendance specific)
     public SortedSet<String> attendanceStudentUIDLists(String date) {
         LocalDate parsedDate = ParseUtility.parseDate(date);
-        AttendanceSheet sheet = attendanceService.queryAttendance(parsedDate);
+        AttendanceSheet sheet = attendanceService.getAttendance(parsedDate);
         return sheet.attendanceStudentsSet()
                 .stream()
                 .map(ParseUtility::unparseUID)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
     public Map<String, String> attendanceRoster(String date) {
-        AttendanceSheet attendanceSheet = attendanceService.queryAttendance(ParseUtility.parseDate(date));
+        AttendanceSheet attendanceSheet = attendanceService.getAttendance(ParseUtility.parseDate(date));
 
-        return studentManagement.queryAllStudent()
+        return studentManagement.getAllStudents()
                 .entrySet()
                 .stream()
                 .filter(entry -> attendanceSheet.attendanceStudentsSet().contains(entry.getKey()))
@@ -136,10 +136,10 @@ public class AttendanceSystemController {
 
     //Querying (Registry)
     public AttendanceSheet queryAttendance(String date) {
-        return attendanceService.queryAttendance(ParseUtility.parseDate(date));
+        return attendanceService.getAttendance(ParseUtility.parseDate(date));
     }
     public List<String> attendanceDateLists() {
-        return attendanceService.queryAttendanceDateList()
+        return attendanceService.getDates()
                 .stream()
                 .map(LocalDate::toString)
                 .toList();

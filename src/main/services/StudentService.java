@@ -5,7 +5,7 @@ import repository.StudentRoster;
 
 import java.util.*;
 
-public class StudentService {
+public class StudentService implements IStudentService {
 
     private final StudentRoster roster;
 
@@ -15,15 +15,15 @@ public class StudentService {
 
 
     //Student Management
-    public void enrollStudent(String name, int uid) {
+    public void enroll(String name, int uid) {
         roster.enroll(new Student(name, uid));
     }
-    public void dropStudent(int uid) {
+    public void drop(int uid) {
         roster.drop(uid);
     }
 
     //Query functions
-    public List<String> queryAllStudentName() {
+    public List<String> getAllNames() {
         return roster.queryAllStudent().values()
                 .stream()
                 .map(Student::name)
@@ -31,9 +31,11 @@ public class StudentService {
                 .toList();
     }
 
-    public Map<Integer, Student> queryAllStudent() {
+    public Map<Integer, Student> getAllStudents() {
         return roster.queryAllStudent();
     }
+
+
     public SortedSet<Integer> queryAllStudentID() {
         return new TreeSet<>(roster.queryAllStudent().keySet());
     }
