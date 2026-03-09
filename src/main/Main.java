@@ -32,7 +32,6 @@ public class  Main {
 
 
 
-        Persist.saveRosterFile(attendanceFactory.roster());
-        Persist.saveRegistry(attendanceFactory.registry());
+        attendanceFactory.saveData();
     }
 }

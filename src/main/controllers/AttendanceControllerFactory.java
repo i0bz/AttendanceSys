@@ -12,13 +12,18 @@ public class AttendanceControllerFactory {
 
     public  AttendanceControllerFactory() {
         this.roster = Persist.loadRoster();
-        this.registry = Persist.loadRegistry(roster);
+        this.registry = Persist.loadRegistry();
     }
 
     public AttendanceSystemController createController() {
         AttendanceService attendanceService = new AttendanceService(registry, roster);
         StudentService managementService = new StudentService(roster);
         return new AttendanceSystemController(managementService, attendanceService);
+    }
+
+    public void saveData() {
+        Persist.saveRosterFile(roster);
+        Persist.saveRegistry(registry);
     }
 
     public StudentRoster roster() {

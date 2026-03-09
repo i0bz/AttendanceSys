@@ -63,36 +63,15 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
     }
 
 
-    //Attendance Checkers
-    /**
-     * Check if student is present.
-     *
-     * @param studentUID the student uid
-     * @return the boolean
-     */
+
     public boolean isPresent(int studentUID) {
         return attendanceRoster.contains(studentUID);
     }
 
-
-    //Query
-    /**
-     * Attendance students uid list in a sorted set.
-     *
-     * @return the sorted set
-     */
     public Set<Integer> attendanceStudentsSet() {
         return attendanceRoster;
     }
 
-
-
-//Getter
-    /**
-     * Getter for date.
-     *
-     * @return the local date
-     */
     public LocalDate date(){
         return this.date;
     }
