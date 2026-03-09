@@ -17,7 +17,6 @@ src/test
 *.iml
 *.ipr
 
-src/main/ui/gui/*
 
 
 ### VS Code ###

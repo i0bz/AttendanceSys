@@ -1,30 +1,34 @@
 package ui.gui.bars;
 
-import com.formdev.flatlaf.ui.FlatEmptyBorder;
-import com.formdev.flatlaf.ui.FlatLineBorder;
-
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class TitleBar {
     JPanel mainPanel = new JPanel();
-    JPanel contentPanel = new JPanel();
-    JLabel title = new JLabel("Attendance System");
+
+    final Color borderColor = Color.decode("#cecfd1");
+    final MatteBorder line_border = BorderFactory.createMatteBorder(0,0,1,0, borderColor);
+    final EmptyBorder padding = new EmptyBorder(10,10,10,10);
+    final CompoundBorder border = new CompoundBorder(line_border, padding);
+
 
     public TitleBar() {
+        initComponents();
+    }
 
-        contentPanel.setLayout(new FlowLayout());
-        contentPanel.add(title);
-        //contentPanel.setBackground(Color.decode("#d9d9d9"));
-
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBorder(new FlatLineBorder(new Insets(0,0,3,0), Color.decode("#cecfd1")));
-        mainPanel.setOpaque(false);
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
+    public void initComponents() {
+        JLabel title = new JLabel("AttendanceSystem");
+        title.putClientProperty( "FlatLaf.style", "font: bold $h2.regular.font" );
+        mainPanel.add(title);
+        mainPanel.setBorder(border);
     }
 
 
+
     public JPanel getPanel() {
-        return mainPanel;
+        return  mainPanel;
     }
 }
