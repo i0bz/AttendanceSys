@@ -3,7 +3,6 @@ package ui.gui;
 import ui.gui.contents.AttendanceManagementContent;
 import ui.gui.contents.StudentManagementContent;
 
-import javax.smartcardio.Card;
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,11 +22,9 @@ public class ContentView {
     ContentView() {
 
         mainPanel.add(studentManagementContent.getPanel(), views[0]);
-        mainPanel.add(studentManagementContent.getPanel(), views[0]);
         mainPanel.add(attendanceManagementContent.getPanel(), views[1]);
 
-
-        cardLayout.show(mainPanel, views[1]);
+        cardLayout.show(mainPanel, views[0]);
     }
 
 
