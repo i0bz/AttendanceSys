@@ -36,7 +36,7 @@ public class Persist {
     /*
     Loading
      */
-    public static AttendanceRegistry loadRegistry(StudentRoster roster) {
+    public static AttendanceRegistry loadRegistry() {
 
         AttendanceRegistry reg = null;
 
@@ -44,12 +44,11 @@ public class Persist {
              ObjectInputStream objectStream = new ObjectInputStream(ifs)) {
 
             reg = (AttendanceRegistry) objectStream.readObject();
-            reg.setRoster(roster);
 
         }
 
         catch (IOException e) {
-            reg = new AttendanceRegistry(roster);
+            reg = new AttendanceRegistry();
         }
 
         catch (ClassNotFoundException e2) {

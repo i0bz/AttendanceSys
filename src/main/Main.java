@@ -1,8 +1,8 @@
+import com.formdev.flatlaf.FlatLightLaf;
 import controllers.AttendanceControllerFactory;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
-import ui.gui.App;
-import utility.Persist;
+import ui.gui.MainWindow;
 
 import javax.swing.*;
 
@@ -12,23 +12,25 @@ public class  Main {
         AttendanceControllerFactory attendanceFactory = new AttendanceControllerFactory();
         AttendanceSystemController controller = attendanceFactory.createController();
 
-
-
-        if (args.length == 0) {
-            SwingUtilities.invokeLater(App::new);
-        }
-
-        for (String arg : args) {
-            if (arg.equals("--cli")) {
-                CLIHandler cli = new CLIHandler(controller);
-                cli.init();
-            } else {
-                SwingUtilities.invokeLater(App::new);
+        if (args.length != 0) {
+            for (String arg : args) {
+                if (arg.equals("--cli")) {
+                    CLIHandler cli = new CLIHandler(controller);
+                    cli.init();
+                }
+                }
+        } else {
+            try {
+                UIManager.setLookAndFeel( new FlatLightLaf() );
+            } catch( Exception ex ) {
+                System.err.println( "Failed to initialize LaF" );
             }
+            SwingUtilities.invokeLater(MainWindow::new);
         }
 
 
-        Persist.saveRosterFile(attendanceFactory.roster());
-        Persist.saveRegistry(attendanceFactory.registry());
+
+
+        attendanceFactory.saveData();
     }
 }
