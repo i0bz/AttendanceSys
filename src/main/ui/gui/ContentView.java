@@ -37,7 +37,7 @@ public class ContentView {
         return cardLayout;
     }
 
-    public String[] getCards() {
+    public String[] getContainerNames() {
         return views;
     }
 }

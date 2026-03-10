@@ -40,7 +40,7 @@ public class NavigationBar {
 
     public NavigationBar(ContentView contents) {
         this.contents = contents;
-        labels = contents.getCards();
+        labels = contents.getContainerNames();
         initComponents();
     }
 
