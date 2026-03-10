@@ -14,9 +14,9 @@ public class Container {
         BorderLayout layout = new BorderLayout();
         mainPanel.setLayout(layout);
 
-        NavigationBar navBar = new NavigationBar();
         TitleBar titleBar = new TitleBar();
         ContentView contentView = new ContentView();
+        NavigationBar navBar = new NavigationBar(contentView);
 
         mainPanel.add(titleBar.getPanel(), BorderLayout.NORTH);
         mainPanel.add(navBar.getPanel(), BorderLayout.WEST);

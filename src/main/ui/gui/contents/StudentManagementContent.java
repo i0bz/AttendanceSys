@@ -4,16 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StudentManagementContent {
-    JPanel mainPanel;
-    GridBagConstraints constraints;
+    private JPanel mainPanel = new JPanel(new GridBagLayout());
+    private GridBagConstraints constraints = new GridBagConstraints();
 
     public  StudentManagementContent() {
         initComponents();
     }
 
     private void initComponents() {
-        mainPanel = new JPanel(new GridBagLayout());
-        constraints = new GridBagConstraints();
 
         EnrollForm enrollForm = new EnrollForm();
 
@@ -84,7 +82,7 @@ class EnrollForm extends Card {
         constraints.gridy = 3;
         constraints.gridwidth = 2;
         constraints.weightx = 1;
-        constraints.insets = new Insets(10, 240, 0, 240);
+        constraints.insets = new Insets(10, 230, 0, 230);
         mainPanel.add(enrollButton, constraints);
 
     }
