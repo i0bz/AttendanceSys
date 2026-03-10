@@ -5,7 +5,6 @@ import com.formdev.flatlaf.ui.FlatLineBorder;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class StudentManagementContent {
@@ -49,6 +48,12 @@ class EnrollForm {
     final FlatLineBorder line_border = new FlatLineBorder(new Insets(0,0,0,0), borderColor, 1, 15);
     final FlatEmptyBorder padding = new FlatEmptyBorder(10,10,10,10);
     final CompoundBorder border = new CompoundBorder(line_border, padding);
+    
+    
+    JTextField studentIdInput = new JTextField(9);
+    JTextField studentNameInput = new JTextField(9);
+    JButton enrollButton = new JButton("Enroll");
+
 
     EnrollForm() {
             initComponents();
@@ -59,21 +64,40 @@ class EnrollForm {
         mainPanel.setBorder(border);
         mainPanel.putClientProperty("FlatLaf.style", "arc: 30");
 
-
         JLabel enrollLabel = new JLabel("Enroll new student");
         JLabel studentNameLabel = new JLabel("Student Name:");
         JLabel studentIDLabel = new JLabel("Student ID:");
 
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.gridwidth = 2;
+        constraints.gridwidth = 1;
         constraints.weightx = 1.0;
-        constraints.fill = GridBagConstraints.BOTH;
-
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        enrollLabel.setHorizontalAlignment(SwingConstants.LEFT);
         mainPanel.add(enrollLabel, constraints);
 
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.weightx = 1.0;
+        mainPanel.add(studentNameLabel, constraints);
 
+        constraints.gridx = 1;
+        mainPanel.add(studentIDLabel, constraints);
+        
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.gridy = 2;
+        mainPanel.add(studentIdInput, constraints);
+        
+        constraints.insets = new Insets(0, 0, 0, 10);
+        constraints.gridx = 0;
+        mainPanel.add(studentNameInput, constraints);
 
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 2;
+        constraints.weightx = 1;
+        constraints.insets = new Insets(10, 240, 0, 240);
+        mainPanel.add(enrollButton, constraints);
 
     }
 
