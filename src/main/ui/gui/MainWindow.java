@@ -11,7 +11,7 @@ public class MainWindow {
 
         //configure
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(900,700);
+        mainFrame.setSize(1000, 700);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setLayout(new BorderLayout());
 
