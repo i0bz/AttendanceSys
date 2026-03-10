@@ -26,7 +26,6 @@ public class AttendanceSystemCLI {
 
 
 
-    //TODO Split this up later
 
 
     void initCLI() {
@@ -34,7 +33,7 @@ public class AttendanceSystemCLI {
 
         int i = 0, decision;
 
-        if(hasAttendances()) return;
+        if(!hasAttendances()) return;
 
 
 
@@ -78,9 +77,8 @@ public class AttendanceSystemCLI {
         System.out.println();
         System.out.println("-------Attendance Mode-------");
 
-        if (hasAttendances()) return;
+        if (!hasAttendances()) return;
         AttendanceSheet sheet = attendanceSelector();
-
 
         System.out.println();
         System.out.println("-------Attendance Mode : " + sheet.date() + "-------");
