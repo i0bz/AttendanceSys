@@ -1,6 +1,5 @@
 package ui.gui.contents;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -39,7 +38,8 @@ public class AttendanceManagementContent {
 
 class AttendanceCreationView extends Card {
 
-    private JLabel createAttendanceLabel = new JLabel("Attendance Creation:");
+    private JLabel descriptionLabel = new JLabel("Attendance Creation:");
+    private JLabel dateLabel = new JLabel("Date:");
     private JTextField dateInput = new JTextField();
     private JButton createButton = new JButton("Create");
 
@@ -51,7 +51,7 @@ class AttendanceCreationView extends Card {
 
     }
 
-
+//TODO create helper functions for each
     private void initComponents() {
         
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -59,13 +59,17 @@ class AttendanceCreationView extends Card {
         constraints.gridy = 0;
         constraints.weightx = 1;
         constraints.gridwidth = 2;
-        createAttendanceLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        mainPanel.add(createAttendanceLabel, constraints);
+        descriptionLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        mainPanel.add(descriptionLabel, constraints);
 
+
+        constraints.insets = new Insets(0,0,0,0);
+        constraints.gridy = 1;
+        mainPanel.add(dateLabel, constraints);
 
         constraints.insets = new Insets(0, 0, 0, 10);
         constraints.gridwidth = 1;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         constraints.weightx = 10;
         mainPanel.add(dateInput, constraints);
         

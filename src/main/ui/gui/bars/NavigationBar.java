@@ -84,11 +84,14 @@ public class NavigationBar {
     }
 
 
-    private void swapCards(int x) {
-        contents.getCardLayout().show(contents.getPanel(), labels[x]);
+    private void swapCards(int iterator) {
+        contents.getCardLayout().show(contents.getPanel(), buttons.get(iterator).getText());
     }
 
 
+
+
+    //  TODO Find a way to to use for loops here 
     private void initListeneters() {
 
         buttons.get(0).addActionListener(e -> {
@@ -104,6 +107,8 @@ public class NavigationBar {
         buttons.get(3).addActionListener(e -> {
             swapCards(3);
         });
+
+
     }
 
 
