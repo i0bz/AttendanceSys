@@ -81,8 +81,8 @@ class EnrollForm extends Card {
         constraints.gridx = 0;
         constraints.gridy = 3;
         constraints.gridwidth = 2;
-        constraints.weightx = 1;
-        constraints.insets = new Insets(10, 230, 0, 230);
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.insets = new Insets(10, 0, 0, 0);
         mainPanel.add(enrollButton, constraints);
 
     }
