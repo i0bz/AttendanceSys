@@ -70,14 +70,18 @@ class EnrollForm extends Card {
         constraints.gridx = 1;
         mainPanel.add(studentIDLabel, constraints);
         
+        studentIdInput.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.gridy = 2;
         mainPanel.add(studentIdInput, constraints);
-        
+
+        studentNameInput.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 10);
         constraints.gridx = 0;
         mainPanel.add(studentNameInput, constraints);
 
+
+        enrollButton.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.gridx = 0;
         constraints.gridy = 3;
         constraints.gridwidth = 2;

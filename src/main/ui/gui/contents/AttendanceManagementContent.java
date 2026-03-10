@@ -38,10 +38,10 @@ public class AttendanceManagementContent {
 
 class AttendanceCreationView extends Card {
 
-    private JLabel descriptionLabel = new JLabel("Attendance Creation:");
+    private JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
     private JLabel dateLabel = new JLabel("Date:");
     private JTextField dateInput = new JTextField();
-    private JButton createButton = new JButton("Create");
+    private JButton addButton = new JButton("Add Date");
 
 
     AttendanceCreationView() {
@@ -67,20 +67,23 @@ class AttendanceCreationView extends Card {
         constraints.gridy = 1;
         mainPanel.add(dateLabel, constraints);
 
+
+        dateInput.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 10);
         constraints.gridwidth = 1;
         constraints.gridy = 2;
-        constraints.weightx = 10;
+        constraints.weightx = 2;
         mainPanel.add(dateInput, constraints);
-        
-        
+
+
+        addButton.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 0);
-        constraints.gridx = 2;
-        constraints.weightx = 0.1;
-        mainPanel.add(createButton, constraints);
-
-
         constraints.gridx = 1;
+        constraints.weightx = 0.1;
+        mainPanel.add(addButton, constraints);
+
+
+        constraints.gridx = 2;
         constraints.weightx = 10;
         mainPanel.add(Box.createVerticalGlue(), constraints);
 
