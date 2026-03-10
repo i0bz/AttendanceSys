@@ -1,10 +1,6 @@
 package ui.gui.contents;
 
-import com.formdev.flatlaf.ui.FlatEmptyBorder;
-import com.formdev.flatlaf.ui.FlatLineBorder;
-
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 
 public class StudentManagementContent {
@@ -40,20 +36,12 @@ public class StudentManagementContent {
     }
 }
 
-class EnrollForm {
-    JPanel mainPanel = new JPanel(new GridBagLayout());
-    GridBagConstraints constraints = new GridBagConstraints();
 
-    final Color borderColor = Color.decode("#cecfd1");
-    final FlatLineBorder line_border = new FlatLineBorder(new Insets(0,0,0,0), borderColor, 1, 15);
-    final FlatEmptyBorder padding = new FlatEmptyBorder(10,10,10,10);
-    final CompoundBorder border = new CompoundBorder(line_border, padding);
-    
+class EnrollForm extends Card {
     
     JTextField studentIdInput = new JTextField(9);
     JTextField studentNameInput = new JTextField(9);
     JButton enrollButton = new JButton("Enroll");
-
 
     EnrollForm() {
             initComponents();

@@ -9,10 +9,10 @@ import java.awt.*;
 public class TitleBar {
     JPanel mainPanel = new JPanel();
 
-    final Color borderColor = Color.decode("#cecfd1");
-    final MatteBorder line_border = BorderFactory.createMatteBorder(0,0,1,0, borderColor);
-    final EmptyBorder padding = new EmptyBorder(10,10,10,10);
-    final CompoundBorder border = new CompoundBorder(line_border, padding);
+    private final Color borderColor = Color.decode("#cecfd1");
+    private final MatteBorder line_border = BorderFactory.createMatteBorder(0,0,1,0, borderColor);
+    private final EmptyBorder padding = new EmptyBorder(10,10,10,10);
+    private final CompoundBorder border = new CompoundBorder(line_border, padding);
 
 
     public TitleBar() {
