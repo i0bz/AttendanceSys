@@ -5,7 +5,7 @@ import entity.Student;
 import java.io.Serializable;
 import java.util.*;
 
-public class StudentRoster implements Serializable {
+public class StudentRoster implements Serializable, IStudentRoster {
     private final HashMap<Integer, Student> studentRoster;
 
     public StudentRoster() {

@@ -1,6 +1,8 @@
 package controllers;
 
 import repository.AttendanceRegistry;
+import repository.IAttendanceRegistry;
+import repository.IStudentRoster;
 import repository.StudentRoster;
 import services.AttendanceService;
 import services.StudentService;
@@ -26,11 +28,10 @@ public class AttendanceControllerFactory {
         Persist.saveRegistry(registry);
     }
 
-    public StudentRoster roster() {
+    public IStudentRoster roster() {
         return roster;
     }
-
-    public AttendanceRegistry registry() {
+    public IAttendanceRegistry registry() {
         return registry;
     }
 }

@@ -1,15 +1,16 @@
 package services;
 
 import entity.Student;
+import repository.IStudentRoster;
 import repository.StudentRoster;
 
 import java.util.*;
 
 public class StudentService implements IStudentService {
 
-    private final StudentRoster roster;
+    private final IStudentRoster roster;
 
-    public StudentService(StudentRoster roster) {
+    public StudentService(IStudentRoster roster) {
         this.roster = roster;
     }
 
