@@ -8,10 +8,13 @@ import javax.swing.table.DefaultTableModel;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
+import repository.StudentRoster;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Map;
 
 public class StudentManagementContent {
@@ -64,6 +67,14 @@ class StudentTable extends Card {
 
 
     StudentTable() {
+        StudentRoster rosterView = ControllerFactorySingleton.getInstance().roster();
+        rosterView.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                refreshTable();
+            }
+        });
+
         super.padding = new FlatEmptyBorder(0,0,0,0);
         super.border = new CompoundBorder(super.line_border, super.padding);
         mainPanel.setBorder(super.border);
@@ -75,7 +86,7 @@ class StudentTable extends Card {
 
     private void refreshTable() {
         AttendanceSystemController attendanceSystemController = ControllerFactorySingleton.getInstance().createController();
-
+        model.setRowCount(0);
         Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
 
 
