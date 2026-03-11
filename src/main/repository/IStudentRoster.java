@@ -9,5 +9,5 @@ public interface IStudentRoster {
     public void drop(int uid);
     public Student queryStudent(int uid);
     public boolean studentExists(int uid);
-    public Map<Integer, Student> queryAllStudent();
+    public Map<Integer, Student> queryRoster();
 }

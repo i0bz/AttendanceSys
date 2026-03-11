@@ -6,6 +6,7 @@ package controllers;
 import entity.AttendanceSheet;
 
 //Services
+import entity.Student;
 import services.IAttendanceService;
 import services.IStudentService;
 
@@ -21,70 +22,27 @@ public class AttendanceSystemController {
     private final IStudentService studentManagement;
     private final IAttendanceService attendanceService;
 
-    /**
-     * Instantiates a new Attendance system controller.
-     *
-     * @param managementService the student management service
-     * @param attendanceService the attendance service
-     */
     AttendanceSystemController(IStudentService managementService, IAttendanceService attendanceService) {
         this.studentManagement = managementService;
         this.attendanceService = attendanceService;
     }
 
-
-
-
     //Student Management
-    /**
-     * Drop student.
-     *
-     * @param uid School ID number of the student
-     */
     public void dropStudent(String uid) {
         studentManagement.drop(ParseUtility.parseUID(uid));
     }
-    /**
-     * Enroll student.
-     *
-     * @param name Full name of the entity.Student
-     * @param uid  School ID number of the student
-     */
     public void enrollStudent(String name, String uid) {
         studentManagement.enroll(name, ParseUtility.parseUID(uid));
     }
 
-
-
-
     //Attendance Management
-    /**
-     * Adds an attendance for a particular date.
-     *
-     * @param date Date in yyyy-MM-dd format
-     */
-    public void addAttendance(String date) {
+    public void createAttendance(String date) {
         attendanceService.createAttendance(ParseUtility.parseDate(date));
     }
-    /**
-     * Removes attendance.
-     *
-     * @param date Date in yyyy-MM-dd format
-     */
     public void removeAttendance(String date) {
         attendanceService.removeAttendance(ParseUtility.parseDate(date));
     }
 
-
-
-
-    //Attendance System
-    /**
-     * Toggle attendance of Student.
-     *
-     * @param uid  the School ID of a student
-     * @param date the date of the attendance in yyyy-MM-dd format
-     */
     public void toggleAttendance(String uid, String date) {
         attendanceService.toggleAttendance(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
     }
@@ -98,14 +56,17 @@ public class AttendanceSystemController {
     }
 
 
-
-
     //Querying (Student Management specific)
-    public List<String> rosterNameLists() {
-        return studentManagement.getAllNames();
+    public SortedMap<String, String> getAllStudentsByName() {
+        return new TreeMap<>(studentManagement.getAllStudentsByName()
+                .entrySet()
+                .stream()
+                .collect(Collectors
+                        .toMap(Map.Entry::getKey,
+                                entry -> ParseUtility.unparseUID(entry.getValue().uid()))));
     }
-    public Map<String, String> rosterLists() {
-        return new TreeMap<>(studentManagement.getAllStudents()
+    public SortedMap<String, String> getAllStudentsById() {
+        return new TreeMap<>(studentManagement.getAllStudentsByID()
                 .entrySet()
                 .stream()
                 .collect(Collectors
@@ -115,24 +76,20 @@ public class AttendanceSystemController {
 
 
     //Querying (Attendance specific)
-    public SortedSet<String> attendanceStudentUIDLists(String date) {
-        LocalDate parsedDate = ParseUtility.parseDate(date);
-        AttendanceSheet sheet = attendanceService.getAttendance(parsedDate);
-        return sheet.attendanceStudentsSet()
+    public Set<String> attendancePresentIdSet(String date) {
+        Set<Student> present  = attendanceService.getPresent(ParseUtility.parseDate(date));
+        return present
                 .stream()
-                .map(ParseUtility::unparseUID)
+                .map(student -> ParseUtility.unparseUID(student.uid()))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
-    public Map<String, String> attendanceRoster(String date) {
-        AttendanceSheet attendanceSheet = attendanceService.getAttendance(ParseUtility.parseDate(date));
-
-        return studentManagement.getAllStudents()
-                .entrySet()
+    public Map<String, String> attendancePresentList(String date) {
+        Set<Student> present = attendanceService.getPresent(ParseUtility.parseDate(date));
+        return present
                 .stream()
-                .filter(entry -> attendanceSheet.attendanceStudentsSet().contains(entry.getKey()))
-                .collect(Collectors.toMap(entry -> ParseUtility.unparseUID(entry.getKey()),
-                        entry -> entry.getValue().name()));
+                .collect(Collectors.toMap(student -> ParseUtility.unparseUID(student.uid()), Student::name));
     }
+
 
     //Querying (Registry)
     public AttendanceSheet queryAttendance(String date) {

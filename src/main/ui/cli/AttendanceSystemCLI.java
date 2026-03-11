@@ -34,17 +34,18 @@ public class AttendanceSystemCLI {
         int i = 0, decision;
 
         attendanceLists = this.systemController.attendanceDateLists();
-        if(!hasAttendances()) return;
+        if(emptyAttendance()) return;
 
 
 
         AttendanceSheet sheet = attendanceSelector();
 
 
-        Map<String, String> rosterList = systemController.rosterLists();
-        List<String> rosterUIDList = new ArrayList<>(systemController.rosterLists().keySet());
+        Map<String, String> rosterList = systemController.getAllStudentsById();
+        List<String> rosterUIDList = new ArrayList<>(systemController.getAllStudentsById().keySet());
         System.out.println();
         System.out.println();
+
 
         System.out.println("-------Attendance Student List-------");
         for (Map.Entry<String, String> student : rosterList.entrySet()) {
@@ -79,7 +80,7 @@ public class AttendanceSystemCLI {
         System.out.println("-------Attendance Mode-------");
 
         attendanceLists = this.systemController.attendanceDateLists();
-        if (!hasAttendances()) return;
+        if (emptyAttendance()) return;
         AttendanceSheet sheet = attendanceSelector();
 
         System.out.println();
@@ -131,13 +132,13 @@ public class AttendanceSystemCLI {
         return systemController.queryAttendance(date);
     }
 
-    private boolean hasAttendances() {
+    private boolean emptyAttendance() {
         System.out.println();
         if (attendanceLists.isEmpty()) {
             System.out.println("There are no registered attendances.");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 

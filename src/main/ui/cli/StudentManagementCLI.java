@@ -105,7 +105,7 @@ public class StudentManagementCLI {
 
         System.out.println();
         System.out.println("-------Student Roster List-------");
-        Map<String, String> roster = systemController.rosterLists();
+        Map<String, String> roster = systemController.getAllStudentsById();
         int i = 0;
         for (Map.Entry<String, String> student : roster.entrySet()) {
             System.out.printf("%d. %s\t%s\n", ++i, student.getValue(), student.getKey());

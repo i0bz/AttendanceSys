@@ -67,7 +67,7 @@ public class AttendanceManagementCLI {
         while (true) {
             try {
                 if (date.equals("q")) return;
-                systemController.addAttendance(date);
+                systemController.createAttendance(date);
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid Date!!!");

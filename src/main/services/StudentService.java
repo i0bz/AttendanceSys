@@ -2,9 +2,11 @@ package services;
 
 import entity.Student;
 import repository.IStudentRoster;
-import repository.StudentRoster;
 
+import java.security.KeyStore.Entry;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class StudentService implements IStudentService {
 
@@ -24,21 +26,15 @@ public class StudentService implements IStudentService {
     }
 
     //Query functions
-    public List<String> getAllNames() {
-        return roster.queryAllStudent().values()
-                .stream()
-                .map(Student::name)
-                .sorted()
-                .toList();
+    public Map<String, Student> getAllStudentsByName() {
+        return new TreeMap<>(roster.queryRoster()
+        .values()
+        .stream()
+        .map(student -> Map.entry(student.name(), student))
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }
-
-    public Map<Integer, Student> getAllStudents() {
-        return roster.queryAllStudent();
-    }
-
-
-    public SortedSet<Integer> queryAllStudentID() {
-        return new TreeSet<>(roster.queryAllStudent().keySet());
+    public Map<Integer, Student> getAllStudentsByID() {
+        return new TreeMap<>(roster.queryRoster());
     }
 
 }
