@@ -1,6 +1,7 @@
 package ui.gui.contents;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 
 import controllers.AttendanceSystemController;
@@ -30,13 +31,13 @@ public class StudentManagementContent {
         mainPanel.add(enrollForm.getPanel(), constraints);
 
         constraints.gridy = 1;
+        constraints.weighty = 1.0;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.insets = new Insets(20,20,20,20);
         mainPanel.add(studentTable.getPanel(), constraints);
 
 
 
-        constraints.weighty = 1.0;
-        constraints.gridy = 100;
-        mainPanel.add(Box.createVerticalGlue(), constraints);
 
 
     }
@@ -48,26 +49,50 @@ public class StudentManagementContent {
 
 class StudentTable extends Card {
 
-    private JLabel label = new JLabel("test");
-    private JTable table = new JTable();
+    private final String[] rowLabels = {"Name:", "UID:", "Action:"};
+    private final DefaultTableModel model = new DefaultTableModel(rowLabels,0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return  column == 2;
+        }
+    };
+    private final JTable tableView = new JTable(model);
+
 
     StudentTable() {
         initComponents();
+        refreshTable();
+
     }
 
 
-    private void initTable() {
+    private void refreshTable() {
         ControllerFactorySingleton attendanceCtrlFactory = ControllerFactorySingleton.getInstance();
         AttendanceSystemController attendanceSystemController = attendanceCtrlFactory.createController();
 
-        Map<String, String> rosterlist = attendanceSystemController.getAllStudentById();
+        Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
+
+
+        for (Map.Entry<String, String> entry : rosterMap.entrySet()) {
+            model.addRow(new Object[]{entry.getKey(),entry.getValue()});
+        }
+
+
 
     }
 
     private void initComponents() {
+        tableView.getTableHeader().setReorderingAllowed(false);
+        tableView.getTableHeader().setResizingAllowed(false);
+        JScrollPane pane = new JScrollPane(tableView);
+        pane.putClientProperty("FlatLaf.style", "arc: 10");
+        constraints.insets = new Insets(5,0,5,0);
         constraints.gridx = 0;
         constraints.gridy = 0;
-        mainPanel.add(label, constraints);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        mainPanel.add(pane,constraints);
     }
 
 
