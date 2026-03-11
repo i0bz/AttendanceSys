@@ -23,7 +23,6 @@ public class MainWindow {
         //add contents
         Container contents = new Container();
         mainFrame.add(contents.getPanel(), BorderLayout.CENTER);
-        mainFrame.add(Box.createVerticalGlue(), BorderLayout.SOUTH);
 
 
 
