@@ -1,18 +1,22 @@
 package controllers;
 
 import repository.AttendanceRegistry;
-import repository.IAttendanceRegistry;
-import repository.IStudentRoster;
 import repository.StudentRoster;
 import services.AttendanceService;
 import services.StudentService;
 import utility.Persist;
 
-public class AttendanceControllerFactory {
-    StudentRoster roster;
-    AttendanceRegistry registry;
+public class ControllerFactorySingleton {
+    private StudentRoster roster;
+    private AttendanceRegistry registry;
 
-    public  AttendanceControllerFactory() {
+
+    //TODO rewrite this temporary fix later this is probably not thread safe also
+    private static class Holder {
+        private static  final ControllerFactorySingleton INSTANCE = new ControllerFactorySingleton();
+    }
+
+    private ControllerFactorySingleton() {
         this.roster = Persist.loadRoster();
         this.registry = Persist.loadRegistry();
     }
@@ -28,10 +32,18 @@ public class AttendanceControllerFactory {
         Persist.saveRegistry(registry);
     }
 
-    public IStudentRoster roster() {
+    public StudentRoster roster() {
         return roster;
     }
-    public IAttendanceRegistry registry() {
+
+    public AttendanceRegistry registry() {
         return registry;
     }
+
+    public static ControllerFactorySingleton getInstance() {
+        return Holder.INSTANCE;
+    }
 }
+
+
+

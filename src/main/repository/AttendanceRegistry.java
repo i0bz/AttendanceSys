@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
-public class AttendanceRegistry implements Serializable {
+public class AttendanceRegistry implements Serializable, IAttendanceRegistry {
 
     private final HashMap<LocalDate, AttendanceSheet> registry;
 
@@ -31,7 +31,6 @@ public class AttendanceRegistry implements Serializable {
     public AttendanceSheet queryAttendance(LocalDate date) {
         return registry.get(date);
     }
-
 
     public SortedSet<LocalDate> attendanceDateList() {
         return new TreeSet<>(registry.keySet());
