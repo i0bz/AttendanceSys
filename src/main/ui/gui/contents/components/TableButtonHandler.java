@@ -1,8 +1,11 @@
 package ui.gui.contents.components;
 
 
+import com.formdev.flatlaf.ui.FlatEmptyBorder;
+import com.formdev.flatlaf.ui.FlatLineBorder;
 import controllers.ControllerFactorySingleton;
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import java.awt.*;
 
 public class TableButtonHandler extends DefaultCellEditor {
@@ -10,11 +13,20 @@ public class TableButtonHandler extends DefaultCellEditor {
     private JTable table;
     private int row;
 
+    //border
+    private final FlatEmptyBorder margin = new FlatEmptyBorder(4,10,4,10);
+    private final Color borderColor = Color.decode("#cecfd1");
+    private final FlatLineBorder line_border = new FlatLineBorder(new Insets(0,0,0,0), borderColor, 1, 10);
+    private final CompoundBorder border = new CompoundBorder(margin,line_border);
+
 
     public TableButtonHandler(JCheckBox checkBox) {
         //The checkbox iis a dummy btw in case youll forget
         super(checkBox);
+        
         button.setOpaque(true);
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setBorder(border);
 
         button.addActionListener(e -> {
             String uid = table.getValueAt(row, 1).toString();
