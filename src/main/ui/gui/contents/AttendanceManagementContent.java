@@ -1,8 +1,8 @@
 package ui.gui.contents;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.*; 
 
@@ -45,11 +45,36 @@ class AttendanceCreationView extends Card {
 
 
     AttendanceCreationView() {
-
         initComponents();
+        addEventHandlers();
 
 
     }
+
+
+    public void addEventHandlers() {
+        dateInput.setText("YYYY-MM-DD");
+        dateInput.setForeground(Color.GRAY);
+
+        dateInput.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (dateInput.getText().equals("YYYY-MM-DD")){
+                    dateInput.setText("");
+                    dateInput.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (dateInput.getText().isEmpty()) {
+                    dateInput.setText("YYYY-MM-DD");
+                    dateInput.setForeground(Color.GRAY);
+                }
+            }
+        });
+    }
+
 
 //TODO create helper functions for each
     private void initComponents() {
