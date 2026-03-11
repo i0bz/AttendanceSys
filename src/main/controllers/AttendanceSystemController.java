@@ -104,14 +104,18 @@ public class AttendanceSystemController {
     public List<String> rosterNameLists() {
         return studentManagement.getAllNames();
     }
-    public Map<String, String> rosterLists() {
-        return new TreeMap<>(studentManagement.getAllStudents()
+    public Map<String, String> getAllStudentById() {
+        return new TreeMap<>(studentManagement.getAllStudentsByID()
                 .entrySet()
                 .stream()
                 .collect(Collectors
                         .toMap(entry -> ParseUtility.unparseUID(entry.getKey()),
                                 entry -> entry.getValue().name())));
     }
+
+    // public Map<String, String> getAllStudentsByName() {
+    //     return new TreeMap<>()
+    // }
 
 
     //Querying (Attendance specific)
@@ -123,10 +127,10 @@ public class AttendanceSystemController {
                 .map(ParseUtility::unparseUID)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
-    public Map<String, String> attendanceRoster(String date) {
+    public Map<String, String> attendancePresentList(String date) {
         AttendanceSheet attendanceSheet = attendanceService.getAttendance(ParseUtility.parseDate(date));
 
-        return studentManagement.getAllStudents()
+        return studentManagement.getAllStudentsByID()
                 .entrySet()
                 .stream()
                 .filter(entry -> attendanceSheet.attendanceStudentsSet().contains(entry.getKey()))

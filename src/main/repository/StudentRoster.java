@@ -29,7 +29,8 @@ public class StudentRoster implements Serializable, IStudentRoster {
     public boolean studentExists(int uid) {
         return studentRoster.containsKey(uid);
     }
-    public Map<Integer, Student> queryAllStudent() {
+    
+    public Map<Integer, Student> queryRoster() {
         return new HashMap<>(studentRoster);
     }
 }

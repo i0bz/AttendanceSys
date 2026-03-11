@@ -41,8 +41,8 @@ public class AttendanceSystemCLI {
         AttendanceSheet sheet = attendanceSelector();
 
 
-        Map<String, String> rosterList = systemController.rosterLists();
-        List<String> rosterUIDList = new ArrayList<>(systemController.rosterLists().keySet());
+        Map<String, String> rosterList = systemController.getAllStudentById();
+        List<String> rosterUIDList = new ArrayList<>(systemController.getAllStudentById().keySet());
         System.out.println();
         System.out.println();
 

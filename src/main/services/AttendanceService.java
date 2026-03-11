@@ -48,7 +48,7 @@ public class AttendanceService implements IAttendanceService {
 
     public SortedSet<Student> getPresent(LocalDate date) {
         AttendanceSheet sheet = registry.queryAttendance(date);
-        return roster.queryAllStudent()
+        return roster.queryRoster()
                 .entrySet()
                 .stream()
                 .filter(entry -> sheet.attendanceStudentsSet().contains(entry.getKey()))
@@ -60,7 +60,7 @@ public class AttendanceService implements IAttendanceService {
 
     public List<String> queryAttendanceNames(LocalDate date) {
         AttendanceSheet sheet = getAttendance(date);
-        return roster.queryAllStudent()
+        return roster.queryRoster()
                 .entrySet()
                 .stream()
                 .filter(entry -> sheet.isPresent(entry.getKey()))
@@ -74,7 +74,7 @@ public class AttendanceService implements IAttendanceService {
     }
     public Set<Student> queryAttendanceStudents(LocalDate date) {
         AttendanceSheet sheet = getAttendance(date);
-        return roster.queryAllStudent()
+        return roster.queryRoster()
                 .entrySet()
                 .stream()
                 .filter(entry -> sheet.isPresent(entry.getKey()))
