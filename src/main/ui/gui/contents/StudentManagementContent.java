@@ -5,18 +5,20 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
 import repository.StudentRoster;
+import ui.gui.contents.components.TableButtonHandler;
+import ui.gui.contents.components.TableButtonRenderer;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Map;
+
+
+
 
 public class StudentManagementContent {
     private JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -69,16 +71,14 @@ class StudentTable extends Card {
 
     StudentTable() {
         StudentRoster rosterView = ControllerFactorySingleton.getInstance().roster();
-        rosterView.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                refreshTableByName();
-            }
-        });
+        rosterView.addPropertyChangeListener(evt -> refreshTableByName());
 
         super.padding = new FlatEmptyBorder(0,0,0,0);
         super.border = new CompoundBorder(super.line_border, super.padding);
         mainPanel.setBorder(super.border);
+
+
+
         initComponents();
         refreshTableByName();
 
@@ -91,16 +91,22 @@ class StudentTable extends Card {
         Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
 
 
+
+
         for (Map.Entry<String, String> entry : rosterMap.entrySet()) {
-            model.addRow(new Object[]{entry.getKey(),entry.getValue()});
+            model.addRow(new Object[]{entry.getKey(),entry.getValue(), "Drop"});
+
         }
+            tableView.getColumnModel().getColumn(2).setCellRenderer(new TableButtonRenderer());
+            tableView.getColumnModel().getColumn(2).setCellEditor(new TableButtonHandler(new JCheckBox()));
 
 
 
     }
 
     private void initComponents() {
-
+        tableView.setRowSelectionAllowed(false);
+        tableView.setRowHeight(40);
         tableView.getTableHeader().setReorderingAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
         tableView.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
