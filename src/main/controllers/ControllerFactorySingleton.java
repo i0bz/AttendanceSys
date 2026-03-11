@@ -13,7 +13,7 @@ public class ControllerFactorySingleton {
 
     //TODO rewrite this temporary fix later this is probably not thread safe also
     private static class Holder {
-        private static  final ControllerFactorySingleton INSTANCE = new ControllerFactorySingleton();
+        private static final ControllerFactorySingleton INSTANCE = new ControllerFactorySingleton();
     }
 
     private ControllerFactorySingleton() {

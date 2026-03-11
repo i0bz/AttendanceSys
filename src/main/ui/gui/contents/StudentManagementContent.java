@@ -3,6 +3,7 @@ package ui.gui.contents;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
@@ -71,7 +72,7 @@ class StudentTable extends Card {
         rosterView.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                refreshTable();
+                refreshTableByName();
             }
         });
 
@@ -79,12 +80,12 @@ class StudentTable extends Card {
         super.border = new CompoundBorder(super.line_border, super.padding);
         mainPanel.setBorder(super.border);
         initComponents();
-        refreshTable();
+        refreshTableByName();
 
     }
 
 
-    private void refreshTable() {
+    private void refreshTableByName() {
         AttendanceSystemController attendanceSystemController = ControllerFactorySingleton.getInstance().createController();
         model.setRowCount(0);
         Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
@@ -99,9 +100,16 @@ class StudentTable extends Card {
     }
 
     private void initComponents() {
+
         tableView.getTableHeader().setReorderingAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
+        tableView.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+
+        TableColumnModel columnModel = tableView.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(300);
+
         JScrollPane pane = new JScrollPane(tableView);
+
         pane.putClientProperty("FlatLaf.style", "arc: 20");
         constraints.insets = new Insets(0,0,0,0);
         constraints.gridx = 0;
@@ -110,6 +118,9 @@ class StudentTable extends Card {
         constraints.weightx = 1;
         constraints.weighty = 1;
         mainPanel.add(pane,constraints);
+
+
+
     }
 
     public JPanel getPanel() {
