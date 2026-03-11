@@ -12,13 +12,12 @@ public class Card {
     protected JPanel mainPanel = new JPanel(new GridBagLayout());
     protected GridBagConstraints constraints = new GridBagConstraints();
 
-    protected final Color borderColor = Color.decode("#cecfd1");
-    protected final FlatLineBorder line_border = new FlatLineBorder(new Insets(0,0,0,0), borderColor, 1, 15);
-    protected final FlatEmptyBorder padding = new FlatEmptyBorder(15,20,15,20);
-    protected final CompoundBorder border = new CompoundBorder(line_border, padding);
+    protected Color borderColor = Color.decode("#cecfd1");
+    protected FlatLineBorder line_border = new FlatLineBorder(new Insets(0,0,0,0), borderColor, 1, 20);
+    protected FlatEmptyBorder padding = new FlatEmptyBorder(20,20,20,20);
+    protected CompoundBorder border = new CompoundBorder(line_border, padding);
 
     protected Card() {
         mainPanel.setBorder(border);
-        mainPanel.putClientProperty("FlatLaf.Style", "arc: 30");
     }
 }

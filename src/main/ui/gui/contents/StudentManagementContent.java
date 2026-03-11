@@ -1,9 +1,11 @@
 package ui.gui.contents;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.table.DefaultTableModel;
 
 
+import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
 
@@ -60,6 +62,9 @@ class StudentTable extends Card {
 
 
     StudentTable() {
+        super.padding = new FlatEmptyBorder(0,0,0,0);
+        super.border = new CompoundBorder(super.line_border, super.padding);
+        mainPanel.setBorder(super.border);
         initComponents();
         refreshTable();
 
@@ -85,8 +90,8 @@ class StudentTable extends Card {
         tableView.getTableHeader().setReorderingAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
         JScrollPane pane = new JScrollPane(tableView);
-        pane.putClientProperty("FlatLaf.style", "arc: 10");
-        constraints.insets = new Insets(5,0,5,0);
+        pane.putClientProperty("FlatLaf.style", "arc: 20");
+        constraints.insets = new Insets(0,0,0,0);
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.fill = GridBagConstraints.BOTH;
