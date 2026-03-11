@@ -1,6 +1,11 @@
 package ui.gui.contents;
 
 import javax.swing.*;
+
+
+import controllers.AttendanceSystemController;
+import controllers.ControllerFactorySingleton;
+
 import java.awt.*;
 
 public class StudentManagementContent {
@@ -51,7 +56,9 @@ class StudentTable extends Card {
 
 
     private void initTable() {
-        
+        ControllerFactorySingleton attendanceCtrlFactory = ControllerFactorySingleton.getInstance();
+        AttendanceSystemController attendanceSystemController = attendanceCtrlFactory.createController();
+
     }
 
     private void initComponents() {
