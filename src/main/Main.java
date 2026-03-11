@@ -1,5 +1,5 @@
 import com.formdev.flatlaf.FlatLightLaf;
-import controllers.AttendanceControllerFactory;
+import controllers.ControllerFactorySingleton;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
 import ui.gui.MainWindow;
@@ -10,7 +10,7 @@ import javax.swing.*;
 public class  Main {
     public static void main(String[] args) {
 
-        AttendanceControllerFactory attendanceFactory = new AttendanceControllerFactory();
+        ControllerFactorySingleton attendanceFactory = ControllerFactorySingleton.getInstance();
         AttendanceSystemController controller = attendanceFactory.createController();
 
         if (args.length != 0) {
