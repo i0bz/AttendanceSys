@@ -7,6 +7,7 @@ import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
 
 import java.awt.*;
+import java.util.Map;
 
 public class StudentManagementContent {
     private JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -58,6 +59,8 @@ class StudentTable extends Card {
     private void initTable() {
         ControllerFactorySingleton attendanceCtrlFactory = ControllerFactorySingleton.getInstance();
         AttendanceSystemController attendanceSystemController = attendanceCtrlFactory.createController();
+
+        Map<String, String> rosterlist = attendanceSystemController.getAllStudentById();
 
     }
 
