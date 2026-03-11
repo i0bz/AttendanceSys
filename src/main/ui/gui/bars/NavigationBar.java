@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+
+import ui.gui.ContentView;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -13,7 +16,7 @@ public class NavigationBar {
     private final GridBagConstraints constraints = new GridBagConstraints();
 
     //Buttons
-    private final String[] labels = {"Student Management", "Attendance Management", "Attendance System", "Attendance Mode"};
+    private String[] labels; 
     private final ArrayList<JButton> buttons = new ArrayList<>();
 
 
@@ -29,11 +32,15 @@ public class NavigationBar {
     //Button
     private final Insets buttonGaps = new Insets(0,0,10,0);
     private final String buttonArc = "arc: 15";
+    
+    //External Shits
+    private ContentView contents;
 
 
 
-
-    public NavigationBar() {
+    public NavigationBar(ContentView contents) {
+        this.contents = contents;
+        labels = contents.getContainerNames();
         initComponents();
     }
 
@@ -43,6 +50,7 @@ public class NavigationBar {
 
 
         createButtons();
+        initListeneters();
 
 
         //Glue buttons to the top
@@ -52,7 +60,6 @@ public class NavigationBar {
         mainPanel.add(Box.createVerticalGlue(), constraints);
 
     }
-
 
     private void createButtons() {
         for(String label : labels) {
@@ -71,7 +78,43 @@ public class NavigationBar {
             constraints.fill = GridBagConstraints.BOTH;
             mainPanel.add(button, constraints);
         }
+
+
+
     }
+
+
+    private void swapCards(int iterator) {
+        contents.getCardLayout().show(contents.getPanel(), buttons.get(iterator).getText());
+    }
+
+
+
+
+    //  TODO Find a way to to use for loops here 
+    private void initListeneters() {
+
+        buttons.get(0).addActionListener(e -> {
+            swapCards(0);
+        });
+        
+        buttons.get(1).addActionListener(e -> {
+            swapCards(1);
+        });
+        buttons.get(2).addActionListener(e -> {
+            swapCards(2);
+        });
+        buttons.get(3).addActionListener(e -> {
+            swapCards(3);
+        });
+
+
+    }
+
+
+
+
+
 
 
 
@@ -79,7 +122,6 @@ public class NavigationBar {
     public JPanel getPanel() {
         return  mainPanel;
     }
-
 
     private void setConstraintCoords(int x, int y) {
         constraints.gridx = x;
