@@ -1,7 +1,11 @@
 package ui.gui;
 
+import controllers.ControllerFactorySingleton;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainWindow {
     JFrame mainFrame;
@@ -10,7 +14,7 @@ public class MainWindow {
         mainFrame = new JFrame();
 
         //configure
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainFrame.setSize(1000, 700);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setLayout(new BorderLayout());
@@ -21,6 +25,18 @@ public class MainWindow {
         mainFrame.add(contents.getPanel(), BorderLayout.CENTER);
         mainFrame.add(Box.createVerticalGlue(), BorderLayout.SOUTH);
 
+
+
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                mainFrame.dispose();
+
+                SwingUtilities.invokeLater(() -> {
+                    ControllerFactorySingleton.getInstance().saveData();
+                });
+            }
+        });
 
         mainFrame.setVisible(true);
     }
