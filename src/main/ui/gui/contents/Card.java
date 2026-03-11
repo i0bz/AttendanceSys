@@ -19,5 +19,6 @@ public class Card {
 
     protected Card() {
         mainPanel.setBorder(border);
+        mainPanel.putClientProperty("FlatLaf.Style", "arc: 30");
     }
 }

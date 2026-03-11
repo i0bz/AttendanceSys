@@ -14,13 +14,19 @@ public class StudentManagementContent {
     private void initComponents() {
 
         EnrollForm enrollForm = new EnrollForm();
+        StudentTable studentTable = new StudentTable();
 
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.insets = new Insets(20,20,20,20);
+        constraints.insets = new Insets(20,20,0,20);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1.0;
         mainPanel.add(enrollForm.getPanel(), constraints);
+
+        constraints.gridy = 1;
+        mainPanel.add(studentTable.getPanel(), constraints);
+
+
 
         constraints.weighty = 1.0;
         constraints.gridy = 100;
@@ -34,6 +40,40 @@ public class StudentManagementContent {
     }
 }
 
+class StudentTable extends Card {
+
+    private JLabel label = new JLabel("test");
+    private JTable table = new JTable();
+
+    StudentTable() {
+        initComponents();
+    }
+
+
+    private void initTable() {
+        
+    }
+
+    private void initComponents() {
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        mainPanel.add(label, constraints);
+    }
+
+
+    public JPanel getPanel() {
+        return mainPanel;
+    }
+
+    
+}
+
+
+
+
+
+
+
 
 class EnrollForm extends Card {
     
@@ -46,9 +86,6 @@ class EnrollForm extends Card {
     }
 
     public void initComponents() {
-
-        mainPanel.setBorder(border);
-        mainPanel.putClientProperty("FlatLaf.style", "arc: 30");
 
         JLabel enrollLabel = new JLabel("Enroll new student");
         JLabel studentNameLabel = new JLabel("Student Name:");
