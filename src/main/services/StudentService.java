@@ -26,29 +26,15 @@ public class StudentService implements IStudentService {
     }
 
     //Query functions
-    public List<String> getAllNames() {
-        return roster.queryRoster().values()
-                .stream()
-                .map(Student::name)
-                .sorted()
-                .toList();
-    }
-
     public Map<String, Student> getAllStudentsByName() {
         return new TreeMap<>(roster.queryRoster()
-        .entrySet()
+        .values()
         .stream()
-        .map(e -> Map.entry(e.getValue().name(), e.getValue()))
-        .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())));   
-    } 
-
+        .map(student -> Map.entry(student.name(), student))
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+    }
     public Map<Integer, Student> getAllStudentsByID() {
         return new TreeMap<>(roster.queryRoster());
-    }
-
-
-    public SortedSet<Integer> queryAllStudentID() {
-        return new TreeSet<>(roster.queryRoster().keySet());
     }
 
 }

@@ -68,7 +68,7 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
         return attendanceRoster.contains(studentUID);
     }
 
-    public Set<Integer> attendanceStudentsSet() {
+    public Set<Integer> presentIdSet() {
         return attendanceRoster;
     }
 

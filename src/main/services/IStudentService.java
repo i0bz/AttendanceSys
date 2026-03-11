@@ -9,7 +9,6 @@ public interface IStudentService {
 
     void enroll(String name, int uid);
     void drop(int uid);
-    List<String> getAllNames();
     Map<Integer, Student> getAllStudentsByID();
     Map<String, Student> getAllStudentsByName();
 

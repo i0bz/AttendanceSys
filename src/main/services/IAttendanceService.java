@@ -4,6 +4,7 @@ import entity.AttendanceSheet;
 import entity.Student;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.SortedSet;
 
 public interface IAttendanceService {
@@ -16,5 +17,5 @@ public interface IAttendanceService {
 
     SortedSet<LocalDate> getDates();
     AttendanceSheet getAttendance(LocalDate date);
-    SortedSet<Student> getPresent(LocalDate date);
+    Set<Student> getPresent(LocalDate date);
 }

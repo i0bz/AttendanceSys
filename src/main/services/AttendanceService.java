@@ -45,41 +45,15 @@ public class AttendanceService implements IAttendanceService {
     public AttendanceSheet getAttendance(LocalDate date) {
         return registry.queryAttendance(date);
     }
-
-    public SortedSet<Student> getPresent(LocalDate date) {
+    public Set<Student> getPresent(LocalDate date) {
         AttendanceSheet sheet = registry.queryAttendance(date);
         return roster.queryRoster()
                 .entrySet()
                 .stream()
-                .filter(entry -> sheet.attendanceStudentsSet().contains(entry.getKey()))
+                .filter(entry -> sheet.presentIdSet().contains(entry.getKey()))
                 .map(Map.Entry::getValue)
-                .collect(Collectors.toCollection(TreeSet::new));
+                .collect(Collectors.toCollection(HashSet::new));
     }
 
-
-
-    public List<String> queryAttendanceNames(LocalDate date) {
-        AttendanceSheet sheet = getAttendance(date);
-        return roster.queryRoster()
-                .entrySet()
-                .stream()
-                .filter(entry -> sheet.isPresent(entry.getKey()))
-                .map(entry -> entry.getValue().name())
-                .sorted()
-                .collect(Collectors.toList());
-    }
-    public SortedSet<Integer> queryAttendanceIDs(LocalDate date) {
-        AttendanceSheet sheet = getAttendance(date);
-        return new TreeSet<>(sheet.attendanceStudentsSet());
-    }
-    public Set<Student> queryAttendanceStudents(LocalDate date) {
-        AttendanceSheet sheet = getAttendance(date);
-        return roster.queryRoster()
-                .entrySet()
-                .stream()
-                .filter(entry -> sheet.isPresent(entry.getKey()))
-                .map(Map.Entry::getValue)
-                .collect(Collectors.toSet());
-    }
 
 }
