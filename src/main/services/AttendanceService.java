@@ -19,6 +19,13 @@ public class AttendanceService implements IAttendanceService {
         this.roster = roster;
     }
 
+    public boolean isPresent(LocalDate date, int uid) {
+        AttendanceSheet attendance =  registry.queryAttendance(date);
+        if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
+        if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
+        return attendance.isPresent(uid);
+    }
+
 
     //Attendance Management
     public void createAttendance(LocalDate date) {
@@ -31,10 +38,10 @@ public class AttendanceService implements IAttendanceService {
 
     //Attendance Manipulation
     public void toggleAttendance(LocalDate date, int uid) {
-        AttendanceSheet attendances =  registry.queryAttendance(date);
-        if (attendances == null) throw new NoSuchElementException("Date given has no attendance");
+        AttendanceSheet attendance =  registry.queryAttendance(date);
+        if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
         if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
-        attendances.toggleAttendance(uid);
+        attendance.toggleAttendance(uid);
     }
 
 

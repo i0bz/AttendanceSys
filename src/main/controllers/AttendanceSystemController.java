@@ -49,10 +49,7 @@ public class AttendanceSystemController {
     public boolean isPresent(String uid, String date) {
         LocalDate parsedDate = ParseUtility.parseDate(date);
         int studentID = ParseUtility.parseUID(uid);
-
-        AttendanceSheet sheet = attendanceService.getAttendance(parsedDate);
-
-        return sheet.isPresent(studentID);
+        return attendanceService.isPresent(parsedDate, studentID);
     }
 
 
