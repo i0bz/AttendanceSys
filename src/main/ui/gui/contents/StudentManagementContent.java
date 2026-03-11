@@ -10,6 +10,8 @@ import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
 
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Map;
 
 public class StudentManagementContent {
@@ -72,8 +74,7 @@ class StudentTable extends Card {
 
 
     private void refreshTable() {
-        ControllerFactorySingleton attendanceCtrlFactory = ControllerFactorySingleton.getInstance();
-        AttendanceSystemController attendanceSystemController = attendanceCtrlFactory.createController();
+        AttendanceSystemController attendanceSystemController = ControllerFactorySingleton.getInstance().createController();
 
         Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
 
@@ -100,16 +101,12 @@ class StudentTable extends Card {
         mainPanel.add(pane,constraints);
     }
 
-
     public JPanel getPanel() {
         return mainPanel;
     }
 
     
 }
-
-
-
 
 
 
@@ -123,7 +120,57 @@ class EnrollForm extends Card {
 
     EnrollForm() {
             initComponents();
+            addEventHandling();
     }
+
+
+    public void addEventHandling() {
+
+        enrollButton.addActionListener(e -> {
+            enrollingStudent();
+        });
+
+
+        studentIdInput.setText("YY-CCXXXX");
+        studentIdInput.setForeground(Color.GRAY);
+        studentIdInput.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (studentIdInput.getText().equals("YY-CCXXXX") || studentIdInput.getText().equals("Invalid ID!!")) {
+                    studentIdInput.setText("");
+                    studentIdInput.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (studentIdInput.getText().isEmpty()) {
+                    studentIdInput.setText("YY-CCXXXX");
+                    studentIdInput.setForeground(Color.GRAY);
+                }
+            }
+        });
+
+
+    }
+
+    public void enrollingStudent() {
+        AttendanceSystemController controller = ControllerFactorySingleton.getInstance().createController();
+        String studId = studentIdInput.getText();
+        String name = studentNameInput.getText();
+        try {
+            controller.enrollStudent(name, studId);
+        } catch (RuntimeException e) {
+            studentNameInput.setText("");
+            studentIdInput.setText("Invalid ID!!");
+            studentIdInput.setForeground(Color.RED);
+        }
+
+        studentNameInput.setText("");
+        studentIdInput.setText("YY-CCXXXX");
+        studentIdInput.setForeground(Color.GRAY);
+    }
+
 
     public void initComponents() {
 
