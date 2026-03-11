@@ -3,7 +3,6 @@ import controllers.ControllerFactorySingleton;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
 import ui.gui.MainWindow;
-import utility.Persist;
 
 import javax.swing.*;
 
@@ -28,9 +27,6 @@ public class  Main {
             }
             SwingUtilities.invokeLater(MainWindow::new);
         }
-
-
-
 
         attendanceFactory.saveData();
     }
