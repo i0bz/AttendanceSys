@@ -2,7 +2,6 @@ package repository;
 
 import entity.Student;
 
-import java.beans.PropertyChangeListener;
 import java.util.Map;
 
 public interface IStudentRoster {

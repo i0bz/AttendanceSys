@@ -2,7 +2,6 @@ import com.formdev.flatlaf.FlatLightLaf;
 import controllers.ControllerFactorySingleton;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
-import ui.gui.ContentView;
 import ui.gui.MainWindow;
 
 import javax.swing.*;
