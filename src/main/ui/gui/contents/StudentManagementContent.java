@@ -136,10 +136,6 @@ class StudentTable extends Card {
     
 }
 
-
-
-
-
 class EnrollForm extends Card {
     
     JTextField studentIdInput = new JTextField(9);
@@ -164,7 +160,7 @@ class EnrollForm extends Card {
         studentIdInput.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (studentIdInput.getText().equals("YY-CCXXXX") || studentIdInput.getText().equals("Invalid ID!!")) {
+                if (studentIdInput.getText().equals("YY-CCXXXX") || studentIdInput.getText().equals("Invalid ID!")) {
                     studentIdInput.setText("");
                     studentIdInput.setForeground(Color.BLACK);
                 }
@@ -190,8 +186,9 @@ class EnrollForm extends Card {
             controller.enrollStudent(name, studId);
         } catch (RuntimeException e) {
             studentNameInput.setText("");
-            studentIdInput.setText("Invalid ID!!");
+            studentIdInput.setText("Invalid ID!");
             studentIdInput.setForeground(Color.RED);
+            return;
         }
 
         studentNameInput.setText("");
