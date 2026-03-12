@@ -13,9 +13,9 @@ import javax.swing.table.DefaultTableModel;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 
-import controllers.AttendanceControllerFactory;
 import controllers.AttendanceSystemController;
-import controllers.ControllerFactorySingleton; 
+import controllers.ControllerFactorySingleton;
+import repository.AttendanceRegistry; 
 
 public class AttendanceManagementContent {
     private JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -66,6 +66,13 @@ class AttendanceTable extends Card {
 
 
     AttendanceTable() {
+        AttendanceRegistry registry = ControllerFactorySingleton.getInstance().registry();
+
+
+        registry.addPropertyChangeListener(evt -> {
+            refreshTable();
+        });
+
         super.padding = new FlatEmptyBorder(0,0,0,0);
         super.border = new CompoundBorder(super.line_border, super.padding);
         mainPanel.setBorder(super.border);
@@ -75,16 +82,20 @@ class AttendanceTable extends Card {
     }
 
     private void refreshTable() {
+        model.setRowCount(0);
         List<String> dateList  = ControllerFactorySingleton.getInstance().createController().attendanceDateLists();
 
         for (String date : dateList) {
-            model.addRow(new Object[]{date, "Action"});
+            model.addRow(new Object[]{date, "Remove"});
         }
     }
 
 
 
     private void initComponents() {
+
+
+        table.setRowSelectionAllowed(false);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
