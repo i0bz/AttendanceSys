@@ -3,7 +3,6 @@ package ui.gui.contents.components;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import com.formdev.flatlaf.ui.FlatLineBorder;
-import controllers.ControllerFactorySingleton;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;

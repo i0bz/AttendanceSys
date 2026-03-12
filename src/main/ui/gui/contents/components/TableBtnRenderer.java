@@ -8,14 +8,14 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
-public class StudTableBtnRenderer implements TableCellRenderer {
+public class TableBtnRenderer implements TableCellRenderer {
     private final FlatEmptyBorder margin = new FlatEmptyBorder(4,10,4,10);
     private final Color borderColor = Color.decode("#cecfd1");
     private final FlatLineBorder line_border = new FlatLineBorder(new Insets(0,0,0,0), borderColor, 1, 10);
     private final CompoundBorder border = new CompoundBorder(margin,line_border);
 
     private final JButton button = new JButton();
-    public StudTableBtnRenderer() {
+    public TableBtnRenderer() {
         button.setOpaque(true);
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setBorder(border);

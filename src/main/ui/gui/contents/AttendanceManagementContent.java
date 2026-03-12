@@ -10,12 +10,16 @@ import java.awt.event.FocusListener;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 
 import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
-import repository.AttendanceRegistry; 
+import repository.AttendanceRegistry;
+
+import ui.gui.contents.components.TableBtnRenderer; 
+import ui.gui.contents.components.AttTableBtnEditor;
 
 public class AttendanceManagementContent {
     private JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -61,7 +65,12 @@ public class AttendanceManagementContent {
 class AttendanceTable extends Card {
 
     private String[] header = {"Date", "Action"};
-    private DefaultTableModel model = new DefaultTableModel(header, 0);
+    private DefaultTableModel model = new DefaultTableModel(header, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return  column == 1;
+        }
+    };
     private JTable table = new JTable(model);
 
 
@@ -89,6 +98,8 @@ class AttendanceTable extends Card {
             model.addRow(new Object[]{date, "Remove"});
         }
 
+        table.getColumnModel().getColumn(1).setCellRenderer(new TableBtnRenderer());
+        table.getColumnModel().getColumn(1).setCellEditor(new AttTableBtnEditor(new JCheckBox()));
         
     }
 
@@ -96,8 +107,10 @@ class AttendanceTable extends Card {
 
     private void initComponents() {
 
-
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
         table.setRowSelectionAllowed(false);
+        table.setRowHeight(50);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -105,7 +118,9 @@ class AttendanceTable extends Card {
         constraints.weighty = 1;
         constraints.fill = GridBagConstraints.BOTH;
 
-        
+        TableColumnModel columnModel = table.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(300);
+
         JScrollPane pane = new JScrollPane(table);
         pane.putClientProperty("FlatLaf.style", "arc: 20");
 
@@ -143,7 +158,7 @@ class AttendanceCreationView extends Card {
         dateInput.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (dateInput.getText().equals("YYYY-MM-DD") || dateInput.getText().equals("Invalid Date Format")){
+                if (dateInput.getText().equals("YYYY-MM-DD") || dateInput.getText().equals("Invalid Date Format!")){
                     dateInput.setText("");
                     dateInput.setForeground(Color.BLACK);
                 }
