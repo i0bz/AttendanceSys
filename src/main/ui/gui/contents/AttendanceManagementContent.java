@@ -1,10 +1,21 @@
 package ui.gui.contents;
 
+
+import java.util.List;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.*; 
+import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.formdev.flatlaf.ui.FlatEmptyBorder;
+
+import controllers.AttendanceControllerFactory;
+import controllers.AttendanceSystemController;
+import controllers.ControllerFactorySingleton; 
 
 public class AttendanceManagementContent {
     private JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -13,21 +24,31 @@ public class AttendanceManagementContent {
 
 
     public AttendanceManagementContent() {
+        initComponents();
+        
+    
+    }
 
+
+    private void initComponents() {
         AttendanceCreationView attendanceCreationView = new AttendanceCreationView();
-
+        AttendanceTable attendanceTable = new AttendanceTable();
 
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(20,20,20,20);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1.0;
         mainPanel.add(attendanceCreationView.getPanel(), constraints);
-
-        constraints.gridy = 100;
+        
+        
+        constraints.gridy = 1;
+        constraints.insets = new Insets(20,20,20,20);
         constraints.weighty = 1.0;
-        mainPanel.add(Box.createVerticalGlue(), constraints);
-    
+        mainPanel.add(attendanceTable.getPanel(), constraints);
+        
+
+
     }
 
 
@@ -35,6 +56,57 @@ public class AttendanceManagementContent {
         return mainPanel;
     }
 }
+
+
+class AttendanceTable extends Card {
+
+    private String[] header = {"Date", "Action"};
+    private DefaultTableModel model = new DefaultTableModel(header, 0);
+    private JTable table = new JTable(model);
+
+
+    AttendanceTable() {
+        super.padding = new FlatEmptyBorder(0,0,0,0);
+        super.border = new CompoundBorder(super.line_border, super.padding);
+        mainPanel.setBorder(super.border);
+        
+        initComponents();
+        refreshTable();
+    }
+
+    private void refreshTable() {
+        List<String> dateList  = ControllerFactorySingleton.getInstance().createController().attendanceDateLists();
+
+        for (String date : dateList) {
+            model.addRow(new Object[]{date, "Action"});
+        }
+    }
+
+
+
+    private void initComponents() {
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        
+        JScrollPane pane = new JScrollPane(table);
+        pane.putClientProperty("FlatLaf.style", "arc: 20");
+
+        mainPanel.add(pane, constraints);
+    }
+
+    public JPanel getPanel() {
+        return mainPanel;
+    }
+}
+
+
+
+
 
 class AttendanceCreationView extends Card {
 
@@ -48,7 +120,6 @@ class AttendanceCreationView extends Card {
         initComponents();
         addEventHandlers();
 
-
     }
 
 
@@ -59,7 +130,7 @@ class AttendanceCreationView extends Card {
         dateInput.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (dateInput.getText().equals("YYYY-MM-DD")){
+                if (dateInput.getText().equals("YYYY-MM-DD") || dateInput.getText().equals("Invalid Date Format")){
                     dateInput.setText("");
                     dateInput.setForeground(Color.BLACK);
                 }
@@ -73,8 +144,28 @@ class AttendanceCreationView extends Card {
                 }
             }
         });
+
+        addButton.addActionListener(e -> {
+            createAttendance();
+        });
+
+
+
     }
 
+    private void createAttendance() {
+        AttendanceSystemController controller = ControllerFactorySingleton.getInstance().createController();
+        String input = dateInput.getText();
+        try{
+            controller.createAttendance(input);
+        } catch(RuntimeException e) {
+            dateInput.setText("Invalid Date Format!");
+            dateInput.setForeground(Color.RED);
+            return;
+        }
+        dateInput.setText("YYYY-MM-DD");
+        dateInput.setForeground(Color.GRAY);
+    }
 
 //TODO create helper functions for each
     private void initComponents() {
@@ -111,8 +202,7 @@ class AttendanceCreationView extends Card {
         constraints.gridx = 2;
         constraints.weightx = 10;
         mainPanel.add(Box.createVerticalGlue(), constraints);
-
-
+    
 
     }
 
