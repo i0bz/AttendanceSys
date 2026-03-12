@@ -25,14 +25,11 @@ public class AttendanceManagementContent {
     private JPanel mainPanel = new JPanel(new GridBagLayout());
     private GridBagConstraints constraints = new GridBagConstraints();
 
-
-
     public AttendanceManagementContent() {
         initComponents();
         
     
     }
-
 
     private void initComponents() {
         AttendanceCreationView attendanceCreationView = new AttendanceCreationView();
@@ -55,12 +52,10 @@ public class AttendanceManagementContent {
 
     }
 
-
     public JPanel getPanel() {
         return mainPanel;
     }
 }
-
 
 class AttendanceTable extends Card {
 
@@ -72,7 +67,6 @@ class AttendanceTable extends Card {
         }
     };
     private JTable table = new JTable(model);
-
 
     AttendanceTable() {
         AttendanceRegistry registry = ControllerFactorySingleton.getInstance().registry();
@@ -103,8 +97,6 @@ class AttendanceTable extends Card {
         
     }
 
-
-
     private void initComponents() {
 
         table.getTableHeader().setReorderingAllowed(false);
@@ -132,10 +124,6 @@ class AttendanceTable extends Card {
     }
 }
 
-
-
-
-
 class AttendanceCreationView extends Card {
 
     private JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
@@ -149,7 +137,6 @@ class AttendanceCreationView extends Card {
         addEventHandlers();
 
     }
-
 
     public void addEventHandlers() {
         dateInput.setText("YYYY-MM-DD");
@@ -176,8 +163,6 @@ class AttendanceCreationView extends Card {
         addButton.addActionListener(e -> {
             createAttendance();
         });
-
-
 
     }
 
