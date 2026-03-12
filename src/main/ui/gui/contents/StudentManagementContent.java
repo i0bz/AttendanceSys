@@ -9,8 +9,9 @@ import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
 import repository.StudentRoster;
-import ui.gui.contents.components.TableButtonHandler;
-import ui.gui.contents.components.TableButtonRenderer;
+import ui.gui.contents.components.TableBtnEditor;
+import ui.gui.contents.components.StudTableBtnEditor;
+import ui.gui.contents.components.StudTableBtnRenderer;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -97,8 +98,8 @@ class StudentTable extends Card {
             model.addRow(new Object[]{entry.getKey(),entry.getValue(), "Drop"});
 
         }
-            tableView.getColumnModel().getColumn(2).setCellRenderer(new TableButtonRenderer());
-            tableView.getColumnModel().getColumn(2).setCellEditor(new TableButtonHandler(new JCheckBox()));
+            tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
+            tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox()));
 
 
 

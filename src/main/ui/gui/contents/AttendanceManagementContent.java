@@ -88,6 +88,8 @@ class AttendanceTable extends Card {
         for (String date : dateList) {
             model.addRow(new Object[]{date, "Remove"});
         }
+
+        
     }
 
 

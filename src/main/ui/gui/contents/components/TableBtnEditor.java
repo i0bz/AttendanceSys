@@ -8,10 +8,10 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
 
-public class TableButtonHandler extends DefaultCellEditor {
-    private JButton button = new JButton();
-    private JTable table;
-    private int row;
+public class TableBtnEditor extends DefaultCellEditor {
+    protected JButton button = new JButton();
+    protected JTable table;
+    protected int row;
 
     //border
     private final FlatEmptyBorder margin = new FlatEmptyBorder(4,10,4,10);
@@ -20,18 +20,13 @@ public class TableButtonHandler extends DefaultCellEditor {
     private final CompoundBorder border = new CompoundBorder(margin,line_border);
 
 
-    public TableButtonHandler(JCheckBox checkBox) {
+    public TableBtnEditor(JCheckBox checkBox) {
         //The checkbox iis a dummy btw in case youll forget
         super(checkBox);
         
         button.setOpaque(true);
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setBorder(border);
-
-        button.addActionListener(e -> {
-            String uid = table.getValueAt(row, 1).toString();
-            ControllerFactorySingleton.getInstance().createController().dropStudent(uid);
-        });
     }
 
     @Override
