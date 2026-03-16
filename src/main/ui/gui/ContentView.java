@@ -2,6 +2,7 @@ package ui.gui;
 
 import ui.gui.contents.AttendanceManagementContent;
 import ui.gui.contents.AttendanceModeContent;
+import ui.gui.contents.AttendanceSystemContent;
 import ui.gui.contents.StudentManagementContent;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class ContentView {
     StudentManagementContent studentManagementContent = new StudentManagementContent();
     AttendanceManagementContent attendanceManagementContent = new AttendanceManagementContent();
     AttendanceModeContent attendanceModeContent = new AttendanceModeContent();
+    AttendanceSystemContent attendanceSystemContent = new AttendanceSystemContent();
 
 
     public CardLayout cardLayout = new CardLayout();
@@ -25,6 +27,7 @@ public class ContentView {
 
         mainPanel.add(studentManagementContent.getPanel(), views[0]);
         mainPanel.add(attendanceManagementContent.getPanel(), views[1]);
+        mainPanel.add(attendanceSystemContent.getPanel(), views[2]);
 
         mainPanel.add(attendanceModeContent.getPanel(), views[3]);
 

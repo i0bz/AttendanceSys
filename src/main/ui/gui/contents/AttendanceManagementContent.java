@@ -59,7 +59,7 @@ public class AttendanceManagementContent {
 
 class AttendanceTable extends Card {
 
-    private String[] header = {"Date", "Action"};
+    private String[] header = {"Date:", "Action:"};
     private DefaultTableModel model = new DefaultTableModel(header, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
