@@ -31,9 +31,8 @@ public class MainWindow {
             public void windowClosing(WindowEvent e) {
                 mainFrame.dispose();
 
-                SwingUtilities.invokeLater(() -> {
-                    ControllerBootstrapSingleton.getInstance().saveData();
-                });
+                ControllerBootstrapSingleton.getInstance().saveData();
+                System.exit(0);
             }
         });
 
