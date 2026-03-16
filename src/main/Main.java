@@ -3,6 +3,7 @@ import controllers.ControllerBootstrapSingleton;
 import controllers.AttendanceSystemController;
 import ui.cli.CLIHandler;
 import ui.gui.MainWindow;
+import utility.PersistenceFlusher;
 
 import javax.swing.*;
 
@@ -10,6 +11,7 @@ public class  Main {
     public static void main(String[] args) {
 
         AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
+        PersistenceFlusher.startDaemon();
 
         if (args.length != 0) {
             for (String arg : args) {
