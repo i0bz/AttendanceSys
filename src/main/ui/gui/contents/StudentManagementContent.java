@@ -199,7 +199,7 @@ class EnrollForm extends Card {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
         String studId = studentIdInput.getText();
         String name = studentNameInput.getText();
-        if (!name.trim().isEmpty()) {
+        if (name.trim().isEmpty()) {
             studentNameInput.setText("Empty Name!!!");
             studentNameInput.setForeground(Color.RED);
         }
