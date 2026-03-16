@@ -170,6 +170,10 @@ class AttendanceSystemTable extends Card {
         ControllerBootstrapSingleton.getInstance().getController().addPropertyChangeListener(evt -> {
             refreshTable();
         });
+
+        ControllerBootstrapSingleton.getInstance().roster().addPropertyChangeListener(evt -> {
+            refreshTable();
+        });
     }
     
     private void initComponents() {
