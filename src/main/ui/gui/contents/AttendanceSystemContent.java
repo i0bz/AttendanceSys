@@ -9,7 +9,6 @@ import com.formdev.flatlaf.ui.FlatEmptyBorder;
 
 import controllers.AttendanceSystemController;
 import controllers.ControllerFactorySingleton;
-import utility.ParseUtility;
 
 import java.awt.*;
 import java.util.Vector;
@@ -52,11 +51,11 @@ public class AttendanceSystemContent {
 
 
 class AttendanceSelection extends Card {
-    JLabel description = new JLabel("Select an Attendance"); 
+    JLabel description = new JLabel("Attendance Mode"); 
     Vector<String> dateList = new Vector<>();   
     JComboBox<String> dateOptions = new JComboBox<>(dateList);
 
-    AttendanceSelection() {
+    private AttendanceSelection() {
         initComponents();
         addEventHandlers();
         refreshDates();
@@ -64,9 +63,9 @@ class AttendanceSelection extends Card {
 
 
     private void initComponents() {
+        dateList.add("Select Attendance");
         
         constraints.insets = new Insets(5,5,5,5);
-        dateList.add("Select Attendance");
         dateOptions.setSelectedIndex(0);
         
         description.setHorizontalAlignment(SwingConstants.LEFT);
