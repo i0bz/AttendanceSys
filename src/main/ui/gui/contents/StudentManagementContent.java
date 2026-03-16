@@ -155,6 +155,10 @@ class EnrollForm extends Card {
             enrollingStudent();
         });
 
+        studentNameInput.addActionListener(evt -> {
+            studentIdInput.requestFocusInWindow();
+        });
+
         studentIdInput.addActionListener(e -> {
             enrollingStudent();
             studentIdInput.getParent().requestFocusInWindow();
