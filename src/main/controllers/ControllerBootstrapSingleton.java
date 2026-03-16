@@ -29,7 +29,7 @@ public class ControllerBootstrapSingleton {
 //        return new AttendanceSystemController(managementService, attendanceService);
     }
 
-    public void saveData() {
+    public synchronized void saveData() {
         if (ControllerBootstrapSingleton.getInstance().registry.isFlushed && ControllerBootstrapSingleton.getInstance().roster.isFlushed) return;
         ControllerBootstrapSingleton.getInstance().registry.isFlushed = true;
         ControllerBootstrapSingleton.getInstance().roster.isFlushed = true;
