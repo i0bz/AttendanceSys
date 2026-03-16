@@ -185,6 +185,10 @@ class AttendanceMode extends Card {
             markPresent();
         });
 
+        inputField.addActionListener(evt -> {
+            markPresent();
+        });
+
 
     }
 

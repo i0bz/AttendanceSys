@@ -13,6 +13,7 @@ import ui.gui.contents.components.StudTableBtnEditor;
 import ui.gui.contents.components.TableBtnRenderer;
 
 import java.awt.*;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Map;
@@ -154,6 +155,22 @@ class EnrollForm extends Card {
             enrollingStudent();
         });
 
+        studentIdInput.addActionListener(e -> {
+            enrollingStudent();
+            studentIdInput.getParent().requestFocusInWindow();
+        });
+
+        studentNameInput.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (studentNameInput.getText().equals("Empty Name!!!")) {
+                    studentNameInput.setText("");
+                    studentNameInput.setForeground(Color.BLACK);
+                }
+            }
+        });
+
+
 
         studentIdInput.setText("YY-CCXXXX");
         studentIdInput.setForeground(Color.GRAY);
@@ -182,6 +199,10 @@ class EnrollForm extends Card {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
         String studId = studentIdInput.getText();
         String name = studentNameInput.getText();
+        if (!name.trim().isEmpty()) {
+            studentNameInput.setText("Empty Name!!!");
+            studentNameInput.setForeground(Color.RED);
+        }
         try {
             controller.enrollStudent(name, studId);
         } catch (RuntimeException e) {

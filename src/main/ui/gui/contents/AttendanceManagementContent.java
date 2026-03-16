@@ -164,6 +164,11 @@ class AttendanceCreationView extends Card {
             createAttendance();
         });
 
+        dateInput.addActionListener(e -> {
+            createAttendance();
+            dateInput.getParent().requestFocusInWindow();
+        });
+
     }
 
     private void createAttendance() {
