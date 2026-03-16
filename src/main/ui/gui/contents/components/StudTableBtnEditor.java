@@ -2,7 +2,7 @@ package ui.gui.contents.components;
 
 import javax.swing.JCheckBox;
 
-import controllers.ControllerFactorySingleton;
+import controllers.ControllerBootstrapSingleton;
 
 public class StudTableBtnEditor extends TableBtnEditor {
     
@@ -10,7 +10,7 @@ public class StudTableBtnEditor extends TableBtnEditor {
         super(checkBox);
         button.addActionListener(e -> {
             String uid = table.getValueAt(row, 1).toString();
-            ControllerFactorySingleton.getInstance().createController().dropStudent(uid);
+            ControllerBootstrapSingleton.getInstance().getController().dropStudent(uid);
         });
     }
 }

@@ -7,7 +7,7 @@ import javax.swing.table.TableColumnModel;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
-import controllers.ControllerFactorySingleton;
+import controllers.ControllerBootstrapSingleton;
 import repository.StudentRoster;
 import ui.gui.contents.components.StudTableBtnEditor;
 import ui.gui.contents.components.TableBtnRenderer;
@@ -70,7 +70,7 @@ class StudentTable extends Card {
 
 
     StudentTable() {
-        StudentRoster rosterView = ControllerFactorySingleton.getInstance().roster();
+        StudentRoster rosterView = ControllerBootstrapSingleton.getInstance().roster();
         rosterView.addPropertyChangeListener(evt -> refreshTableByName());
 
         super.padding = new FlatEmptyBorder(0,0,0,0);
@@ -86,7 +86,7 @@ class StudentTable extends Card {
 
 
     private void refreshTableByName() {
-        AttendanceSystemController attendanceSystemController = ControllerFactorySingleton.getInstance().createController();
+        AttendanceSystemController attendanceSystemController = ControllerBootstrapSingleton.getInstance().getController();
         model.setRowCount(0);
         Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
 
@@ -179,7 +179,7 @@ class EnrollForm extends Card {
     }
 
     public void enrollingStudent() {
-        AttendanceSystemController controller = ControllerFactorySingleton.getInstance().createController();
+        AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
         String studId = studentIdInput.getText();
         String name = studentNameInput.getText();
         try {

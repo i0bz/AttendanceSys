@@ -1,7 +1,7 @@
 package ui.gui.contents.components;
 
 import javax.swing.JCheckBox;
-import controllers.ControllerFactorySingleton;
+import controllers.ControllerBootstrapSingleton;
 
 public class AttTableBtnEditor extends TableBtnEditor {
 
@@ -10,7 +10,7 @@ public class AttTableBtnEditor extends TableBtnEditor {
 
         button.addActionListener(e -> {
             String date = table.getValueAt(row, 0).toString();
-            ControllerFactorySingleton.getInstance().createController().removeAttendance(date);
+            ControllerBootstrapSingleton.getInstance().getController().removeAttendance(date);
         });
     }
 }

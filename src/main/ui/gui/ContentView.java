@@ -11,7 +11,7 @@ import java.awt.*;
 public class ContentView {
     StudentManagementContent studentManagementContent = new StudentManagementContent();
     AttendanceManagementContent attendanceManagementContent = new AttendanceManagementContent();
-    AttendanceModeContent attendanceModeContent = AttendanceModeContent.getInstance();
+    AttendanceModeContent attendanceModeContent = new AttendanceModeContent();
     AttendanceSystemContent attendanceSystemContent = new AttendanceSystemContent();
 
 

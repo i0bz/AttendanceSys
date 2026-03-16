@@ -6,25 +6,25 @@ import services.AttendanceService;
 import services.StudentService;
 import utility.Persist;
 
-public class ControllerFactorySingleton {
+public class ControllerBootstrapSingleton {
     private StudentRoster roster;
     private AttendanceRegistry registry;
 
 
     //TODO rewrite this temporary fix later this is probably not thread safe also
     private static class Holder {
-        private static final ControllerFactorySingleton INSTANCE = new ControllerFactorySingleton();
+        private static final ControllerBootstrapSingleton INSTANCE = new ControllerBootstrapSingleton();
+        private static final AttendanceSystemController CONTROLLER_INSTANCE = new AttendanceSystemController(new StudentService(ControllerBootstrapSingleton.getInstance().roster), new AttendanceService(ControllerBootstrapSingleton.getInstance().registry, ControllerBootstrapSingleton.getInstance().roster));
     }
 
-    private ControllerFactorySingleton() {
+    private ControllerBootstrapSingleton() {
         this.roster = Persist.loadRoster();
         this.registry = Persist.loadRegistry();
     }
 
-    public AttendanceSystemController createController() {
-        AttendanceService attendanceService = new AttendanceService(registry, roster);
-        StudentService managementService = new StudentService(roster);
-        return new AttendanceSystemController(managementService, attendanceService);
+    public AttendanceSystemController getController() {
+        return Holder.CONTROLLER_INSTANCE;
+//        return new AttendanceSystemController(managementService, attendanceService);
     }
 
     public void saveData() {
@@ -40,7 +40,7 @@ public class ControllerFactorySingleton {
         return registry;
     }
 
-    public static ControllerFactorySingleton getInstance() {
+    public static ControllerBootstrapSingleton getInstance() {
         return Holder.INSTANCE;
     }
 }

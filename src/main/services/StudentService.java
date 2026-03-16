@@ -35,4 +35,8 @@ public class StudentService implements IStudentService {
         return new TreeMap<>(roster.queryRoster());
     }
 
+    public String getStudentName(int uid) {
+        return roster.queryStudent(uid).name();
+    }
+
 }

@@ -13,6 +13,8 @@ import services.IStudentService;
 //Utilities
 import utility.ParseUtility;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 import java.time.LocalDate;
@@ -21,6 +23,15 @@ import java.util.stream.Collectors;
 public class AttendanceSystemController {
     private final IStudentService studentManagement;
     private final IAttendanceService attendanceService;
+
+
+    private PropertyChangeSupport support = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+
 
     AttendanceSystemController(IStudentService managementService, IAttendanceService attendanceService) {
         this.studentManagement = managementService;
@@ -45,6 +56,7 @@ public class AttendanceSystemController {
 
     public void toggleAttendance(String uid, String date) {
         attendanceService.toggleAttendance(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
+        support.firePropertyChange("attendance", null, this);
     }
     public boolean isPresent(String uid, String date) {
         LocalDate parsedDate = ParseUtility.parseDate(date);
@@ -69,6 +81,9 @@ public class AttendanceSystemController {
                 .collect(Collectors
                         .toMap(entry -> ParseUtility.unparseUID(entry.getKey()),
                                 entry -> entry.getValue().name())));
+    }
+    public String getStudentName(String uid) {
+        return studentManagement.getStudentName(ParseUtility.parseUID(uid));
     }
 
 

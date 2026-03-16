@@ -1,6 +1,6 @@
 package ui.gui;
 
-import controllers.ControllerFactorySingleton;
+import controllers.ControllerBootstrapSingleton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +32,7 @@ public class MainWindow {
                 mainFrame.dispose();
 
                 SwingUtilities.invokeLater(() -> {
-                    ControllerFactorySingleton.getInstance().saveData();
+                    ControllerBootstrapSingleton.getInstance().saveData();
                 });
             }
         });

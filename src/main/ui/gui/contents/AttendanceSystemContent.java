@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 
 import controllers.AttendanceSystemController;
-import controllers.ControllerFactorySingleton;
+import controllers.ControllerBootstrapSingleton;
 
 import java.awt.*;
 import java.util.Vector;
@@ -86,7 +86,7 @@ class AttendanceSelection extends Card {
 
 
     public void refreshDates() {
-        List<String> registryDateList = ControllerFactorySingleton.getInstance().createController().attendanceDateLists();
+        List<String> registryDateList = ControllerBootstrapSingleton.getInstance().getController().attendanceDateLists();
 
         dateList.clear();
         dateList.add("Select Attendance");
@@ -99,7 +99,7 @@ class AttendanceSelection extends Card {
 
     public void addEventHandlers() {
 
-        ControllerFactorySingleton.getInstance().registry().addPropertyChangeListener(evt -> {
+        ControllerBootstrapSingleton.getInstance().registry().addPropertyChangeListener(evt -> {
             refreshDates();
         });
 
@@ -163,7 +163,13 @@ class AttendanceSystemTable extends Card {
 
         initComponents();
         refreshTable();
+        addEventHandlers();
+    }
 
+    private void addEventHandlers() {
+        ControllerBootstrapSingleton.getInstance().getController().addPropertyChangeListener(evt -> {
+            refreshTable();
+        });
     }
     
     private void initComponents() {
@@ -192,7 +198,7 @@ class AttendanceSystemTable extends Card {
     }
 
     public void refreshTable() {
-        AttendanceSystemController controller = ControllerFactorySingleton.getInstance().createController();
+        AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
         Map<String,String> students = controller.getAllStudentsByName();
 
         String date = AttendanceSelection.getInstance().dateOptions.getSelectedItem().toString();

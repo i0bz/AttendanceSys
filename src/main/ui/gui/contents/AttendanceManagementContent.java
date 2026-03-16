@@ -15,7 +15,7 @@ import javax.swing.table.TableColumnModel;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 
 import controllers.AttendanceSystemController;
-import controllers.ControllerFactorySingleton;
+import controllers.ControllerBootstrapSingleton;
 import repository.AttendanceRegistry;
 
 import ui.gui.contents.components.TableBtnRenderer; 
@@ -69,7 +69,7 @@ class AttendanceTable extends Card {
     private JTable table = new JTable(model);
 
     AttendanceTable() {
-        AttendanceRegistry registry = ControllerFactorySingleton.getInstance().registry();
+        AttendanceRegistry registry = ControllerBootstrapSingleton.getInstance().registry();
 
 
         registry.addPropertyChangeListener(evt -> {
@@ -86,7 +86,7 @@ class AttendanceTable extends Card {
 
     private void refreshTable() {
         model.setRowCount(0);
-        List<String> dateList  = ControllerFactorySingleton.getInstance().createController().attendanceDateLists();
+        List<String> dateList  = ControllerBootstrapSingleton.getInstance().getController().attendanceDateLists();
 
         for (String date : dateList) {
             model.addRow(new Object[]{date, "Remove"});
@@ -167,7 +167,7 @@ class AttendanceCreationView extends Card {
     }
 
     private void createAttendance() {
-        AttendanceSystemController controller = ControllerFactorySingleton.getInstance().createController();
+        AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
         String input = dateInput.getText();
         try{
             controller.createAttendance(input);
