@@ -202,6 +202,7 @@ class EnrollForm extends Card {
         if (name.trim().isEmpty()) {
             studentNameInput.setText("Empty Name!!!");
             studentNameInput.setForeground(Color.RED);
+            return;
         }
         try {
             controller.enrollStudent(name, studId);
