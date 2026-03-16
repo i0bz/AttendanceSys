@@ -105,8 +105,6 @@ class AttendanceSelection extends Card {
         });
 
         dateOptions.addActionListener(evt -> {
-            JComboBox<String> options = (JComboBox<String>) evt.getSource();
-            String option = options.getSelectedItem().toString();
             AttendanceSystemTable.getInstance().refreshTable();
         });
         
@@ -170,6 +168,16 @@ class AttendanceSystemTable extends Card {
     }
     
     private void initComponents() {
+
+        tableView.setRowSelectionAllowed(false);
+        tableView.getTableHeader().setResizingAllowed(false);
+        tableView.getTableHeader().setReorderingAllowed(false);
+
+        tableView.getColumnModel().getColumn(2).setMaxWidth(150);
+        tableView.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+        tableView.setRowHeight(45);
+
         JScrollPane pane = new JScrollPane(tableView);
         pane.putClientProperty("FlatLaf.style", "arc: 20");
 
