@@ -10,4 +10,5 @@ public interface IStudentRoster {
     public Student queryStudent(int uid);
     public boolean studentExists(int uid);
     public Map<Integer, Student> queryRoster();
+    public void unmarkFlushed();
 }

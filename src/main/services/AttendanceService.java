@@ -42,6 +42,7 @@ public class AttendanceService implements IAttendanceService {
         if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
         if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
         attendance.toggleAttendance(uid);
+        roster.unmarkFlushed();
     }
 
 

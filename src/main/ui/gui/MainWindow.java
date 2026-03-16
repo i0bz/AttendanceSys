@@ -29,7 +29,6 @@ public class MainWindow {
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                mainFrame.dispose();
 
                 ControllerBootstrapSingleton.getInstance().saveData();
                 System.exit(0);

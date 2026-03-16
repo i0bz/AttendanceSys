@@ -12,4 +12,6 @@ public interface IAttendanceRegistry {
 
     public AttendanceSheet queryAttendance(LocalDate date);
     public SortedSet<LocalDate> attendanceDateList();
+
+    public void unmarkFlushed();
 }

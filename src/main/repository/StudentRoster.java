@@ -11,6 +11,8 @@ public class StudentRoster implements Serializable, IStudentRoster {
     private final HashMap<Integer, Student> studentRoster;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
+    public boolean isFlushed = true;
+
     public StudentRoster() {
         studentRoster = new HashMap<>();
     }
@@ -18,15 +20,21 @@ public class StudentRoster implements Serializable, IStudentRoster {
     //Student Roster Management
     public void enroll(Student student) {
         studentRoster.putIfAbsent(student.uid(), student);
+        unmarkFlushed();
         support.firePropertyChange("studentRoster", null, studentRoster);
     }
     public void drop(int uid) {
         studentRoster.remove(uid);
+        unmarkFlushed();
         support.firePropertyChange("studentRoster", null, studentRoster);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
+    }
+
+    public void unmarkFlushed() {
+        isFlushed = false;
     }
 
     //Query functions

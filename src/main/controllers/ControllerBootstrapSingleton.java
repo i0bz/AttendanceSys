@@ -6,6 +6,8 @@ import services.AttendanceService;
 import services.StudentService;
 import utility.Persist;
 
+import javax.net.ssl.CertPathTrustManagerParameters;
+
 public class ControllerBootstrapSingleton {
     private StudentRoster roster;
     private AttendanceRegistry registry;
@@ -28,8 +30,12 @@ public class ControllerBootstrapSingleton {
     }
 
     public void saveData() {
+        if (ControllerBootstrapSingleton.getInstance().registry.isFlushed && ControllerBootstrapSingleton.getInstance().roster.isFlushed) return;
+        ControllerBootstrapSingleton.getInstance().registry.isFlushed = true;
+        ControllerBootstrapSingleton.getInstance().roster.isFlushed = true;
         Persist.saveRosterFile(roster);
         Persist.saveRegistry(registry);
+
     }
 
     public StudentRoster roster() {
