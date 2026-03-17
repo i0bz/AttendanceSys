@@ -200,6 +200,7 @@ class AttendanceMode extends Card {
         } catch (NoSuchElementException e) {
             inputField.setText("Student not enrolled!");
             inputField.setForeground(Color.RED);
+            inputField.getParent().requestFocusInWindow();
             return;
         } catch (RuntimeException e) {
             inputField.setText("Invalid UID!");
