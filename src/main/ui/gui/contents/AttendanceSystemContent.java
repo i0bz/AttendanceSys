@@ -215,7 +215,7 @@ class AttendanceSystemTable extends Card {
         for (Map.Entry<String, String> entry : students.entrySet()) {
             String name = entry.getKey();
             String uid = entry.getValue();
-            String isPresent = String.valueOf(controller.isPresent(uid, date));
+            String isPresent = controller.isPresent(uid, date) ?  "Present" : "Absent";
 
             model.addRow(new Object[] {
                 name, 
