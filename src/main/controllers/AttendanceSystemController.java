@@ -65,7 +65,7 @@ public class AttendanceSystemController {
         int studentID = ParseUtility.parseUID(uid);
         return attendanceService.isPresent(parsedDate, studentID);
     }
-    public void markPresent(String date, String uid) {
+    public void markPresent(String uid, String date) {
         attendanceService.markPresent(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
     }
 
