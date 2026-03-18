@@ -13,7 +13,7 @@ public interface IAttendanceService {
     void removeAttendance(LocalDate date);
 
     void toggleAttendance(LocalDate date, int uid);
-
+    public void markPresent(LocalDate date, int uid);
     boolean isPresent(LocalDate date, int uid);
 
     SortedSet<LocalDate> getDates();

@@ -26,6 +26,15 @@ public class AttendanceService implements IAttendanceService {
         return attendance.isPresent(uid);
     }
 
+    public void markPresent(LocalDate date, int uid) {
+        AttendanceSheet attendance =  registry.queryAttendance(date);
+        if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
+        if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
+        attendance.markPresent(uid);
+        roster.unmarkFlushed();
+    }
+
+
 
     //Attendance Management
     public void createAttendance(LocalDate date) {
