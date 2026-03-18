@@ -212,24 +212,28 @@ class AttendanceMode extends Card {
     }
 
     private void initComponents() {
-        attendanceEntry.setPreferredSize(new Dimension(700, 150));
-        activeDateInfo.setPreferredSize(new Dimension(700, 50));
+
 
         mainPanel.setBorder(new FlatEmptyBorder(0,0,0,0));
 
         attendanceEntry.setBorder(line_border);
         activeDateInfo.setBorder(line_border);
 
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = new Insets(20,20,20,20);
-
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 0.1;
+        constraints.insets = new Insets(20,20,10,20);
         mainPanel.add(activeDateInfo, constraints);
+
+
+        constraints.weighty = 1;
         constraints.gridy = 1;
-        constraints.insets = new Insets(0,20,20,20);
+        constraints.weightx = 1;
+        constraints.insets = new Insets(10,20,20,20);
         mainPanel.add(attendanceEntry, constraints);
 
 
 
+        constraints.weighty = 0;
         constraints.insets = new Insets(10,160,10,50);
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridy = 0;
@@ -241,8 +245,15 @@ class AttendanceMode extends Card {
         constraints.gridx = 2;
         activeDateInfo.add(changeDateBtn, constraints);
 
+
+
+
+
+
+
         constraints.insets = new Insets(10,0,10,0);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 0.1;
         CompoundBorder descBorder = new CompoundBorder(BorderFactory.createMatteBorder(0,0,1,0, borderColor), new FlatEmptyBorder(0,15,5,15));
         description.setBorder(descBorder);
         constraints.weightx = 1;
@@ -254,17 +265,24 @@ class AttendanceMode extends Card {
         constraints.insets = new Insets(5,10,5,10);
         constraints.weightx = 0;
         constraints.gridy = 1;
+        constraints.weighty = 0.1;
         attendanceEntry.add(inputDescription, constraints);
 
 
         constraints.insets = new Insets(5,200,5,200);
         constraints.gridy = 2;
+        constraints.weighty = 0.1;
         attendanceEntry.add(inputField, constraints);
 
         constraints.insets = new Insets(5,10,5,10);
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridy = 3;
+        constraints.weighty = 0.1;
         attendanceEntry.add(markPresentBtn, constraints);
+
+        constraints.weighty = 1;
+        constraints.gridy = 4;
+        attendanceEntry.add(Box.createVerticalGlue(), constraints);
 
 
     }
