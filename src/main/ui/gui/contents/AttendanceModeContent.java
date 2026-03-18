@@ -196,7 +196,7 @@ class AttendanceMode extends Card {
     private void markPresent() {
         String uid = inputField.getText();
         try {
-            ControllerBootstrapSingleton.getInstance().getController().toggleAttendance(uid, currentDate);
+            ControllerBootstrapSingleton.getInstance().getController().markPresent(uid, currentDate);
         } catch (NoSuchElementException e) {
             inputField.setText("Student not enrolled!");
             inputField.setForeground(Color.RED);
