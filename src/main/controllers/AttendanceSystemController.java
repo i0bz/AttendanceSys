@@ -54,6 +54,8 @@ public class AttendanceSystemController {
         attendanceService.removeAttendance(ParseUtility.parseDate(date));
     }
 
+
+
     public void toggleAttendance(String uid, String date) {
         attendanceService.toggleAttendance(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
         support.firePropertyChange("attendance", null, this);
@@ -63,7 +65,9 @@ public class AttendanceSystemController {
         int studentID = ParseUtility.parseUID(uid);
         return attendanceService.isPresent(parsedDate, studentID);
     }
-
+    public void markPresent(String date, String uid) {
+        attendanceService.markPresent(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
+    }
 
     //Querying (Student Management specific)
     public SortedMap<String, String> getAllStudentsByName() {
