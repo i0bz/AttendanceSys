@@ -67,6 +67,7 @@ public class AttendanceSystemController {
     }
     public void markPresent(String uid, String date) {
         attendanceService.markPresent(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
+        support.firePropertyChange("attendance", null, this);
     }
 
     //Querying (Student Management specific)
