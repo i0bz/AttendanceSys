@@ -3,6 +3,8 @@ package ui.gui.contents;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
@@ -147,7 +149,10 @@ class AttendanceSystemTable extends Card {
     DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return false;
+            return column == 2;
+        }
+        public Class<?> getColumnClass(int col) {
+            return (col == 2) ? Boolean.class : super.getColumnClass(col);
         }
     };
     JTable tableView = new JTable(model);
@@ -173,6 +178,21 @@ class AttendanceSystemTable extends Card {
 
         ControllerBootstrapSingleton.getInstance().roster().addPropertyChangeListener(evt -> {
             refreshTable();
+        });
+
+
+        model.addTableModelListener(e -> {
+            if (e.getType() != TableModelEvent.UPDATE) return;
+            int row = e.getFirstRow();
+            int col = e.getColumn();
+
+            if (col != 2) return;
+            DefaultTableModel model = (DefaultTableModel) e.getSource();
+            String date = AttendanceSelection.getInstance().dateOptions.getSelectedItem().toString();
+            String uid = (String) model.getValueAt(row, 1);
+
+            ControllerBootstrapSingleton.getInstance().getController().toggleAttendance(uid, date);
+
         });
     }
     
@@ -215,12 +235,11 @@ class AttendanceSystemTable extends Card {
         for (Map.Entry<String, String> entry : students.entrySet()) {
             String name = entry.getKey();
             String uid = entry.getValue();
-            String isPresent = controller.isPresent(uid, date) ?  "Present" : "Absent";
 
             model.addRow(new Object[] {
                 name, 
                 uid, 
-                isPresent
+                controller.isPresent(uid, date)
             });
         }
     }
