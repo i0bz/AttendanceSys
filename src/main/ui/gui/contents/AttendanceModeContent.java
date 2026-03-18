@@ -139,7 +139,7 @@ class AttendanceMode extends Card {
     JLabel description = new JLabel("Quick Attendance Entry");
     JLabel inputDescription = new JLabel("Enter Student UID:");
     JTextField inputField = new JTextField();
-    JButton markPresentBtn = new JButton("Toggle Attendance");
+    JButton markPresentBtn = new JButton("Mark Present");
 
     String currentDate = "";
 
@@ -205,6 +205,7 @@ class AttendanceMode extends Card {
         } catch (RuntimeException e) {
             inputField.setText("Invalid UID!");
             inputField.setForeground(Color.RED);
+            inputField.getParent().requestFocusInWindow();
             return;
         }
         JOptionPane.showMessageDialog(null ,"Welcome " + ControllerBootstrapSingleton.getInstance().getController().getStudentName(uid));
