@@ -11,6 +11,7 @@ import services.IAttendanceService;
 import services.IStudentService;
 
 //Utilities
+import services.SaveStateTracker;
 import utility.ParseUtility;
 
 import java.beans.PropertyChangeListener;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class AttendanceSystemController {
     private final IStudentService studentManagement;
     private final IAttendanceService attendanceService;
+    private final SaveStateTracker saveStateTracker;
 
 
     private PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -33,31 +35,41 @@ public class AttendanceSystemController {
 
 
 
-    AttendanceSystemController(IStudentService managementService, IAttendanceService attendanceService) {
+    AttendanceSystemController(IStudentService managementService, IAttendanceService attendanceService, SaveStateTracker saveStateTracker) {
         this.studentManagement = managementService;
         this.attendanceService = attendanceService;
+        this.saveStateTracker = saveStateTracker;
     }
 
     //Student Management
     public void dropStudent(String uid) {
         studentManagement.drop(ParseUtility.parseUID(uid));
+        saveStateTracker.markDirty();
     }
     public void enrollStudent(String name, String uid) {
         studentManagement.enroll(name, ParseUtility.parseUID(uid));
+        saveStateTracker.markDirty();
     }
 
     //Attendance Management
     public void createAttendance(String date) {
         attendanceService.createAttendance(ParseUtility.parseDate(date));
+        saveStateTracker.markDirty();
     }
     public void removeAttendance(String date) {
         attendanceService.removeAttendance(ParseUtility.parseDate(date));
+        saveStateTracker.markDirty();
     }
-
 
 
     public void toggleAttendance(String uid, String date) {
         attendanceService.toggleAttendance(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
+        saveStateTracker.markDirty();
+        support.firePropertyChange("attendance", null, this);
+    }
+    public void markPresent(String uid, String date) {
+        attendanceService.markPresent(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
+        saveStateTracker.markDirty();
         support.firePropertyChange("attendance", null, this);
     }
     public boolean isPresent(String uid, String date) {
@@ -65,10 +77,7 @@ public class AttendanceSystemController {
         int studentID = ParseUtility.parseUID(uid);
         return attendanceService.isPresent(parsedDate, studentID);
     }
-    public void markPresent(String uid, String date) {
-        attendanceService.markPresent(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
-        support.firePropertyChange("attendance", null, this);
-    }
+
 
     //Querying (Student Management specific)
     public SortedMap<String, String> getAllStudentsByName() {
