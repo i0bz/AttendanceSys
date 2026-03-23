@@ -1,4 +1,4 @@
-package ui.gui;
+package ui.gui.wrappers;
 
 import ui.gui.bars.NavigationBar;
 import ui.gui.bars.TitleBar;
@@ -9,7 +9,7 @@ import java.awt.*;
 public class Container {
     JPanel mainPanel;
 
-    Container() {
+    public Container() {
         mainPanel = new JPanel();
         BorderLayout layout = new BorderLayout();
         mainPanel.setLayout(layout);
@@ -24,7 +24,7 @@ public class Container {
     }
 
 
-    JPanel getPanel() {
+    public JPanel getPanel() {
         return mainPanel;
     }
 

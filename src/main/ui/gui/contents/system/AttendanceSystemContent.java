@@ -1,21 +1,24 @@
-package ui.gui.contents;
+package ui.gui.contents.system;
 
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
+import ui.gui.contents.components.Card;
 
 import java.awt.*;
 import java.util.Vector;
 import java.util.List;
 import java.util.Map;
+
+
+//TODO split up
 
 public class AttendanceSystemContent {
 
@@ -88,7 +91,7 @@ class AttendanceSelection extends Card {
 
 
     public void refreshDates() {
-        List<String> registryDateList = ControllerBootstrapSingleton.getInstance().getController().attendanceDateLists();
+        List<String> registryDateList = ControllerBootstrapSingleton.getController().attendanceDateLists();
 
         dateList.clear();
         dateList.add("Select Attendance");
@@ -124,7 +127,7 @@ class AttendanceSelection extends Card {
 
 
 
-    //TODO hude refactor for this later
+    //TODO huge refactor for this later
     //im creating this as singleton for now
 
 
@@ -172,7 +175,7 @@ class AttendanceSystemTable extends Card {
     }
 
     private void addEventHandlers() {
-        ControllerBootstrapSingleton.getInstance().getController().addPropertyChangeListener(evt -> {
+        ControllerBootstrapSingleton.getController().addPropertyChangeListener(evt -> {
             refreshTable();
         });
 
@@ -191,7 +194,7 @@ class AttendanceSystemTable extends Card {
             String date = AttendanceSelection.getInstance().dateOptions.getSelectedItem().toString();
             String uid = (String) model.getValueAt(row, 1);
 
-            ControllerBootstrapSingleton.getInstance().getController().toggleAttendance(uid, date);
+            ControllerBootstrapSingleton.getController().toggleAttendance(uid, date);
 
         });
     }
@@ -222,7 +225,7 @@ class AttendanceSystemTable extends Card {
     }
 
     public void refreshTable() {
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
+        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         Map<String,String> students = controller.getAllStudentsByName();
 
         String date = AttendanceSelection.getInstance().dateOptions.getSelectedItem().toString();

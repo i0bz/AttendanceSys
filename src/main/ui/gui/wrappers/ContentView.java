@@ -1,9 +1,9 @@
-package ui.gui;
+package ui.gui.wrappers;
 
-import ui.gui.contents.AttendanceManagementContent;
-import ui.gui.contents.AttendanceModeContent;
-import ui.gui.contents.AttendanceSystemContent;
-import ui.gui.contents.StudentManagementContent;
+import ui.gui.contents.attendancemanagement.AttendanceManagementContent;
+import ui.gui.contents.system.AttendanceModeContent;
+import ui.gui.contents.system.AttendanceSystemContent;
+import ui.gui.contents.studentmanagement.StudentManagementContent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +13,7 @@ public class ContentView {
     AttendanceManagementContent attendanceManagementContent = new AttendanceManagementContent();
     AttendanceModeContent attendanceModeContent = new AttendanceModeContent();
     AttendanceSystemContent attendanceSystemContent = new AttendanceSystemContent();
+
 
 
     public CardLayout cardLayout = new CardLayout();

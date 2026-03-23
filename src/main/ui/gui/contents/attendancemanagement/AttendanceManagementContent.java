@@ -1,4 +1,4 @@
-package ui.gui.contents;
+package ui.gui.contents.attendancemanagement;
 
 
 import java.util.List;
@@ -18,8 +18,13 @@ import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import repository.AttendanceRegistry;
 
-import ui.gui.contents.components.TableBtnRenderer; 
+import ui.gui.contents.components.Card;
+import ui.gui.contents.components.TableBtnRenderer;
 import ui.gui.contents.components.AttTableBtnEditor;
+
+
+//TODO split up
+
 
 public class AttendanceManagementContent {
     private JPanel mainPanel = new JPanel(new GridBagLayout());

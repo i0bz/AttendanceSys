@@ -1,4 +1,4 @@
-package ui.gui.contents;
+package ui.gui.contents.components;
 
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;

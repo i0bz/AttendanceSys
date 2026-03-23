@@ -1,4 +1,4 @@
-package ui.gui.contents;
+package ui.gui.contents.system;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -12,6 +12,10 @@ import javax.swing.border.CompoundBorder;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
+import ui.gui.contents.components.Card;
+
+//TODO split up
+
 
 public class AttendanceModeContent {
     public CardLayout cardLayout = new CardLayout();

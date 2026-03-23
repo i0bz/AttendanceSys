@@ -1,4 +1,4 @@
-package ui.gui.contents;
+package ui.gui.contents.studentmanagement;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -9,6 +9,7 @@ import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import repository.StudentRoster;
+import ui.gui.contents.components.Card;
 import ui.gui.contents.components.StudTableBtnEditor;
 import ui.gui.contents.components.TableBtnRenderer;
 
@@ -18,7 +19,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Map;
 
-
+//TODO split up
 
 
 public class StudentManagementContent {

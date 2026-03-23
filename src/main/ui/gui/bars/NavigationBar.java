@@ -5,7 +5,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import ui.gui.ContentView;
+import ui.gui.wrappers.ContentView;
 
 import java.awt.*;
 import java.util.ArrayList;
