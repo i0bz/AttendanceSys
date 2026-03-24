@@ -1,7 +1,7 @@
-package ui.gui;
+package ui;
 
 import controllers.ControllerBootstrapSingleton;
-import ui.gui.wrappers.Container;
+import ui.wrappers.Container;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class MainWindow {
 
 
         //add contents
-        ui.gui.wrappers.Container contents = new Container();
+        Container contents = new Container();
         mainFrame.add(contents.getPanel(), BorderLayout.CENTER);
 
 

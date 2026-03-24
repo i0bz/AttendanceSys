@@ -1,4 +1,4 @@
-package ui.gui.contents.system;
+package ui.contents.system;
 
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import com.formdev.flatlaf.ui.FlatEmptyBorder;
 
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
-import ui.gui.contents.components.Card;
+import ui.contents.components.Card;
 
 import java.awt.*;
 import java.util.Vector;

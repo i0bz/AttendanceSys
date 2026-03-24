@@ -1,7 +1,7 @@
-package ui.gui.wrappers;
+package ui.wrappers;
 
-import ui.gui.bars.NavigationBar;
-import ui.gui.bars.TitleBar;
+import ui.bars.NavigationBar;
+import ui.bars.TitleBar;
 
 import javax.swing.*;
 import java.awt.*;

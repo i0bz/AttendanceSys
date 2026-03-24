@@ -1,4 +1,4 @@
-package ui.gui.contents.system;
+package ui.contents.system;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -12,7 +12,7 @@ import javax.swing.border.CompoundBorder;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
-import ui.gui.contents.components.Card;
+import ui.contents.components.Card;
 
 //TODO split up
 

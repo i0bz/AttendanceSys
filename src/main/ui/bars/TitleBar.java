@@ -1,4 +1,4 @@
-package ui.gui.bars;
+package ui.bars;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;

@@ -1,4 +1,4 @@
-package ui.gui.contents.components;
+package ui.contents.components;
 
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;

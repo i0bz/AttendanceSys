@@ -1,4 +1,4 @@
-package ui.cli;
+package cli;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

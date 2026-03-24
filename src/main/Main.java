@@ -1,8 +1,8 @@
 import com.formdev.flatlaf.FlatLightLaf;
 import controllers.ControllerBootstrapSingleton;
 import controllers.AttendanceSystemController;
-import ui.cli.CLIHandler;
-import ui.gui.MainWindow;
+import cli.CLIHandler;
+import ui.MainWindow;
 import utility.PersistenceFlusher;
 
 import javax.swing.*;

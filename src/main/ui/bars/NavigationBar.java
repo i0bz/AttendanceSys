@@ -1,11 +1,11 @@
-package ui.gui.bars;
+package ui.bars;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import ui.gui.wrappers.ContentView;
+import ui.wrappers.ContentView;
 
 import java.awt.*;
 import java.util.ArrayList;

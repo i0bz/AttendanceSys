@@ -1,4 +1,4 @@
-package ui.gui.contents.components;
+package ui.contents.components;
 
 import javax.swing.JCheckBox;
 
@@ -10,7 +10,7 @@ public class StudTableBtnEditor extends TableBtnEditor {
         super(checkBox);
         button.addActionListener(e -> {
             String uid = table.getValueAt(row, 1).toString();
-            ControllerBootstrapSingleton.getInstance().getController().dropStudent(uid);
+            ControllerBootstrapSingleton.getController().dropStudent(uid);
         });
     }
 }
