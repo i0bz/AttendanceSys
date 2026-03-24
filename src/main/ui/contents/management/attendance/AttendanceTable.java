@@ -4,7 +4,7 @@ import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
 import repository.AttendanceRegistry;
 import ui.contents.components.AttTableBtnEditor;
-import ui.contents.components.Card;
+import ui.contents.components.Panel;
 import ui.contents.components.TableBtnRenderer;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.List;
 
-class AttendanceTable extends Card {
+class AttendanceTable extends Panel {
 
     private String[] header = {"Date:", "Action:"};
     private DefaultTableModel model = new DefaultTableModel(header, 0) {

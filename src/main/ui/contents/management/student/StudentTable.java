@@ -4,7 +4,7 @@ import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import repository.StudentRoster;
-import ui.contents.components.Card;
+import ui.contents.components.Panel;
 import ui.contents.components.StudTableBtnEditor;
 import ui.contents.components.TableBtnRenderer;
 
@@ -15,7 +15,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.Map;
 
-class StudentTable extends Card {
+class StudentTable extends Panel {
 
     private final String[] rowLabels = {"Name:", "UID:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(rowLabels,0) {

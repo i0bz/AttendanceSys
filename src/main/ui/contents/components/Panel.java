@@ -8,7 +8,7 @@ import com.formdev.flatlaf.ui.FlatLineBorder;
 import java.awt.*;
 
 
-public class Card {
+public class Panel {
     protected JPanel mainPanel = new JPanel(new GridBagLayout());
     protected GridBagConstraints constraints = new GridBagConstraints();
 
@@ -17,7 +17,7 @@ public class Card {
     protected FlatEmptyBorder padding = new FlatEmptyBorder(20,20,20,20);
     protected CompoundBorder border = new CompoundBorder(line_border, padding);
 
-    protected Card() {
+    protected Panel() {
         mainPanel.setBorder(border);
     }
 }

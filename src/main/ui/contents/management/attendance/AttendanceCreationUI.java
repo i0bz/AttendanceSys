@@ -2,14 +2,14 @@ package ui.contents.management.attendance;
 
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Card;
+import ui.contents.components.Panel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-class AttendanceCreationUI extends Card {
+class AttendanceCreationUI extends Panel {
 
     private JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
     private JLabel dateLabel = new JLabel("Date:");
