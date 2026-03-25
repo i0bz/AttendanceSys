@@ -8,6 +8,14 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+class Config {
+    public static final int width = 1000;
+    public static final int height = 700;
+    public static final int minimumWidth = 700;
+    public static final int minimumHeight = 450;
+}
+
+
 public class MainWindow {
     JFrame mainFrame;
 
@@ -16,7 +24,8 @@ public class MainWindow {
 
         //configure
         mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        mainFrame.setSize(1000, 700);
+        mainFrame.setSize(Config.width, Config.height);
+        mainFrame.setMinimumSize(new Dimension(Config.minimumWidth, Config.minimumHeight));
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setLayout(new BorderLayout());
 
