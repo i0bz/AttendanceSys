@@ -44,20 +44,24 @@ public class AttendanceSystemController {
     //Student Management
     public void dropStudent(String uid) {
         studentManagement.drop(ParseUtility.parseUID(uid));
+        support.firePropertyChange("roster", null, this);
         saveStateTracker.markDirty();
     }
     public void enrollStudent(String name, String uid) {
         studentManagement.enroll(name, ParseUtility.parseUID(uid));
+        support.firePropertyChange("roster", null, this);
         saveStateTracker.markDirty();
     }
 
     //Attendance Management
     public void createAttendance(String date) {
         attendanceService.createAttendance(ParseUtility.parseDate(date));
+        support.firePropertyChange("registry", null, this);
         saveStateTracker.markDirty();
     }
     public void removeAttendance(String date) {
         attendanceService.removeAttendance(ParseUtility.parseDate(date));
+        support.firePropertyChange("registry", null, this);
         saveStateTracker.markDirty();
     }
 
