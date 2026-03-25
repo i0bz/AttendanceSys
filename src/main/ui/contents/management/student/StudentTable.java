@@ -28,8 +28,8 @@ class StudentTable extends Panel {
 
 
     StudentTable() {
-        StudentRoster rosterView = ControllerBootstrapSingleton.getInstance().roster();
-        rosterView.addPropertyChangeListener(evt -> refreshTableByName());
+        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
+        controller.addPropertyChangeListener(evt -> refreshTableByName());
 
         super.padding = new FlatEmptyBorder(0,0,0,0);
         super.border = new CompoundBorder(super.line_border, super.padding);
