@@ -9,14 +9,15 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.Map;
 
 class AttendanceSystem extends Panel {
 
 
-    String[] columnHeaders = {"Name:", "UID:", "Present:"};
-    DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) {
+    private final String[] columnHeaders = {"Name:", "UID:", "Present:"};
+    private final DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
             return column == 2;
@@ -26,30 +27,23 @@ class AttendanceSystem extends Panel {
             return (col == 2) ? Boolean.class : super.getColumnClass(col);
         }
     };
-    JTable tableView = new JTable(model);
+    private final JTable tableView = new JTable(model);
+    private final JScrollPane pane = new JScrollPane(tableView);
 
+    String date;
 
     AttendanceSystem() {
-
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
         super.border = new CompoundBorder(super.line_border, super.padding);
-
         mainPanel.setBorder(border);
 
-        initComponents();
-        refreshTable();
+        drawComponents();
+        refreshTable(date);
         addEventHandlers();
     }
 
     private void addEventHandlers() {
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(evt -> {
-            refreshTable();
-        });
-
-        ControllerBootstrapSingleton.getInstance().roster().addPropertyChangeListener(evt -> {
-            refreshTable();
-        });
-
+        ControllerBootstrapSingleton.getController().addPropertyChangeListener(evt -> refreshTable(date));
 
         model.addTableModelListener(e -> {
             if (e.getType() != TableModelEvent.UPDATE) return;
@@ -58,7 +52,6 @@ class AttendanceSystem extends Panel {
 
             if (col != 2) return;
             DefaultTableModel model = (DefaultTableModel) e.getSource();
-            String date = AttendanceSelection.getInstance().dateOptions.getSelectedItem().toString();
             String uid = (String) model.getValueAt(row, 1);
 
             ControllerBootstrapSingleton.getController().toggleAttendance(uid, date);
@@ -66,37 +59,43 @@ class AttendanceSystem extends Panel {
         });
     }
 
-    private void initComponents() {
+    private void drawComponents() {
 
         tableView.setRowSelectionAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
         tableView.getTableHeader().setReorderingAllowed(false);
+        tableView.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        tableView.getColumnModel().getColumn(2).setMaxWidth(150);
-        tableView.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+        TableColumnModel columnModel = tableView.getColumnModel();
+
+        int totalWidth = tableView.getWidth();
+        if (totalWidth <= 0) totalWidth = 400;
+
+        columnModel.getColumn(0).setPreferredWidth((int) (totalWidth * 0.8));
+        columnModel.getColumn(1).setPreferredWidth((int) (totalWidth * 0.1));
+        columnModel.getColumn(1).setMinWidth(80);
+        columnModel.getColumn(2).setPreferredWidth((int) (totalWidth * 0.1));
+        columnModel.getColumn(2).setMinWidth(80);
 
         tableView.setRowHeight(45);
 
-        JScrollPane pane = new JScrollPane(tableView);
-        pane.putClientProperty("FlatLaf.style", "arc: 20");
 
+        pane.putClientProperty("FlatLaf.style", "arc: 20");
 
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1;
         constraints.weighty = 1;
-
-        constraints.insets = new Insets(0, 0, 0, 0);
         mainPanel.add(pane, constraints);
 
 
     }
 
-    public void refreshTable() {
+    public void refreshTable(String date) {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         Map<String, String> students = controller.getAllStudentsByName();
 
-        String date = AttendanceSelection.getInstance().dateOptions.getSelectedItem().toString();
-        if (date.equals("Select Attendance")) {
+        if (date == null || date.equals("Select Attendance")) {
             model.setRowCount(0);
             return;
         }
@@ -117,19 +116,5 @@ class AttendanceSystem extends Panel {
     public JPanel getPanel() {
         return mainPanel;
     }
-
-
-    //TODO hude refactor for this later
-    //im creating this as singleton for now
-
-
-    static class SingletonHolder {
-        private static final AttendanceSystem singleton = new AttendanceSystem();
-    }
-
-    static AttendanceSystem getInstance() {
-        return SingletonHolder.singleton;
-    }
-
 
 }

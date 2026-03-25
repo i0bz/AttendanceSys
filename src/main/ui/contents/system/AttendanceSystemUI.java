@@ -14,12 +14,14 @@ public class AttendanceSystemUI {
     private final GridBagLayout layout = new GridBagLayout();
     private final JPanel mainPanel = new JPanel(layout);
     private final GridBagConstraints constraints = new GridBagConstraints();
-    AttendanceSelection attendanceSelection = AttendanceSelection.getInstance();
-    AttendanceSystem attendanceSystemTable = AttendanceSystem.getInstance();
+    private final AttendanceSelection attendanceSelection = new AttendanceSelection();
+    private final AttendanceSystem attendanceSystemTable = new AttendanceSystem();
+
 
     private int gapSize = 20;
 
     public AttendanceSystemUI() {
+        final SelectionMediator mediator = new SelectionMediator(attendanceSelection, attendanceSystemTable);
 
         mainPanel.add(attendanceSelection.getPanel(), constraints);
         mainPanel.add(attendanceSystemTable.getPanel(), constraints);
