@@ -3,6 +3,7 @@ package ui.contents.management.attendance;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.Panel;
+import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,19 +12,39 @@ import java.awt.event.FocusListener;
 
 class AttendanceCreationUI extends Panel {
 
-    private JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
-    private JLabel dateLabel = new JLabel("Date:");
-    private JTextField dateInput = new JTextField();
-    private JButton addButton = new JButton("Add Date");
+    private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
+    private final JLabel dateLabel = new JLabel("Date:");
+    private final JTextField dateInput = new JTextField();
+    private final JButton addButton = new JButton("Add Date");
 
+    private final Component horizontalGlue = Box.createHorizontalGlue();
 
     AttendanceCreationUI() {
-        initComponents();
-        addEventHandlers();
+        mainPanel.add(descriptionLabel, constraints);
+        mainPanel.add(dateLabel, constraints);
+        mainPanel.add(dateInput, constraints);
+        mainPanel.add(addButton, constraints);
+        mainPanel.add(horizontalGlue, constraints);
+
+        dynamicPadding();
+        drawComponents();
+        focusListeners();
+        buttonListeners();
 
     }
 
-    public void addEventHandlers() {
+    private void buttonListeners() {
+        addButton.addActionListener(e -> {
+            createAttendance();
+        });
+
+        dateInput.addActionListener(e -> {
+            createAttendance();
+            dateInput.getParent().requestFocusInWindow();
+        });
+    }
+
+    private void focusListeners() {
         dateInput.setText("YYYY-MM-DD");
         dateInput.setForeground(Color.GRAY);
 
@@ -44,20 +65,10 @@ class AttendanceCreationUI extends Panel {
                 }
             }
         });
-
-        addButton.addActionListener(e -> {
-            createAttendance();
-        });
-
-        dateInput.addActionListener(e -> {
-            createAttendance();
-            dateInput.getParent().requestFocusInWindow();
-        });
-
     }
 
     private void createAttendance() {
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
+        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         String input = dateInput.getText();
         try {
             controller.createAttendance(input);
@@ -71,41 +82,40 @@ class AttendanceCreationUI extends Panel {
     }
 
     //TODO create helper functions for each
-    private void initComponents() {
+    private void drawComponents() {
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
         constraints.weightx = 1;
-        constraints.gridwidth = 2;
+        ConstraintUtils.setWidth(constraints, 2);
         descriptionLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        mainPanel.add(descriptionLabel, constraints);
+        layout.setConstraints(descriptionLabel, constraints);
 
 
         constraints.insets = new Insets(0, 0, 0, 0);
-        constraints.gridy = 1;
-        mainPanel.add(dateLabel, constraints);
+        ConstraintUtils.setCoords(constraints, 0, 1);
+        layout.setConstraints(dateLabel, constraints);
 
 
         dateInput.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 10);
-        constraints.gridwidth = 1;
-        constraints.gridy = 2;
+        ConstraintUtils.setWidth(constraints, 1);
+        ConstraintUtils.setCoords(constraints, 0, 2);
         constraints.weightx = 2;
-        mainPanel.add(dateInput, constraints);
+        layout.setConstraints(dateInput, constraints);
 
 
         addButton.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 0);
-        constraints.gridx = 1;
+        ConstraintUtils.setCoords(constraints, 1, 2);
         constraints.weightx = 0.1;
-        mainPanel.add(addButton, constraints);
+        layout.setConstraints(addButton, constraints);
 
 
         constraints.gridx = 2;
         constraints.weightx = 10;
-        mainPanel.add(Box.createVerticalGlue(), constraints);
+        layout.setConstraints(horizontalGlue, constraints);
 
+        ConstraintUtils.reset(constraints);
 
     }
 

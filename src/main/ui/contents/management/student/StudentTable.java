@@ -5,7 +5,7 @@ import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.Panel;
 import ui.contents.components.StudTableBtnEditor;
-import ui.contents.components.TableBtnRenderer;
+import ui.contents.components.StudTableBtnRenderer;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -46,13 +46,12 @@ class StudentTable extends Panel {
 
 
     private void refreshTableByName() {
-        AttendanceSystemController attendanceSystemController = ControllerBootstrapSingleton.getController();
-        Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
+        Map<String, String> rosterMap = ControllerBootstrapSingleton.getController().getAllStudentsByName();
 
         model.setRowCount(0);
         rosterMap.forEach((key, value) -> model.addRow(new Object[]{key, value, "Drop"}));
 
-        tableView.getColumnModel().getColumn(2).setCellRenderer(new TableBtnRenderer());
+        tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
         tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox()));
 
     }
@@ -66,8 +65,8 @@ class StudentTable extends Panel {
 
         TableColumnModel columnModel = tableView.getColumnModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        columnModel.getColumn(1).setCellRenderer(centerRenderer);
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        columnModel.getColumn(1).setCellRenderer(centerRenderer);
 
         int totalWidth = tableView.getWidth();
         if (totalWidth <= 0) totalWidth = 400;

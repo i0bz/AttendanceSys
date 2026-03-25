@@ -42,7 +42,7 @@ class EnrollForm extends Panel {
         });
     }
 
-    public void focusEventListeners() {
+    private void focusEventListeners() {
 
         //Enter button events
         studentNameInput.addActionListener(evt -> {
@@ -86,7 +86,7 @@ class EnrollForm extends Panel {
 
     }
 
-    public void enrollingStudent() {
+    private void enrollingStudent() {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         String studId = studentIdInput.getText();
         String name = studentNameInput.getText();
@@ -110,7 +110,7 @@ class EnrollForm extends Panel {
         studentIdInput.setForeground(Color.GRAY);
     }
 
-    public void drawComponents() {
+    private void drawComponents() {
 
         constraints.weightx = 1.0;
         constraints.fill = GridBagConstraints.HORIZONTAL;

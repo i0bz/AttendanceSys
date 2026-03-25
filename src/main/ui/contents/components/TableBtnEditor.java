@@ -13,7 +13,7 @@ public class TableBtnEditor extends DefaultCellEditor {
     protected int row;
 
     //border
-    private int width;
+    protected int width;
     private CompoundBorder border;
 
 
@@ -31,9 +31,6 @@ public class TableBtnEditor extends DefaultCellEditor {
         this.table = table;
         this.row = row;
         button.setText(value == null ? "" : value.toString());
-
-        width = table.getColumnModel().getColumn(2).getWidth();
-        setMargin();
         return button;
     }
 
@@ -42,7 +39,7 @@ public class TableBtnEditor extends DefaultCellEditor {
     }
 
 
-    private void setMargin() {
+    protected void setMargin() {
         int marginSize = (int) (width * 0.2);
 
         FlatEmptyBorder margin = new FlatEmptyBorder(5, marginSize, 5, marginSize);
