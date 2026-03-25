@@ -10,7 +10,7 @@ public class AttTableBtnEditor extends TableBtnEditor {
 
         button.addActionListener(e -> {
             String date = table.getValueAt(row, 0).toString();
-            ControllerBootstrapSingleton.getInstance().getController().removeAttendance(date);
+            ControllerBootstrapSingleton.getController().removeAttendance(date);
         });
     }
 }

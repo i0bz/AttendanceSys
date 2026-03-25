@@ -3,13 +3,14 @@ package ui.contents.management.student;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
-import repository.StudentRoster;
 import ui.contents.components.Panel;
 import ui.contents.components.StudTableBtnEditor;
 import ui.contents.components.TableBtnRenderer;
+import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
@@ -25,6 +26,7 @@ class StudentTable extends Panel {
         }
     };
     private final JTable tableView = new JTable(model);
+    JScrollPane scrollPanel = new JScrollPane(tableView);
 
 
     StudentTable() {
@@ -35,9 +37,9 @@ class StudentTable extends Panel {
         super.border = new CompoundBorder(super.line_border, super.padding);
         mainPanel.setBorder(super.border);
 
+        mainPanel.add(scrollPanel);
 
-
-        initComponents();
+        drawComponents();
         refreshTableByName();
 
     }
@@ -45,44 +47,43 @@ class StudentTable extends Panel {
 
     private void refreshTableByName() {
         AttendanceSystemController attendanceSystemController = ControllerBootstrapSingleton.getController();
-        model.setRowCount(0);
         Map<String, String> rosterMap = attendanceSystemController.getAllStudentsByName();
 
+        model.setRowCount(0);
+        rosterMap.forEach((key, value) -> model.addRow(new Object[]{key, value, "Drop"}));
 
-
-
-        for (Map.Entry<String, String> entry : rosterMap.entrySet()) {
-            model.addRow(new Object[]{entry.getKey(),entry.getValue(), "Drop"});
-
-        }
         tableView.getColumnModel().getColumn(2).setCellRenderer(new TableBtnRenderer());
         tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox()));
 
-
-
     }
 
-    private void initComponents() {
+    private void drawComponents() {
         tableView.setRowSelectionAllowed(false);
-        tableView.setRowHeight(40);
+        tableView.setRowHeight(50);
         tableView.getTableHeader().setReorderingAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
-        tableView.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tableView.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         TableColumnModel columnModel = tableView.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(300);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        columnModel.getColumn(1).setCellRenderer(centerRenderer);
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 
-        JScrollPane pane = new JScrollPane(tableView);
+        int totalWidth = tableView.getWidth();
+        if (totalWidth <= 0) totalWidth = 400;
 
-        pane.putClientProperty("FlatLaf.style", "arc: 20");
-        constraints.insets = new Insets(0,0,0,0);
-        constraints.gridx = 0;
-        constraints.gridy = 0;
+        columnModel.getColumn(0).setPreferredWidth((int)(totalWidth * 0.5));
+        columnModel.getColumn(1).setPreferredWidth((int)(totalWidth * 0.1));
+        columnModel.getColumn(1).setMinWidth(80);
+        columnModel.getColumn(2).setPreferredWidth((int)(totalWidth * 0.4));
+
+
+        scrollPanel.putClientProperty("FlatLaf.style", "arc: 20");
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        mainPanel.add(pane,constraints);
-
+        layout.setConstraints(scrollPanel, constraints);
+        ConstraintUtils.reset(constraints);
 
 
     }
