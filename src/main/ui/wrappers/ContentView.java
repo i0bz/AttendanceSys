@@ -17,7 +17,7 @@ public class ContentView {
 
 
     public CardLayout cardLayout = new CardLayout();
-    private JPanel mainPanel = new JPanel(cardLayout);
+    private final JPanel mainPanel = new JPanel(cardLayout);
 
 
     public String[] views = {"Student Management", "Attendance Management", "Attendance System", "Attendance Mode"};

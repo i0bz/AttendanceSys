@@ -1,38 +1,60 @@
 package ui.contents.system;
 
 
+import ui.utility.ConstraintUtils;
+
 import javax.swing.*;
 
 import java.awt.*;
-
-
-//TODO split up
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class AttendanceSystemUI {
 
-    JPanel mainPanel = new JPanel(new GridBagLayout());
-    GridBagConstraints constraints = new GridBagConstraints();
+    private final GridBagLayout layout = new GridBagLayout();
+    private final JPanel mainPanel = new JPanel(layout);
+    private final GridBagConstraints constraints = new GridBagConstraints();
+    AttendanceSelection attendanceSelection = AttendanceSelection.getInstance();
+    AttendanceSystem attendanceSystemTable = AttendanceSystem.getInstance();
 
-
+    private int gapSize = 20;
 
     public AttendanceSystemUI() {
-        AttendanceSelection attendanceSelection = AttendanceSelection.getInstance();
-        AttendanceSystem attendanceSystemTable = AttendanceSystem.getInstance();
 
-        constraints.insets = new Insets(20,20,20,20);
-        constraints.gridx = 0;
-        constraints.gridy = 0;
+        mainPanel.add(attendanceSelection.getPanel(), constraints);
+        mainPanel.add(attendanceSystemTable.getPanel(), constraints);
+
+        dynamicPadding();
+        drawComponents();
+    }
+
+    private void drawComponents() {
+
+        constraints.insets = new Insets(gapSize,gapSize,0,gapSize);
         constraints.weightx = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        mainPanel.add(attendanceSelection.getPanel(), constraints);
+        layout.setConstraints(attendanceSelection.getPanel(), constraints);
 
-
-
-
-        constraints.gridy = 1;
+        ConstraintUtils.setCoords(constraints, 0, 1);
         constraints.weighty = 1;
+        constraints.insets = new Insets(gapSize,gapSize,gapSize,gapSize);
         constraints.fill = GridBagConstraints.BOTH;
-        mainPanel.add(attendanceSystemTable.getPanel(), constraints);
+        layout.setConstraints(attendanceSystemTable.getPanel(), constraints);
+
+        ConstraintUtils.reset(constraints);
+    }
+
+    private void dynamicPadding() {
+
+        mainPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent evt) {
+                gapSize = (int) Math.min( 40.0 , evt.getComponent().getWidth() * 0.03);
+                drawComponents();
+
+            }
+        });
+
     }
 
     public JPanel getPanel() {
