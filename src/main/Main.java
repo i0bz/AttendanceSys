@@ -10,7 +10,7 @@ import javax.swing.*;
 public class  Main {
     public static void main(String[] args) {
 
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getInstance().getController();
+        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         PersistenceFlusher.startDaemon();
 
         if (args.length != 0) {

@@ -3,6 +3,7 @@ package ui.contents.management.student;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.Panel;
+import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,38 +16,42 @@ class EnrollForm extends Panel {
     JTextField studentIdInput = new JTextField(9);
     JTextField studentNameInput = new JTextField(9);
     JButton enrollButton = new JButton("Enroll");
+    JLabel enrollLabel = new JLabel("Enroll new student");
+    JLabel studentNameLabel = new JLabel("Student Name:");
+    JLabel studentIDLabel = new JLabel("Student ID:");
 
     EnrollForm() {
-        initComponents();
-        addEventHandling();
+
+        mainPanel.add(enrollLabel, constraints);
+        mainPanel.add(studentNameLabel, constraints);
+        mainPanel.add(studentIDLabel, constraints);
+        mainPanel.add(studentIdInput, constraints);
+        mainPanel.add(studentNameInput, constraints);
+        mainPanel.add(enrollButton, constraints);
+
+        drawComponents();
+        dynamicPadding();
+        focusEventListeners();
+        enrollEventListeners();
     }
 
 
-    public void addEventHandling() {
-
+    private void enrollEventListeners() {
         enrollButton.addActionListener(e -> {
             enrollingStudent();
         });
+    }
 
+    public void focusEventListeners() {
+
+        //Enter button events
         studentNameInput.addActionListener(evt -> {
             studentIdInput.requestFocusInWindow();
         });
-
         studentIdInput.addActionListener(e -> {
             enrollingStudent();
             studentIdInput.getParent().requestFocusInWindow();
         });
-
-        studentNameInput.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (studentNameInput.getText().equals("Empty Name!!!")) {
-                    studentNameInput.setText("");
-                    studentNameInput.setForeground(Color.BLACK);
-                }
-            }
-        });
-
 
 
         studentIdInput.setText("YY-CCXXXX");
@@ -59,7 +64,6 @@ class EnrollForm extends Panel {
                     studentIdInput.setForeground(Color.BLACK);
                 }
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 if (studentIdInput.getText().isEmpty()) {
@@ -70,12 +74,23 @@ class EnrollForm extends Panel {
         });
 
 
+        studentNameInput.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (studentNameInput.getText().equals("Empty Name!!!")) {
+                    studentNameInput.setText("");
+                    studentNameInput.setForeground(Color.BLACK);
+                }
+            }
+        });
+
     }
 
     public void enrollingStudent() {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         String studId = studentIdInput.getText();
         String name = studentNameInput.getText();
+
         if (name.trim().isEmpty()) {
             studentNameInput.setText("Empty Name!!!");
             studentNameInput.setForeground(Color.RED);
@@ -95,47 +110,37 @@ class EnrollForm extends Panel {
         studentIdInput.setForeground(Color.GRAY);
     }
 
+    public void drawComponents() {
 
-    public void initComponents() {
-
-        JLabel enrollLabel = new JLabel("Enroll new student");
-        JLabel studentNameLabel = new JLabel("Student Name:");
-        JLabel studentIDLabel = new JLabel("Student ID:");
-
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.gridwidth = 1;
         constraints.weightx = 1.0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         enrollLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        mainPanel.add(enrollLabel, constraints);
+        layout.setConstraints(enrollLabel, constraints);
 
-        constraints.gridy = 1;
-        constraints.gridwidth = 1;
-        constraints.weightx = 1.0;
-        mainPanel.add(studentNameLabel, constraints);
+        ConstraintUtils.setCoords(constraints, 0, 1);
+        layout.setConstraints(studentNameLabel, constraints);
 
-        constraints.gridx = 1;
-        mainPanel.add(studentIDLabel, constraints);
+        ConstraintUtils.setCoords(constraints, 1, 1);
+        layout.setConstraints(studentIDLabel, constraints);
 
+        //ID input
         studentIdInput.putClientProperty("FlatLaf.style", "arc: 10");
-        constraints.insets = new Insets(0, 0, 0, 0);
-        constraints.gridy = 2;
-        mainPanel.add(studentIdInput, constraints);
+        ConstraintUtils.setCoords(constraints, 1, 2);
+        layout.setConstraints(studentIdInput, constraints);
 
+        //Name Input
         studentNameInput.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 10);
-        constraints.gridx = 0;
-        mainPanel.add(studentNameInput, constraints);
+        ConstraintUtils.setCoords(constraints, 0, 2);
+        layout.setConstraints(studentNameInput, constraints);
 
-
+        //Enroll Button
         enrollButton.putClientProperty("FlatLaf.style", "arc: 10");
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        constraints.gridwidth = 2;
+        ConstraintUtils.setCoords(constraints,0,3);
+        ConstraintUtils.setWidth(constraints, 2);
         constraints.fill = GridBagConstraints.NONE;
         constraints.insets = new Insets(10, 0, 0, 0);
-        mainPanel.add(enrollButton, constraints);
+        layout.setConstraints(enrollButton, constraints);
 
     }
 
