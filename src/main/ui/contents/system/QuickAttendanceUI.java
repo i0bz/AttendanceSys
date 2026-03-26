@@ -9,8 +9,8 @@ import javax.swing.*;
 
 public class QuickAttendanceUI {
     public CardLayout cardLayout = new CardLayout();
-    private JPanel mainPanel = new JPanel(cardLayout);
-    private String[] views = {"Attendance Selection", "Attendance Mode"};
+    private final JPanel mainPanel = new JPanel(cardLayout);
+    private final String[] views = {"Attendance Selection", "Attendance Mode"};
 
     public QuickAttendanceUI() {
         QuickAttendance attendanceMode = new QuickAttendance(mainPanel, cardLayout, views);
@@ -21,7 +21,11 @@ public class QuickAttendanceUI {
         mainPanel.add(attendanceMode.getPanel(), views[1]);
         cardLayout.show(mainPanel, views[0]);
     }
-   
+
+    private void dynamicPadding() {
+        
+    }
+
     public JPanel getPanel() {
         return mainPanel;
     }

@@ -36,23 +36,22 @@ class QuickAttendanceSelection extends Panel {
         mainPanel.setBorder(border);
 
         wrapper.add(mainPanel, constraints);
+        dynamicPadding();
         refreshDates();
-        initComponents();
+        drawComponents();
         addEventHandlers();
     }
 
 
-    private void initComponents() {
+    private void drawComponents() {
 
-        mainPanel.setPreferredSize(new Dimension(700, 150));
+//        mainPanel.setPreferredSize(new Dimension(700, 150));
 
         FlatEmptyBorder padding = new FlatEmptyBorder(0, 20, 20, 15);
         CompoundBorder descriptionBorder = new CompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borderColor), padding);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(10, 0, 0, 0);
         description.setBorder(descriptionBorder);
-        constraints.gridx = 0;
-        constraints.gridy = 0;
         constraints.weightx = 1;
         constraints.weighty = 1;
         constraints.ipadx = 10;

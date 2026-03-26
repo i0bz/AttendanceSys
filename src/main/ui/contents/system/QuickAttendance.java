@@ -3,17 +3,19 @@ package ui.contents.system;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.Panel;
+import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.lang.constant.Constable;
 import java.util.NoSuchElementException;
 
 class QuickAttendance extends Panel {
-    JPanel activeDateInfo = new JPanel(new GridBagLayout());
-    JPanel attendanceEntry = new JPanel(new GridBagLayout());
+    JPanel activeDateInfo = new JPanel(layout);
+    JPanel attendanceEntry = new JPanel(layout);
 
     JLabel activeDate = new JLabel("");
     JButton changeDateBtn = new JButton("Change");
@@ -35,7 +37,8 @@ class QuickAttendance extends Panel {
         parentPanel = panel;
 
 
-        initComponents();
+        dynamicPadding();
+        drawComponents();
         addEventHandlers();
     }
 
@@ -91,7 +94,7 @@ class QuickAttendance extends Panel {
         inputField.setText("");
     }
 
-    private void initComponents() {
+    private void drawComponents() {
 
 
         mainPanel.setBorder(new FlatEmptyBorder(0, 0, 0, 0));
@@ -158,7 +161,7 @@ class QuickAttendance extends Panel {
         constraints.gridy = 4;
         attendanceEntry.add(Box.createVerticalGlue(), constraints);
 
-
+        ConstraintUtils.reset(constraints);
     }
 
 
