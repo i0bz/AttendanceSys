@@ -3,6 +3,7 @@ package ui.contents.system;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.Panel;
+import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -35,7 +36,12 @@ class QuickAttendanceSelection extends Panel {
 
         mainPanel.setBorder(border);
 
+
+        mainPanel.add(description, constraints);
+        mainPanel.add(dateOptions, constraints);
         wrapper.add(mainPanel, constraints);
+
+
         dynamicPadding();
         refreshDates();
         drawComponents();
@@ -55,16 +61,18 @@ class QuickAttendanceSelection extends Panel {
         constraints.weightx = 1;
         constraints.weighty = 1;
         constraints.ipadx = 10;
-        mainPanel.add(description, constraints);
+        layout.setConstraints(description, constraints);
 
 
         constraints.fill = GridBagConstraints.NONE;
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.weighty = 1.5;
         constraints.gridy = 1;
-        mainPanel.add(dateOptions, constraints);
+        layout.setConstraints(dateOptions, constraints);
 
         dateOptions.setSelectedIndex(0);
+
+        ConstraintUtils.reset(constraints);
 
     }
 

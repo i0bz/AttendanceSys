@@ -90,7 +90,7 @@ class QuickAttendance extends Panel {
             inputField.getParent().requestFocusInWindow();
             return;
         }
-        JOptionPane.showMessageDialog(null, "Welcome " + ControllerBootstrapSingleton.getInstance().getController().getStudentName(uid));
+        JOptionPane.showMessageDialog(null, "Welcome " + ControllerBootstrapSingleton.getController().getStudentName(uid));
         inputField.setText("");
     }
 

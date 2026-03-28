@@ -22,10 +22,6 @@ public class QuickAttendanceUI {
         cardLayout.show(mainPanel, views[0]);
     }
 
-    private void dynamicPadding() {
-        
-    }
-
     public JPanel getPanel() {
         return mainPanel;
     }

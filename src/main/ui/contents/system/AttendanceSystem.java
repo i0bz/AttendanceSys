@@ -36,6 +36,7 @@ class AttendanceSystem extends Panel {
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
         super.border = new CompoundBorder(super.line_border, super.padding);
         mainPanel.setBorder(border);
+        mainPanel.add(pane, constraints);
 
         drawComponents();
         refreshTable(date);
@@ -59,7 +60,8 @@ class AttendanceSystem extends Panel {
         });
     }
 
-    private void drawComponents() {
+    private void drawComponents()
+    {
 
         tableView.setRowSelectionAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
@@ -86,7 +88,7 @@ class AttendanceSystem extends Panel {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1;
         constraints.weighty = 1;
-        mainPanel.add(pane, constraints);
+        layout.setConstraints(pane, constraints);
 
 
     }
