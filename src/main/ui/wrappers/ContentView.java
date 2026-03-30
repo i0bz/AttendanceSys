@@ -20,7 +20,7 @@ public class ContentView {
     private final JPanel mainPanel = new JPanel(cardLayout);
 
 
-    public String[] views = {"Student Management", "Attendance Management", "Attendance System", "Attendance Mode"};
+    public String[] views = {"Student Management", "Attendance Management", "Attendance System", "Quick Attendance Mode"};
 
 
 

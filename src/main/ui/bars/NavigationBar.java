@@ -1,10 +1,12 @@
 package ui.bars;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import ui.utility.ConstraintUtils;
 import ui.wrappers.ContentView;
 
 import java.awt.*;
@@ -12,15 +14,19 @@ import java.util.ArrayList;
 
 public class NavigationBar {
     //Panel and Layout
-    private final JPanel mainPanel = new JPanel(new GridBagLayout());
+    private final GridBagLayout layout = new GridBagLayout();
+    private final JPanel mainPanel = new JPanel(layout);
     private final GridBagConstraints constraints = new GridBagConstraints();
 
     //Buttons
     private String[] labels; 
     private final ArrayList<JButton> buttons = new ArrayList<>();
 
-
-
+    //button icons
+    FlatSVGIcon studentManagementIcon = new FlatSVGIcon("images/calendar-user-svgrepo-com.svg", 24, 24);
+    FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", 24, 24);
+    FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", 24, 24);
+    FlatSVGIcon quickAttendanceIcon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 24, 24);
 
 
     //Border
@@ -41,16 +47,28 @@ public class NavigationBar {
     public NavigationBar(ContentView contents) {
         this.contents = contents;
         labels = contents.getContainerNames();
-        initComponents();
+        drawComponents();
     }
 
-    private void initComponents() {
+    private void drawComponents() {
 
         mainPanel.setBorder(border);
-
-
         createButtons();
-        initListeneters();
+        initBtnListeners();
+
+        ConstraintUtils.setCoords(constraints,0, 0);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weighty = 1.0;
+        constraints.weightx = 1.0;
+        constraints.insets = buttonGaps;
+        layout.setConstraints(buttons.get(0), constraints);
+        constraints.weighty = 1.5;
+        ConstraintUtils.setCoords(constraints,0, 1);
+        layout.setConstraints(buttons.get(1), constraints);
+        ConstraintUtils.setCoords(constraints,0, 2);
+        layout.setConstraints(buttons.get(2), constraints);
+        ConstraintUtils.setCoords(constraints,0, 3);
+        layout.setConstraints(buttons.get(3), constraints);
 
 
         //Glue buttons to the top
@@ -59,28 +77,27 @@ public class NavigationBar {
         constraints.fill = GridBagConstraints.VERTICAL;
         mainPanel.add(Box.createVerticalGlue(), constraints);
 
+        ConstraintUtils.reset(constraints);
+
+
+
+
+        buttons.get(0).setIcon(studentManagementIcon);
+        buttons.get(1).setIcon(attendanceManagementIcon);
+        buttons.get(2).setIcon(systemIcon);
+        buttons.get(3).setIcon(quickAttendanceIcon);
+
     }
 
     private void createButtons() {
         for(String label : labels) {
             buttons.add(new JButton(label));
         }
-
-        int y = 0;
         for (JButton button : buttons) {
-            constraints.insets = buttonGaps;
             button.putClientProperty("FlatLaf.style", buttonArc);
-
-            if (y == 1) constraints.weighty = 1.5;
-            else constraints.weighty = 1.0;
-
-            setConstraintCoords(0, y++);
-            constraints.fill = GridBagConstraints.BOTH;
+            button.setHorizontalAlignment(SwingConstants.LEFT);
             mainPanel.add(button, constraints);
         }
-
-
-
     }
 
 
@@ -91,13 +108,11 @@ public class NavigationBar {
 
 
 
-    //  TODO Find a way to to use for loops here 
-    private void initListeneters() {
-
+    //  TODO Find a way to to use for loops here
+    private void initBtnListeners() {
         buttons.get(0).addActionListener(e -> {
             swapCards(0);
         });
-        
         buttons.get(1).addActionListener(e -> {
             swapCards(1);
         });
@@ -107,8 +122,6 @@ public class NavigationBar {
         buttons.get(3).addActionListener(e -> {
             swapCards(3);
         });
-
-
     }
 
 
