@@ -8,6 +8,8 @@ import ui.utility.ConstraintUtils;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 import java.util.Vector;
 
@@ -16,7 +18,8 @@ class QuickAttendanceSelection extends Panel {
     Vector<String> dateList = new Vector<>();
     JComboBox<String> dateOptions = new JComboBox<>(dateList);
     JLabel description = new JLabel("Select Attendance Sheet");
-    JPanel wrapper = new JPanel(new GridBagLayout());
+    GridBagLayout wrapperLayout = new GridBagLayout();
+    JPanel wrapper = new JPanel(wrapperLayout);
 
     JPanel parentPanel;
     String[] parentViews;
@@ -24,6 +27,27 @@ class QuickAttendanceSelection extends Panel {
 
     QuickAttendance attendanceMode;
 
+
+
+    int marginSize = 0;
+    FlatEmptyBorder margin;
+    private int newPaddingSize;
+
+    @Override
+    protected void dynamicPadding() {
+        mainPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                newPaddingSize = (int) Math.min(25, e.getComponent().getWidth() * 0.04);
+                marginSize = (int) (e.getComponent().getParent().getWidth() * 0.1);
+                margin = new FlatEmptyBorder(0,marginSize,0,marginSize);
+                padding = new FlatEmptyBorder(newPaddingSize,newPaddingSize,newPaddingSize,newPaddingSize);
+                border = new CompoundBorder(line_border, padding);
+                border = new CompoundBorder(margin, border);
+                mainPanel.setBorder(border);
+            }
+        });
+    }
 
     QuickAttendanceSelection(JPanel panel, CardLayout layout, String[] views, QuickAttendance attendanceMode) {
         parentCardLayout = layout;
@@ -45,15 +69,13 @@ class QuickAttendanceSelection extends Panel {
         dynamicPadding();
         refreshDates();
         drawComponents();
-        addEventHandlers();
+        actionHandlers();
     }
 
 
     private void drawComponents() {
 
-//        mainPanel.setPreferredSize(new Dimension(700, 150));
-
-        FlatEmptyBorder padding = new FlatEmptyBorder(0, 20, 20, 15);
+        FlatEmptyBorder padding = new FlatEmptyBorder(0, newPaddingSize/2, newPaddingSize/2, newPaddingSize/2);
         CompoundBorder descriptionBorder = new CompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borderColor), padding);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(10, 0, 0, 0);
@@ -61,6 +83,7 @@ class QuickAttendanceSelection extends Panel {
         constraints.weightx = 1;
         constraints.weighty = 1;
         constraints.ipadx = 10;
+        description.setHorizontalAlignment(SwingConstants.CENTER);
         layout.setConstraints(description, constraints);
 
 
@@ -72,11 +95,14 @@ class QuickAttendanceSelection extends Panel {
 
         dateOptions.setSelectedIndex(0);
 
-        ConstraintUtils.reset(constraints);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.weightx = 1;
+        wrapperLayout.setConstraints(mainPanel, constraints);
 
+        ConstraintUtils.reset(constraints);
     }
 
-    private void addEventHandlers() {
+    private void actionHandlers() {
 
         ControllerBootstrapSingleton.getInstance().registry().addPropertyChangeListener(evt -> {
             refreshDates();

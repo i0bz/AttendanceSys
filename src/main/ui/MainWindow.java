@@ -9,10 +9,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 class Config {
-    public static final int width = 1000;
+    public static final int width = 1300;
     public static final int height = 700;
-    public static final int minimumWidth = 700;
-    public static final int minimumHeight = 450;
+    public static final int minimumWidth = 1200;
+    public static final int minimumHeight = 550;
 }
 
 
