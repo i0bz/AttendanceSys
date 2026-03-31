@@ -6,6 +6,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import com.formdev.flatlaf.ui.FlatEmptyBorder;
+import com.formdev.flatlaf.ui.FlatLineBorder;
 import ui.utility.ConstraintUtils;
 import ui.wrappers.ContentView;
 
@@ -19,14 +21,16 @@ public class NavigationBar {
     private final GridBagConstraints constraints = new GridBagConstraints();
 
     //Buttons
-    private String[] labels; 
+    private final String[] labels;
     private final ArrayList<JButton> buttons = new ArrayList<>();
+    private final FlatLineBorder buttonBorders = new FlatLineBorder(new Insets(10,10,10,10), null, 0, 15);
+
 
     //button icons
-    FlatSVGIcon studentManagementIcon = new FlatSVGIcon("images/calendar-user-svgrepo-com.svg", 24, 24);
-    FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", 24, 24);
-    FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", 24, 24);
-    FlatSVGIcon quickAttendanceIcon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 24, 24);
+    private final FlatSVGIcon studentManagementIcon = new FlatSVGIcon("images/calendar-user-svgrepo-com.svg", 24, 24);
+    private final FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", 24, 24);
+    private final FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", 24, 24);
+    private final FlatSVGIcon quickAttendanceIcon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 24, 24);
 
 
     //Border
@@ -96,6 +100,8 @@ public class NavigationBar {
         for (JButton button : buttons) {
             button.putClientProperty("FlatLaf.style", buttonArc);
             button.setHorizontalAlignment(SwingConstants.LEFT);
+            button.setBorder(buttonBorders);
+            button.setBackground(Color.decode("#f2f2f2"));
             mainPanel.add(button, constraints);
         }
     }
