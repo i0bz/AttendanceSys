@@ -1,5 +1,6 @@
 package ui.contents.system;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.Panel;
@@ -26,6 +27,8 @@ class QuickAttendanceSelection extends Panel {
     CardLayout parentCardLayout;
 
     QuickAttendance attendanceMode;
+    FlatSVGIcon icon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 128,128);
+    JLabel quickAttendanceIcon = new JLabel(icon);
 
 
 
@@ -74,6 +77,7 @@ class QuickAttendanceSelection extends Panel {
 
         mainPanel.add(description, constraints);
         mainPanel.add(dateOptions, constraints);
+        mainPanel.add(quickAttendanceIcon, constraints);
         wrapper.add(mainPanel, constraints);
 
 
@@ -98,10 +102,15 @@ class QuickAttendanceSelection extends Panel {
         layout.setConstraints(description, constraints);
 
 
+
+
         constraints.fill = GridBagConstraints.NONE;
         constraints.insets = new Insets(10, 10, 10, 10);
-        constraints.weighty = 1.5;
+        constraints.weighty = 0;
         constraints.gridy = 1;
+        layout.setConstraints(quickAttendanceIcon, constraints);
+
+        constraints.gridy = 2;
         layout.setConstraints(dateOptions, constraints);
 
         dateOptions.setSelectedIndex(0);
