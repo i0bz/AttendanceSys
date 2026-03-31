@@ -61,6 +61,40 @@
         </executions>
       </plugin>
 
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>package-with-jpackage</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>jpackage</executable>
+              <arguments>
+                <argument>--dest</argument>
+                <argument>${project.build.directory}</argument>
+                <argument>--input</argument>
+                <argument>${project.build.directory}</argument>
+                <argument>--name</argument>
+                <argument>${project.artifactId}</argument>
+                <argument>--main-jar</argument>
+                <argument>${project.build.finalName}-shaded.jar</argument>
+                <argument>--main-class</argument>
+                <argument>${mainClass}</argument>
+                <argument>--type</argument>
+                <argument>app-image</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+
     </plugins>
   </build>
 
