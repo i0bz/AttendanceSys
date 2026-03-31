@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class  Main {
-    public static void main(String[] args) {
+    static void main(String[] args) {
 
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         PersistenceFlusher.startDaemon();

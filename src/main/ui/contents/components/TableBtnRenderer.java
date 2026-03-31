@@ -16,6 +16,7 @@ public class TableBtnRenderer implements TableCellRenderer {
     public TableBtnRenderer() {
         button.setOpaque(true);
         button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setBackground(UIManager.getColor("Table.background"));
         button.setBorder(border);
     }
 
