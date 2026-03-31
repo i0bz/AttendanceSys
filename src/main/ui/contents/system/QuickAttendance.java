@@ -8,6 +8,8 @@ import ui.utility.ConstraintUtils;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.lang.constant.Constable;
@@ -40,6 +42,18 @@ class QuickAttendance extends Panel {
         dynamicPadding();
         drawComponents();
         addEventHandlers();
+    }
+
+    @Override
+    protected void dynamicPadding() {
+        mainPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                paddingSize = (int) Math.min(25, e.getComponent().getWidth() * 0.04);
+                padding = new FlatEmptyBorder(paddingSize,paddingSize,paddingSize,paddingSize);
+                mainPanel.setBorder(padding);
+            }
+        });
     }
 
 
@@ -95,9 +109,6 @@ class QuickAttendance extends Panel {
     }
 
     private void drawComponents() {
-
-
-        mainPanel.setBorder(new FlatEmptyBorder(0, 0, 0, 0));
 
         attendanceEntry.setBorder(line_border);
         activeDateInfo.setBorder(line_border);

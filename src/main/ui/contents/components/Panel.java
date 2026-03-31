@@ -16,7 +16,7 @@ public class Panel {
     protected GridBagConstraints constraints = new GridBagConstraints();
 
 
-    private int paddingSize = 25;
+    protected int paddingSize = 25;
 
     protected Color borderColor = Color.decode("#cecfd1");
     protected FlatLineBorder line_border = new FlatLineBorder(new Insets(0,0,0,0), borderColor, 1, 20);

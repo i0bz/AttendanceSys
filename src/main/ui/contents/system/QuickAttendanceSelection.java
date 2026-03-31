@@ -31,20 +31,31 @@ class QuickAttendanceSelection extends Panel {
 
     int marginSize = 0;
     FlatEmptyBorder margin;
-    private int newPaddingSize;
 
     @Override
     protected void dynamicPadding() {
         mainPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                newPaddingSize = (int) Math.min(25, e.getComponent().getWidth() * 0.04);
+                paddingSize = (int) Math.min(15, e.getComponent().getWidth() * 0.07);
                 marginSize = (int) (e.getComponent().getParent().getWidth() * 0.1);
                 margin = new FlatEmptyBorder(0,marginSize,0,marginSize);
-                padding = new FlatEmptyBorder(newPaddingSize,newPaddingSize,newPaddingSize,newPaddingSize);
+                padding = new FlatEmptyBorder(paddingSize,0,paddingSize,0);
                 border = new CompoundBorder(line_border, padding);
                 border = new CompoundBorder(margin, border);
                 mainPanel.setBorder(border);
+            }
+        });
+    }
+
+    private void dynamicDescriptionSpacing() {
+        mainPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int descriptionPaddingSize = Math.min(10, (int) (e.getComponent().getWidth() * 0.04));
+                FlatEmptyBorder padding = new FlatEmptyBorder(0, descriptionPaddingSize, descriptionPaddingSize, descriptionPaddingSize);
+                CompoundBorder descriptionBorder = new CompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borderColor), padding);
+                description.setBorder(descriptionBorder);
             }
         });
     }
@@ -67,6 +78,7 @@ class QuickAttendanceSelection extends Panel {
 
 
         dynamicPadding();
+        dynamicDescriptionSpacing();
         refreshDates();
         drawComponents();
         actionHandlers();
@@ -75,15 +87,14 @@ class QuickAttendanceSelection extends Panel {
 
     private void drawComponents() {
 
-        FlatEmptyBorder padding = new FlatEmptyBorder(0, newPaddingSize/2, newPaddingSize/2, newPaddingSize/2);
-        CompoundBorder descriptionBorder = new CompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borderColor), padding);
+
+
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(10, 0, 0, 0);
-        description.setBorder(descriptionBorder);
         constraints.weightx = 1;
         constraints.weighty = 1;
         constraints.ipadx = 10;
-        description.setHorizontalAlignment(SwingConstants.CENTER);
+        description.setHorizontalAlignment(SwingConstants.LEFT);
         layout.setConstraints(description, constraints);
 
 
