@@ -6,7 +6,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import com.formdev.flatlaf.ui.FlatLineBorder;
 import ui.utility.ConstraintUtils;
 import ui.wrappers.ContentView;
@@ -44,7 +43,7 @@ public class NavigationBar {
     private final String buttonArc = "arc: 15";
     
     //External Shits
-    private ContentView contents;
+    private final ContentView contents;
 
 
 
@@ -76,7 +75,7 @@ public class NavigationBar {
 
 
         //Glue buttons to the top
-        setConstraintCoords(0, 100);
+        ConstraintUtils.setCoords(constraints,0, 100);
         constraints.weighty = 15.0;
         constraints.fill = GridBagConstraints.VERTICAL;
         mainPanel.add(Box.createVerticalGlue(), constraints);
@@ -101,7 +100,7 @@ public class NavigationBar {
             button.putClientProperty("FlatLaf.style", buttonArc);
             button.setHorizontalAlignment(SwingConstants.LEFT);
             button.setBorder(buttonBorders);
-            button.setBackground(Color.decode("#f2f2f2"));
+            button.setFocusPainted(false);
             mainPanel.add(button, constraints);
         }
     }
@@ -110,8 +109,6 @@ public class NavigationBar {
     private void swapCards(int iterator) {
         contents.getCardLayout().show(contents.getPanel(), buttons.get(iterator).getText());
     }
-
-
 
 
     //  TODO Find a way to to use for loops here
@@ -131,19 +128,8 @@ public class NavigationBar {
     }
 
 
-
-
-
-
-
-
-
     public JPanel getPanel() {
         return  mainPanel;
     }
 
-    private void setConstraintCoords(int x, int y) {
-        constraints.gridx = x;
-        constraints.gridy = y;
-    }
 }

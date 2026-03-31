@@ -6,6 +6,7 @@ import ui.MainWindow;
 import utility.PersistenceFlusher;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class  Main {
     public static void main(String[] args) {
@@ -22,14 +23,17 @@ public class  Main {
                 }
                 }
         } else {
-            try {
-                UIManager.setLookAndFeel( new FlatLightLaf() );
-            } catch( Exception ex ) {
-                System.err.println( "Failed to initialize LaF" );
-            }
+            FlatLightLaf.setup();
+            initializeTheme();
             SwingUtilities.invokeLater(MainWindow::new);
         }
 
 
+    }
+
+
+    static void initializeTheme() {
+        UIManager.put("Panel.background", Color.decode("#f2f2f2"));
+        UIManager.put("Button.background", Color.decode("#f2f2f2"));
     }
 }

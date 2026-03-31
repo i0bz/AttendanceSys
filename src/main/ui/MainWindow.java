@@ -20,8 +20,8 @@ public class MainWindow {
     JFrame mainFrame;
 
     public MainWindow() {
-        mainFrame = new JFrame();
 
+        mainFrame = new JFrame();
         //configure
         mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainFrame.setSize(Config.width, Config.height);
@@ -44,6 +44,7 @@ public class MainWindow {
                 System.exit(0);
             }
         });
+
 
         mainFrame.setVisible(true);
     }
