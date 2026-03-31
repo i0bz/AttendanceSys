@@ -115,7 +115,7 @@ class QuickAttendanceSelection extends Panel {
 
     private void actionHandlers() {
 
-        ControllerBootstrapSingleton.getInstance().registry().addPropertyChangeListener(evt -> {
+        ControllerBootstrapSingleton.getController().addPropertyChangeListener(evt -> {
             refreshDates();
         });
 
