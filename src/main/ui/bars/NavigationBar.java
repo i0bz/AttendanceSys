@@ -110,21 +110,13 @@ public class NavigationBar {
         contents.getCardLayout().show(contents.getPanel(), buttons.get(iterator).getText());
     }
 
-
-    //  TODO Find a way to to use for loops here
     private void initBtnListeners() {
-        buttons.get(0).addActionListener(e -> {
-            swapCards(0);
-        });
-        buttons.get(1).addActionListener(e -> {
-            swapCards(1);
-        });
-        buttons.get(2).addActionListener(e -> {
-            swapCards(2);
-        });
-        buttons.get(3).addActionListener(e -> {
-            swapCards(3);
-        });
+        int iterator = 0;
+        for (JButton button : buttons) {
+            int index = iterator;
+            button.addActionListener( e -> swapCards(index));
+            iterator++;
+        }
     }
 
 
