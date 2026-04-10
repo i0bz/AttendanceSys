@@ -7,10 +7,10 @@ import java.util.SortedSet;
 
 public interface IAttendanceRegistry {
 
-    public void addAttendance(LocalDate date);
-    public void removeAttendance(LocalDate date);
+    public void addAttendance(String event, LocalDate date);
+    public void removeAttendance(String event);
 
-    public AttendanceSheet queryAttendance(LocalDate date);
+    public AttendanceSheet queryAttendance(String event);
     public SortedSet<LocalDate> attendanceDateList();
 
 }

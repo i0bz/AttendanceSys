@@ -9,14 +9,14 @@ import java.util.SortedSet;
 
 public interface IAttendanceService {
 
-    void createAttendance(LocalDate date);
-    void removeAttendance(LocalDate date);
+    void createAttendance(String event, LocalDate date);
+    void removeAttendance(String event, LocalDate date);
 
-    void toggleAttendance(LocalDate date, int uid);
-    public void markPresent(LocalDate date, int uid);
-    boolean isPresent(LocalDate date, int uid);
+    void toggleAttendance(String event, int uid);
+    void markPresent(String event, int uid);
+    boolean isPresent(String event, int uid);
 
     SortedSet<LocalDate> getDates();
-    AttendanceSheet getAttendance(LocalDate date);
-    Set<Student> getPresent(LocalDate date);
+    AttendanceSheet getAttendance(String event);
+    Set<Student> getPresent(String event);
 }

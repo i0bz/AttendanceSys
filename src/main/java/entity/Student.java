@@ -7,7 +7,6 @@ public class Student implements Serializable,Comparable<Student> {
     private final String name;
     private final int uid;
 
-
     public Student(String name, int uid) {
         this.name = name;
         this.uid = uid;
