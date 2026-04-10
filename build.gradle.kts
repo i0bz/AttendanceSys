@@ -1,5 +1,5 @@
 val groupID = "i0bz"
-val versionID = "1.0-SNAPSHOT"
+val versionID = "1.0"
 
 group = groupID
 version = versionID
