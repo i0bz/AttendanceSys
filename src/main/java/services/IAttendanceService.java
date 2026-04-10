@@ -10,7 +10,7 @@ import java.util.SortedSet;
 public interface IAttendanceService {
 
     void createAttendance(String event, LocalDate date);
-    void removeAttendance(String event, LocalDate date);
+    void removeAttendance(String event);
 
     void toggleAttendance(String event, int uid);
     void markPresent(String event, int uid);
