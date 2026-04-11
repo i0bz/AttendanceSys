@@ -10,11 +10,16 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+
+//TODO finish the event name inputs later
+
 class AttendanceCreationUI extends Panel {
 
     private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
     private final JLabel dateLabel = new JLabel("Date:");
     private final JTextField dateInput = new JTextField();
+    private final JLabel eventNameLabel = new JLabel("Event Name:");
+    private final JTextField eventNameInput = new JTextField();
     private final JButton addButton = new JButton("Add Date");
 
     private final Component horizontalGlue = Box.createHorizontalGlue();
@@ -81,7 +86,8 @@ class AttendanceCreationUI extends Panel {
         dateInput.setForeground(Color.GRAY);
     }
 
-    //TODO create helper functions for each
+
+
     private void drawComponents() {
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
