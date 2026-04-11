@@ -1,7 +1,7 @@
 import com.formdev.flatlaf.FlatLightLaf;
 import controllers.ControllerBootstrapSingleton;
 import controllers.AttendanceSystemController;
-import cli.CLIHandler;
+
 import ui.MainWindow;
 import utility.PersistenceFlusher;
 
