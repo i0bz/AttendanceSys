@@ -11,7 +11,6 @@ import java.awt.*;
 public class  Main {
     static void main(String[] args) {
 
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         PersistenceFlusher.startDaemon();
 
         FlatLightLaf.setup();

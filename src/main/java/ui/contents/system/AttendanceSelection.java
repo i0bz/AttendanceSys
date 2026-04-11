@@ -12,25 +12,25 @@ import java.util.Vector;
 
 class AttendanceSelection extends Panel {
     private final JLabel description = new JLabel("Attendance Mode");
-    private final Vector<String> dateList = new Vector<>();
-    private final JComboBox<String> dateOptions = new JComboBox<>(dateList);
+    private final Vector<String> eventList = new Vector<>();
+    private final JComboBox<String> eventOptions = new JComboBox<>(eventList);
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
     AttendanceSelection() {
         mainPanel.add(description, constraints);
-        mainPanel.add(dateOptions, constraints);
+        mainPanel.add(eventOptions, constraints);
         mainPanel.add(horizontalGlue, constraints);
 
         dynamicPadding();
         drawComponents();
-        refreshDates();
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(evt -> refreshDates());
+        refreshEvents();
+        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> refreshEvents());
     }
 
 
     private void drawComponents() {
-        dateList.add("Select Attendance");
-        dateOptions.setSelectedIndex(0);
+        eventList.add("Select Attendance");
+        eventOptions.setSelectedIndex(0);
 
         description.setHorizontalAlignment(SwingConstants.LEFT);
         constraints.weightx = 1;
@@ -40,7 +40,7 @@ class AttendanceSelection extends Panel {
         constraints.gridy = 1;
         constraints.weightx = 0.5;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        layout.setConstraints(dateOptions, constraints);
+        layout.setConstraints(eventOptions, constraints);
 
         constraints.gridx = 1;
         constraints.weightx = 3;
@@ -49,18 +49,18 @@ class AttendanceSelection extends Panel {
         ConstraintUtils.reset(constraints);
     }
 
-    private void refreshDates() {
-        List<String> registryDateList = ControllerBootstrapSingleton.getController().attendanceDateList();
-        dateList.clear();
-        dateList.add("Select Attendance");
-        registryDateList.forEach(dateList::addLast);
+    private void refreshEvents() {
+        List<String> registryEventList = ControllerBootstrapSingleton.getController().attendanceEventList();
+        eventList.clear();
+        eventList.add("Select Attendance");
+        registryEventList.forEach(eventList::addLast);
     }
 
-    String getSelectedDate() {
-        return dateOptions.getSelectedItem().toString();
+    String getSelectedEvent() {
+        return eventOptions.getSelectedItem().toString();
     }
     void onDateSelected(ActionListener listener) {
-        dateOptions.addActionListener(listener);
+        eventOptions.addActionListener(listener);
     }
 
     public JPanel getPanel() {

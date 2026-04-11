@@ -18,11 +18,11 @@ import java.util.List;
 
 class AttendanceTable extends Panel {
 
-    private final String[] header = {"Date:", "Action:"};
+    private final String[] header = {"Event:","Date:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(header, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return column == 1;
+            return column == 2;
         }
     };
     private final JTable table = new JTable(model);
@@ -44,12 +44,15 @@ class AttendanceTable extends Panel {
 
     private void refreshTable() {
         model.setRowCount(0);
+        List<String> eventList = ControllerBootstrapSingleton.getController().attendanceEventList();
         List<String> dateList = ControllerBootstrapSingleton.getController().attendanceDateList();
 
-        dateList.forEach(date -> model.addRow(new Object[]{date, "Remove"}));
+        for (int i = 0; i < eventList.size(); i++) {
+            model.addRow(new Object[]{eventList.get(i), dateList.get(i), "Remove"});
+        }
 
-        table.getColumnModel().getColumn(1).setCellRenderer(new AttTableBtnRenderer());
-        table.getColumnModel().getColumn(1).setCellEditor(new AttTableBtnEditor(new JCheckBox()));
+        table.getColumnModel().getColumn(2).setCellRenderer(new AttTableBtnRenderer());
+        table.getColumnModel().getColumn(2).setCellEditor(new AttTableBtnEditor(new JCheckBox()));
 
     }
 
@@ -70,8 +73,9 @@ class AttendanceTable extends Panel {
         int totalWidth = table.getWidth();
         if (totalWidth <= 0) totalWidth = 400;
 
-        columnModel.getColumn(0).setPreferredWidth((int)(totalWidth * 0.7));
-        columnModel.getColumn(1).setPreferredWidth((int)(totalWidth * 0.3));
+        columnModel.getColumn(0).setPreferredWidth((int)(totalWidth * 0.5));
+        columnModel.getColumn(1).setPreferredWidth((int)(totalWidth * 0.25));
+        columnModel.getColumn(2).setPreferredWidth((int)(totalWidth * 0.25));
 
 
 

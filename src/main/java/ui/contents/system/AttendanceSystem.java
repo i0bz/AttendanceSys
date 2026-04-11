@@ -30,7 +30,7 @@ class AttendanceSystem extends Panel {
     private final JTable tableView = new JTable(model);
     private final JScrollPane pane = new JScrollPane(tableView);
 
-    String date;
+    String event;
 
     AttendanceSystem() {
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
@@ -39,12 +39,12 @@ class AttendanceSystem extends Panel {
         mainPanel.add(pane, constraints);
 
         drawComponents();
-        refreshTable(date);
+        refreshTable(event);
         addEventHandlers();
     }
 
     private void addEventHandlers() {
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(evt -> refreshTable(date));
+        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> refreshTable(event));
 
         model.addTableModelListener(e -> {
             if (e.getType() != TableModelEvent.UPDATE) return;
@@ -55,7 +55,7 @@ class AttendanceSystem extends Panel {
             DefaultTableModel model = (DefaultTableModel) e.getSource();
             String uid = (String) model.getValueAt(row, 1);
 
-            ControllerBootstrapSingleton.getController().toggleAttendance(uid, date);
+            ControllerBootstrapSingleton.getController().toggleAttendance(uid, event);
 
         });
     }

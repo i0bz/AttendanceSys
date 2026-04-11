@@ -50,8 +50,8 @@ public class AttendanceSystemUI {
 
         mainPanel.addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent evt) {
-                gapSize = (int) Math.min( 40.0 , evt.getComponent().getWidth() * 0.03);
+            public void componentResized(ComponentEvent e) {
+                gapSize = (int) Math.min( 40.0 , e.getComponent().getWidth() * 0.03);
                 drawComponents();
 
             }
