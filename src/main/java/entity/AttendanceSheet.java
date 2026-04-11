@@ -8,7 +8,7 @@ import java.util.*;
 public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet> {
     private final String eventName;
     private final LocalDate date;
-    private final Set<Integer> attendanceRoster;
+    private final Set<Integer> presentUIDs;
 
 
     //Comparing Functions
@@ -32,25 +32,25 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
     public AttendanceSheet(String eventName, LocalDate date) {
         this.eventName = eventName;
         this.date = date;
-        this.attendanceRoster = new HashSet<>();
+        this.presentUIDs = new HashSet<>();
     }
 
     public void toggleAttendance(int studentUID) {
-        if (!attendanceRoster.contains(studentUID)) attendanceRoster.add(studentUID);
-        else attendanceRoster.remove(studentUID);
+        if (!presentUIDs.contains(studentUID)) presentUIDs.add(studentUID);
+        else presentUIDs.remove(studentUID);
     }
 
 
     public void markPresent(int studentUID) {
-        attendanceRoster.add(studentUID);
+        presentUIDs.add(studentUID);
     }
 
     public boolean isPresent(int studentUID) {
-        return attendanceRoster.contains(studentUID);
+        return presentUIDs.contains(studentUID);
     }
 
     public Set<Integer> presentIdSet() {
-        return attendanceRoster;
+        return presentUIDs;
     }
 
     public LocalDate date(){
