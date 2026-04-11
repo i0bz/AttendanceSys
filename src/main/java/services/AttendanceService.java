@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AttendanceService implements IAttendanceService {
+public class AttendanceService {
 
     private final IAttendanceRegistry registry;
     private final IStudentRoster roster;

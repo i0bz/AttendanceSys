@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-//TODO split up
 
 
 public class QuickAttendanceUI {

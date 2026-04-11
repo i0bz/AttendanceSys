@@ -6,7 +6,7 @@ import repository.IStudentRoster;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class StudentService implements IStudentService {
+public class StudentService {
 
     private final IStudentRoster roster;
 

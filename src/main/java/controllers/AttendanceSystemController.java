@@ -7,11 +7,9 @@ import entity.AttendanceSheet;
 
 //Services
 import entity.Student;
-import services.IAttendanceService;
-import services.IStudentService;
+import services.*;
 
 //Utilities
-import services.SaveStateTracker;
 import utility.ParseUtility;
 
 import java.beans.PropertyChangeListener;
@@ -22,8 +20,8 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 public class AttendanceSystemController {
-    private final IStudentService studentManagement;
-    private final IAttendanceService attendanceService;
+    private final StudentService studentManagement;
+    private final AttendanceService attendanceService;
     private final SaveStateTracker saveStateTracker;
 
 
@@ -35,7 +33,7 @@ public class AttendanceSystemController {
 
 
 
-    AttendanceSystemController(IStudentService managementService, IAttendanceService attendanceService, SaveStateTracker saveStateTracker) {
+    AttendanceSystemController(StudentService managementService, AttendanceService attendanceService, SaveStateTracker saveStateTracker) {
         this.studentManagement = managementService;
         this.attendanceService = attendanceService;
         this.saveStateTracker = saveStateTracker;

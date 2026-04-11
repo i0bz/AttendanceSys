@@ -11,8 +11,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 
-//TODO finish the event name inputs later
-
 class AttendanceCreationUI extends Panel {
 
     private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
