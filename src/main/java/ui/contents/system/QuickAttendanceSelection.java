@@ -16,8 +16,8 @@ import java.util.Vector;
 
 class QuickAttendanceSelection extends Panel {
 
-    Vector<String> dateList = new Vector<>();
-    JComboBox<String> dateOptions = new JComboBox<>(dateList);
+    Vector<String> eventList = new Vector<>();
+    JComboBox<String> eventOptions = new JComboBox<>(eventList);
     JLabel description = new JLabel("Select Attendance Sheet");
     GridBagLayout wrapperLayout = new GridBagLayout();
     JPanel wrapper = new JPanel(wrapperLayout);
@@ -76,7 +76,7 @@ class QuickAttendanceSelection extends Panel {
 
 
         mainPanel.add(description, constraints);
-        mainPanel.add(dateOptions, constraints);
+        mainPanel.add(eventOptions, constraints);
         mainPanel.add(quickAttendanceIcon, constraints);
         wrapper.add(mainPanel, constraints);
 
@@ -111,9 +111,9 @@ class QuickAttendanceSelection extends Panel {
         layout.setConstraints(quickAttendanceIcon, constraints);
 
         constraints.gridy = 2;
-        layout.setConstraints(dateOptions, constraints);
+        layout.setConstraints(eventOptions, constraints);
 
-        dateOptions.setSelectedIndex(0);
+        eventOptions.setSelectedIndex(0);
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;
@@ -124,26 +124,26 @@ class QuickAttendanceSelection extends Panel {
 
     private void actionHandlers() {
 
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(evt -> {
+        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> {
             refreshDates();
         });
 
-        dateOptions.addActionListener(evt -> {
-            if (dateOptions.getSelectedItem().equals("Select Attendance")) return;
-            attendanceMode.currentDate = dateOptions.getSelectedItem().toString();
-            attendanceMode.activeDate.setText("Active Date: " + dateOptions.getSelectedItem());
+        eventOptions.addActionListener(e -> {
+            if (eventOptions.getSelectedItem().equals("Select Attendance")) return;
+            attendanceMode.currentDate = eventOptions.getSelectedItem().toString();
+            attendanceMode.activeDate.setText("Active Event: " + eventOptions.getSelectedItem());
             parentCardLayout.show(parentPanel, parentViews[1]);
-            dateOptions.setSelectedIndex(0);
+            eventOptions.setSelectedIndex(0);
         });
 
     }
 
     private void refreshDates() {
-        List<String> refreshedDateList = ControllerBootstrapSingleton.getController().attendanceDateLists();
+        List<String> refreshedEventList = ControllerBootstrapSingleton.getController().attendanceEventList();
 
-        dateList.clear();
-        dateList.add("Select Attendance");
-        dateList.addAll(refreshedDateList);
+        eventList.clear();
+        eventList.add("Select Attendance");
+        eventList.addAll(refreshedEventList);
     }
 
 

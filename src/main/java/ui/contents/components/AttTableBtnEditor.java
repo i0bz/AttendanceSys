@@ -12,8 +12,8 @@ public class AttTableBtnEditor extends TableBtnEditor {
         super(checkBox);
 
         button.addActionListener(e -> {
-            String date = table.getValueAt(row, 0).toString();
-            ControllerBootstrapSingleton.getController().removeAttendance(date);
+            String event = table.getValueAt(row, 0).toString();
+            ControllerBootstrapSingleton.getController().removeAttendance(event);
         });
     }
 

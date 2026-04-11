@@ -32,7 +32,6 @@ public class ManagementUI {
             public void componentResized(ComponentEvent evt) {
                 gapSize = (int) Math.min( 40.0 , evt.getComponent().getWidth() * 0.03);
                 drawComponents();
-
             }
         });
 

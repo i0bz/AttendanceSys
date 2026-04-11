@@ -10,11 +10,16 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+
+//TODO finish the event name inputs later
+
 class AttendanceCreationUI extends Panel {
 
     private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
     private final JLabel dateLabel = new JLabel("Date:");
     private final JTextField dateInput = new JTextField();
+    private final JLabel eventNameLabel = new JLabel("Event Name:");
+    private final JTextField eventNameInput = new JTextField();
     private final JButton addButton = new JButton("Add Date");
 
     private final Component horizontalGlue = Box.createHorizontalGlue();
@@ -23,6 +28,8 @@ class AttendanceCreationUI extends Panel {
         mainPanel.add(descriptionLabel, constraints);
         mainPanel.add(dateLabel, constraints);
         mainPanel.add(dateInput, constraints);
+        mainPanel.add(eventNameLabel, constraints);
+        mainPanel.add(eventNameInput, constraints);
         mainPanel.add(addButton, constraints);
         mainPanel.add(horizontalGlue, constraints);
 
@@ -36,6 +43,10 @@ class AttendanceCreationUI extends Panel {
     private void buttonListeners() {
         addButton.addActionListener(e -> {
             createAttendance();
+        });
+
+        eventNameInput.addActionListener(e -> {
+            dateInput.requestFocusInWindow();
         });
 
         dateInput.addActionListener(e -> {
@@ -69,9 +80,10 @@ class AttendanceCreationUI extends Panel {
 
     private void createAttendance() {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
-        String input = dateInput.getText();
+        String dateInputText = dateInput.getText();
+        String eventInputText = eventNameInput.getText();
         try {
-            controller.createAttendance(input);
+            controller.createAttendance(eventInputText, dateInputText);
         } catch (RuntimeException e) {
             dateInput.setText("Invalid Date Format!");
             dateInput.setForeground(Color.RED);
@@ -81,9 +93,11 @@ class AttendanceCreationUI extends Panel {
         dateInput.setForeground(Color.GRAY);
     }
 
-    //TODO create helper functions for each
+
+
     private void drawComponents() {
 
+        //"Description"
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;
         ConstraintUtils.setWidth(constraints, 2);
@@ -91,32 +105,45 @@ class AttendanceCreationUI extends Panel {
         layout.setConstraints(descriptionLabel, constraints);
 
 
+        //Name Header
         constraints.insets = new Insets(0, 0, 0, 0);
+        ConstraintUtils.setWidth(constraints, 1);
         ConstraintUtils.setCoords(constraints, 0, 1);
+        layout.setConstraints(eventNameLabel, constraints);
+
+        //Date Header
+        ConstraintUtils.setWidth(constraints, 1);
+        ConstraintUtils.setCoords(constraints, 1, 1);
         layout.setConstraints(dateLabel, constraints);
 
-
-        dateInput.putClientProperty("FlatLaf.style", "arc: 10");
+        //Name Input
+        eventNameInput.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 10);
-        ConstraintUtils.setWidth(constraints, 1);
         ConstraintUtils.setCoords(constraints, 0, 2);
+        constraints.weightx = 2;
+        layout.setConstraints(eventNameInput, constraints);
+
+
+        //Date Input
+        dateInput.putClientProperty("FlatLaf.style", "arc: 10");
+        ConstraintUtils.setCoords(constraints, 1, 2);
         constraints.weightx = 2;
         layout.setConstraints(dateInput, constraints);
 
 
+        //Create attendance button
         addButton.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 0);
-        ConstraintUtils.setCoords(constraints, 1, 2);
+        ConstraintUtils.setCoords(constraints, 2, 2);
         constraints.weightx = 0.1;
         layout.setConstraints(addButton, constraints);
 
-
-        constraints.gridx = 2;
+        //push things to the left
+        ConstraintUtils.setCoords(constraints, 3, 2);
         constraints.weightx = 10;
         layout.setConstraints(horizontalGlue, constraints);
 
         ConstraintUtils.reset(constraints);
-
     }
 
     public JPanel getPanel() {

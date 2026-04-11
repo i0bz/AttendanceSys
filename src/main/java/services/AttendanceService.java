@@ -19,15 +19,15 @@ public class AttendanceService implements IAttendanceService {
         this.roster = roster;
     }
 
-    public boolean isPresent(LocalDate date, int uid) {
-        AttendanceSheet attendance =  registry.queryAttendance(date);
+    public boolean isPresent(String event, int uid) {
+        AttendanceSheet attendance =  registry.queryAttendance(event);
         if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
         if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
         return attendance.isPresent(uid);
     }
 
-    public void markPresent(LocalDate date, int uid) {
-        AttendanceSheet attendance =  registry.queryAttendance(date);
+    public void markPresent(String event, int uid) {
+        AttendanceSheet attendance =  registry.queryAttendance(event);
         if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
         if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
         attendance.markPresent(uid);
@@ -36,17 +36,17 @@ public class AttendanceService implements IAttendanceService {
 
 
     //Attendance Management
-    public void createAttendance(LocalDate date) {
-        registry.addAttendance(date);
+    public void createAttendance(String event, LocalDate date) {
+        registry.addAttendance(event, date);
     }
-    public void removeAttendance(LocalDate date) {
-        registry.removeAttendance(date);
+    public void removeAttendance(String event) {
+        registry.removeAttendance(event);
     }
 
 
     //Attendance Manipulation
-    public void toggleAttendance(LocalDate date, int uid) {
-        AttendanceSheet attendance =  registry.queryAttendance(date);
+    public void toggleAttendance(String event, int uid) {
+        AttendanceSheet attendance =  registry.queryAttendance(event);
         if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
         if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
         attendance.toggleAttendance(uid);
@@ -54,14 +54,17 @@ public class AttendanceService implements IAttendanceService {
 
 
     //Query functions
-    public SortedSet<LocalDate> getDates() {
+    public SortedSet<String> getEventNames() {
+        return registry.attendanceEventNames();
+    }
+    public List<LocalDate> getDates() {
         return registry.attendanceDateList();
     }
-    public AttendanceSheet getAttendance(LocalDate date) {
-        return registry.queryAttendance(date);
+    public AttendanceSheet getAttendance(String event) {
+        return registry.queryAttendance(event);
     }
-    public Set<Student> getPresent(LocalDate date) {
-        AttendanceSheet sheet = registry.queryAttendance(date);
+    public Set<Student> getPresent(String event) {
+        AttendanceSheet sheet = registry.queryAttendance(event);
         return roster.queryRoster()
                 .entrySet()
                 .stream()

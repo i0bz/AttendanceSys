@@ -8,9 +8,9 @@ class SelectionMediator {
         this.attendanceSelection = attendanceSelection;
         this.attendanceSystem = attendanceSystem;
 
-        attendanceSelection.onDateSelected(evt -> {
-            attendanceSystem.date = attendanceSelection.getSelectedDate();
-            attendanceSystem.refreshTable(attendanceSystem.date);
+        attendanceSelection.onDateSelected(e -> {
+            attendanceSystem.event = attendanceSelection.getSelectedEvent();
+            attendanceSystem.refreshTable(attendanceSystem.event);
         });
     }
 }

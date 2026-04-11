@@ -6,10 +6,10 @@ import java.util.Map;
 
 public interface IStudentRoster {
 
-    public void enroll(Student student);
-    public void drop(int uid);
+    void enroll(Student student);
+    void drop(int uid);
 
-    public Student queryStudent(int uid);
-    public boolean studentExists(int uid);
-    public Map<Integer, Student> queryRoster();
+    Student queryStudent(int uid);
+    boolean studentExists(int uid);
+    Map<Integer, Student> queryRoster();
 }

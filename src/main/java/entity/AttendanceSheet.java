@@ -6,6 +6,7 @@ import java.util.*;
 
 
 public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet> {
+    private final String eventName;
     private final LocalDate date;
     private final Set<Integer> attendanceRoster;
 
@@ -13,45 +14,27 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
     //Comparing Functions
     @Override
     public int compareTo(AttendanceSheet other) {
-        return this.date.compareTo(other.date);
+        return this.eventName.compareTo(other.eventName);
     }
 
     //Hashing Functions
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof AttendanceSheet other)) return false;
-        return date == other.date;
+        return eventName.equals(other.eventName);
     }
     @Override
     public int hashCode() {
-        return Objects.hashCode(date);
+        return Objects.hashCode(eventName);
     }
 
 
-
-
-    /**
-     * Instantiates a new Attendance sheet.
-     *
-     * @param date          the date
-     */
-    public AttendanceSheet(LocalDate date) {
+    public AttendanceSheet(String eventName, LocalDate date) {
+        this.eventName = eventName;
         this.date = date;
         this.attendanceRoster = new HashSet<>();
     }
 
-
-
-
-
-    //Attendance Manipulation
-
-    /**
-     * Toggle attendance.
-     *
-     * @param studentUID the student uid
-     * @throws NoSuchElementException If the student uid given does not exist in the roster.
-     */
     public void toggleAttendance(int studentUID) {
         if (!attendanceRoster.contains(studentUID)) attendanceRoster.add(studentUID);
         else attendanceRoster.remove(studentUID);
@@ -61,8 +44,6 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
     public void markPresent(int studentUID) {
         attendanceRoster.add(studentUID);
     }
-
-
 
     public boolean isPresent(int studentUID) {
         return attendanceRoster.contains(studentUID);
@@ -74,6 +55,10 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
 
     public LocalDate date(){
         return this.date;
+    }
+
+    public String eventName(){
+        return this.eventName;
     }
 
 

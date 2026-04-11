@@ -2,15 +2,14 @@ package repository;
 
 import entity.AttendanceSheet;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AttendanceRegistry implements Serializable, IAttendanceRegistry {
 
-    private final HashMap<LocalDate, AttendanceSheet> registry;
+    private final HashMap<String, AttendanceSheet> registry;
 
     public AttendanceRegistry() {
         this.registry = new HashMap<>();
@@ -18,18 +17,25 @@ public class AttendanceRegistry implements Serializable, IAttendanceRegistry {
 
 
     //Attendance Management
-    public void addAttendance(LocalDate date) {
-        registry.putIfAbsent(date, new AttendanceSheet(date));
+    public void addAttendance(String event,LocalDate date) {
+        registry.putIfAbsent(event, new AttendanceSheet(event, date));
     }
-    public void removeAttendance(LocalDate date) {
-        registry.remove(date);
+    public void removeAttendance(String event) {
+        registry.remove(event);
     }
 
 
-    public AttendanceSheet queryAttendance(LocalDate date) {
-        return registry.get(date);
+    public AttendanceSheet queryAttendance(String event) {
+        return registry.get(event);
     }
-    public SortedSet<LocalDate> attendanceDateList() {
+    public List<LocalDate> attendanceDateList() {
+        return registry.values()
+                .stream()
+                .sorted(Comparator.comparing(AttendanceSheet::eventName))
+                .map(AttendanceSheet::date)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+    public  SortedSet<String> attendanceEventNames() {
         return new TreeSet<>(registry.keySet());
     }
 }
