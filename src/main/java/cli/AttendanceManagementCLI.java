@@ -106,7 +106,7 @@ public class AttendanceManagementCLI {
     private void listAttendances() {
         System.out.println();
         System.out.println("-------List Attendances-------");
-        List<String> attendances = systemController.attendanceDateLists();
+        List<String> attendances = systemController.attendanceDateList();
         int i = 0;
 
         for (String attendance : attendances) {

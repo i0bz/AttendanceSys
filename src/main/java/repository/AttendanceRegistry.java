@@ -28,10 +28,14 @@ public class AttendanceRegistry implements Serializable, IAttendanceRegistry {
     public AttendanceSheet queryAttendance(String event) {
         return registry.get(event);
     }
-    public SortedSet<LocalDate> attendanceDateList() {
+    public List<LocalDate> attendanceDateList() {
         return registry.values()
                 .stream()
+                .sorted(Comparator.comparing(AttendanceSheet::eventName))
                 .map(AttendanceSheet::date)
-                .collect(Collectors.toCollection(TreeSet::new));
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+    public  SortedSet<String> attendanceEventNames() {
+        return new TreeSet<>(registry.keySet());
     }
 }

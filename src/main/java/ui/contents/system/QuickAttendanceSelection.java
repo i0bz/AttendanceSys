@@ -139,7 +139,7 @@ class QuickAttendanceSelection extends Panel {
     }
 
     private void refreshDates() {
-        List<String> refreshedDateList = ControllerBootstrapSingleton.getController().attendanceDateLists();
+        List<String> refreshedDateList = ControllerBootstrapSingleton.getController().attendanceDateList();
 
         dateList.clear();
         dateList.add("Select Attendance");

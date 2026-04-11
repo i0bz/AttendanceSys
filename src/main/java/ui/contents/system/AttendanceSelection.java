@@ -50,7 +50,7 @@ class AttendanceSelection extends Panel {
     }
 
     private void refreshDates() {
-        List<String> registryDateList = ControllerBootstrapSingleton.getController().attendanceDateLists();
+        List<String> registryDateList = ControllerBootstrapSingleton.getController().attendanceDateList();
         dateList.clear();
         dateList.add("Select Attendance");
         registryDateList.forEach(dateList::addLast);

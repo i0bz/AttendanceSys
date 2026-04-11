@@ -44,7 +44,7 @@ class AttendanceTable extends Panel {
 
     private void refreshTable() {
         model.setRowCount(0);
-        List<String> dateList = ControllerBootstrapSingleton.getController().attendanceDateLists();
+        List<String> dateList = ControllerBootstrapSingleton.getController().attendanceDateList();
 
         dateList.forEach(date -> model.addRow(new Object[]{date, "Remove"}));
 

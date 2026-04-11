@@ -21,7 +21,7 @@ public class AttendanceSystemCLI {
         this.systemController = systemController;
         this.validator = validator;
 
-        attendanceLists = this.systemController.attendanceDateLists();
+        attendanceLists = this.systemController.attendanceDateList();
     }
 
 
@@ -33,7 +33,7 @@ public class AttendanceSystemCLI {
 
         int i = 0, decision;
 
-        attendanceLists = this.systemController.attendanceDateLists();
+        attendanceLists = this.systemController.attendanceDateList();
         if(emptyAttendance()) return;
 
 
@@ -79,7 +79,7 @@ public class AttendanceSystemCLI {
         System.out.println();
         System.out.println("-------Attendance Mode-------");
 
-        attendanceLists = this.systemController.attendanceDateLists();
+        attendanceLists = this.systemController.attendanceDateList();
         if (emptyAttendance()) return;
         AttendanceSheet sheet = attendanceSelector();
 

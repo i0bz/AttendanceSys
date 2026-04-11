@@ -4,6 +4,7 @@ import entity.AttendanceSheet;
 import entity.Student;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -16,7 +17,8 @@ public interface IAttendanceService {
     void markPresent(String event, int uid);
     boolean isPresent(String event, int uid);
 
-    SortedSet<LocalDate> getDates();
+    SortedSet<String> getEventNames();
+    List<LocalDate> getDates();
     AttendanceSheet getAttendance(String event);
     Set<Student> getPresent(String event);
 }

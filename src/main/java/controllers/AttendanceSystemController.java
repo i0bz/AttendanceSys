@@ -27,7 +27,7 @@ public class AttendanceSystemController {
     private final SaveStateTracker saveStateTracker;
 
 
-    private PropertyChangeSupport support = new PropertyChangeSupport(this);
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
@@ -54,32 +54,30 @@ public class AttendanceSystemController {
     }
 
     //Attendance Management
-    public void createAttendance(String date) {
-        attendanceService.createAttendance(ParseUtility.parseDate(date));
+    public void createAttendance(String event, String date) {
+        attendanceService.createAttendance(event, ParseUtility.parseDate(date));
         support.firePropertyChange("registry", null, this);
         saveStateTracker.markDirty();
     }
-    public void removeAttendance(String date) {
-        attendanceService.removeAttendance(ParseUtility.parseDate(date));
+    public void removeAttendance(String event) {
+        attendanceService.removeAttendance(event);
         support.firePropertyChange("registry", null, this);
         saveStateTracker.markDirty();
     }
 
 
-    public void toggleAttendance(String uid, String date) {
-        attendanceService.toggleAttendance(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
+    public void toggleAttendance(String uid, String event) {
+        attendanceService.toggleAttendance(event, ParseUtility.parseUID(uid));
         saveStateTracker.markDirty();
         support.firePropertyChange("attendance", null, this);
     }
-    public void markPresent(String uid, String date) {
-        attendanceService.markPresent(ParseUtility.parseDate(date), ParseUtility.parseUID(uid));
+    public void markPresent(String uid, String event) {
+        attendanceService.markPresent(event, ParseUtility.parseUID(uid));
         saveStateTracker.markDirty();
         support.firePropertyChange("attendance", null, this);
     }
-    public boolean isPresent(String uid, String date) {
-        LocalDate parsedDate = ParseUtility.parseDate(date);
-        int studentID = ParseUtility.parseUID(uid);
-        return attendanceService.isPresent(parsedDate, studentID);
+    public boolean isPresent(String uid, String event) {
+        return attendanceService.isPresent(event, ParseUtility.parseUID(uid));
     }
 
 
@@ -106,15 +104,15 @@ public class AttendanceSystemController {
 
 
     //Querying (Attendance specific)
-    public Set<String> attendancePresentIdSet(String date) {
-        Set<Student> present  = attendanceService.getPresent(ParseUtility.parseDate(date));
+    public Set<String> attendancePresentIdSet(String event) {
+        Set<Student> present  = attendanceService.getPresent(event);
         return present
                 .stream()
                 .map(student -> ParseUtility.unparseUID(student.uid()))
                 .collect(Collectors.toCollection(TreeSet::new));
     }
-    public Map<String, String> attendancePresentList(String date) {
-        Set<Student> present = attendanceService.getPresent(ParseUtility.parseDate(date));
+    public Map<String, String> attendancePresentList(String event) {
+        Set<Student> present = attendanceService.getPresent(event);
         return present
                 .stream()
                 .collect(Collectors.toMap(student -> ParseUtility.unparseUID(student.uid()), Student::name));
@@ -122,14 +120,18 @@ public class AttendanceSystemController {
 
 
     //Querying (Registry)
-    public AttendanceSheet queryAttendance(String date) {
-        return attendanceService.getAttendance(ParseUtility.parseDate(date));
+    public AttendanceSheet queryAttendance(String event) {
+        return attendanceService.getAttendance(event);
     }
-    public List<String> attendanceDateLists() {
+
+    public List<String> attendanceDateList() {
         return attendanceService.getDates()
                 .stream()
                 .map(LocalDate::toString)
                 .toList();
     }
 
+    public List<String> attendanceEventList() {
+        return new ArrayList<>(attendanceService.getEventNames());
+    }
 }

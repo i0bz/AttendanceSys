@@ -54,7 +54,10 @@ public class AttendanceService implements IAttendanceService {
 
 
     //Query functions
-    public SortedSet<LocalDate> getDates() {
+    public SortedSet<String> getEventNames() {
+        return registry.attendanceEventNames();
+    }
+    public List<LocalDate> getDates() {
         return registry.attendanceDateList();
     }
     public AttendanceSheet getAttendance(String event) {

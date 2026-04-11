@@ -6,7 +6,7 @@ import java.util.*;
 
 
 public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet> {
-    private String eventName;
+    private final String eventName;
     private final LocalDate date;
     private final Set<Integer> attendanceRoster;
 
@@ -55,6 +55,10 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
 
     public LocalDate date(){
         return this.date;
+    }
+
+    public String eventName(){
+        return this.eventName;
     }
 
 
