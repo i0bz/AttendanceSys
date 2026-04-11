@@ -30,7 +30,7 @@ class AttendanceTable extends Panel {
 
     AttendanceTable() {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
-        controller.addPropertyChangeListener(evt -> refreshTable());
+        controller.addPropertyChangeListener(e -> refreshTable());
 
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
         super.border = new CompoundBorder(super.line_border, super.padding);

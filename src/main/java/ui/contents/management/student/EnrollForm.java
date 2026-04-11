@@ -45,7 +45,7 @@ class EnrollForm extends Panel {
     private void focusEventListeners() {
 
         //Enter button events
-        studentNameInput.addActionListener(evt -> {
+        studentNameInput.addActionListener(e -> {
             studentIdInput.requestFocusInWindow();
         });
         studentIdInput.addActionListener(e -> {
