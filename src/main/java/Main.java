@@ -14,19 +14,9 @@ public class  Main {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         PersistenceFlusher.startDaemon();
 
-        if (args.length != 0) {
-            for (String arg : args) {
-                if (arg.equals("--cli")) {
-                    CLIHandler cli = new CLIHandler(controller);
-                    cli.init();
-                    ControllerBootstrapSingleton.getInstance().saveData();
-                }
-                }
-        } else {
-            FlatLightLaf.setup();
-            initializeTheme();
-            SwingUtilities.invokeLater(MainWindow::new);
-        }
+        FlatLightLaf.setup();
+        initializeTheme();
+        SwingUtilities.invokeLater(MainWindow::new);
 
 
     }
