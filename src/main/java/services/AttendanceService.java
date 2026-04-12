@@ -60,6 +60,9 @@ public class AttendanceService {
     public List<LocalDate> getDates() {
         return registry.attendanceDateList();
     }
+    public Map<String, LocalDate> queryEvents() {
+        return registry.queryEvents();
+    }
     public AttendanceSheet getAttendance(String event) {
         return registry.queryAttendance(event);
     }

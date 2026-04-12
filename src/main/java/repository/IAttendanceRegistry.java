@@ -4,6 +4,7 @@ import entity.AttendanceSheet;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedSet;
 
 public interface IAttendanceRegistry {
@@ -12,6 +13,7 @@ public interface IAttendanceRegistry {
     void removeAttendance(String event);
 
     AttendanceSheet queryAttendance(String event);
+    Map<String, LocalDate> queryEvents();
     List<LocalDate> attendanceDateList();
     SortedSet<String> attendanceEventNames();
 }
