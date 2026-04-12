@@ -28,6 +28,8 @@ repositories {
 dependencies {
     implementation("com.formdev:flatlaf:3.7")
     implementation("com.formdev:flatlaf-extras:3.7")
+    implementation("org.apache.poi:poi:5.5.1")
+    implementation("org.apache.poi:poi-ooxml:5.5.1")
 
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
