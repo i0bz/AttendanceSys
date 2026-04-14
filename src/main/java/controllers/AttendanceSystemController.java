@@ -14,6 +14,8 @@ import utility.ParseUtility;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import java.time.LocalDate;
@@ -23,6 +25,8 @@ public class AttendanceSystemController {
     private final StudentService studentManagement;
     private final AttendanceService attendanceService;
     private final SaveStateTracker saveStateTracker;
+    private final ExportService exportService;
+    private final ImportService importService;
 
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -32,11 +36,12 @@ public class AttendanceSystemController {
     }
 
 
-
     AttendanceSystemController(StudentService managementService, AttendanceService attendanceService, SaveStateTracker saveStateTracker) {
         this.studentManagement = managementService;
         this.attendanceService = attendanceService;
         this.saveStateTracker = saveStateTracker;
+        this.exportService = new ExportService(managementService, attendanceService);
+        this.importService = new ImportService(managementService, attendanceService);
     }
 
     //Student Management
@@ -132,4 +137,20 @@ public class AttendanceSystemController {
     public List<String> attendanceEventList() {
         return new ArrayList<>(attendanceService.getEventNames());
     }
+
+
+    //export
+    public void exportFile(File file) throws IOException {
+        exportService.exportExcel(file);
+    }
+
+    //import
+    public void importAttendances(File file) throws IOException {
+        importService.importAttendancesExcel(file);
+        support.firePropertyChange("import", null, this);
+        saveStateTracker.markDirty();
+    }
+
+
+
 }
