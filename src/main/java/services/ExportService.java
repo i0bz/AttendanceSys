@@ -3,6 +3,7 @@ package services;
 import entity.Student;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import utility.ParseUtility;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,7 +50,7 @@ public class ExportService {
 
         students.forEach((id, student) -> {
             Row row = sheet.createRow(iterator.get());
-            row.createCell(0).setCellValue(id);
+            row.createCell(0).setCellValue(ParseUtility.unparseUID(id));
             row.createCell(1).setCellValue(student.name());
             iterator.getAndIncrement();
         });
@@ -57,12 +58,14 @@ public class ExportService {
 
     private void writeEventsExcel(Workbook workbook) {
         Sheet eventsSheet = workbook.createSheet("Events List");
+        CellStyle dateStyle = workbook.createCellStyle();
+        dateStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat("yyyy-MM-dd"));
 
         Map<String, LocalDate> events = attendanceService.queryEvents();
 
         Row header = eventsSheet.createRow(0);
         header.createCell(0).setCellValue("Event Name");
-        header.createCell(0).setCellValue("Date");
+        header.createCell(1).setCellValue("Date");
 
         AtomicInteger iterator = new AtomicInteger(1);
 
@@ -70,6 +73,7 @@ public class ExportService {
             Row row = eventsSheet.createRow(iterator.get());
             row.createCell(0).setCellValue(name);
             row.createCell(1).setCellValue(date);
+            row.getCell(1).setCellStyle(dateStyle);
             iterator.getAndIncrement();
         });
     }
@@ -89,7 +93,7 @@ public class ExportService {
         iterator = 1;
         for (Integer id : students) {
             Row row = attendancesSheet.createRow(iterator);
-            row.createCell(iterator++).setCellValue(id);
+            row.createCell(0).setCellValue(ParseUtility.unparseUID(id));
         }
 
 
