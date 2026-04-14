@@ -19,6 +19,7 @@ public class ImportService {
     public void importStudentsExcel(File file) throws IOException {
         Workbook workbook = WorkbookFactory.create(file);
         Sheet studentSheet = workbook.getSheet("Students List");
+        if (studentSheet == null) throw new IOException("Students List not found");
 
         for (Row row : studentSheet) {
             if (row.equals(studentSheet.getRow(0))) continue;
@@ -31,8 +32,10 @@ public class ImportService {
     public void importEventsExcel(File file) throws IOException {
         Workbook workbook = WorkbookFactory.create(file);
         Sheet attendanceSheet = workbook.getSheet("Events List");
+        if (attendanceSheet == null) throw new IOException("Events List not found");
 
         for (Row row : attendanceSheet) {
+            if (row.equals(attendanceSheet.getRow(0))) continue;
             String event = dataFormatter.formatCellValue(row.getCell(0));
             String date = dataFormatter.formatCellValue(row.getCell(1));
             attendanceService.createAttendance(event, ParseUtility.parseDate(date));
@@ -44,7 +47,8 @@ public class ImportService {
         importEventsExcel(file);
 
         Workbook workbook = WorkbookFactory.create(file);
-        Sheet attendanceSheet = workbook.getSheet("Attendance Sheets");
+        Sheet attendanceSheet = workbook.getSheet("Attendance Sheet");
+        if (attendanceSheet == null) throw new IOException("Attendance Sheet not found");
         Row headerRow = attendanceSheet.getRow(0);
 
         int i = 0;
