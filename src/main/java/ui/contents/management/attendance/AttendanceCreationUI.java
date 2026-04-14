@@ -83,10 +83,12 @@ class AttendanceCreationUI extends Panel {
         try {
             controller.createAttendance(eventInputText, dateInputText);
         } catch (RuntimeException e) {
+            eventNameInput.setText("");
             dateInput.setText("Invalid Date Format!");
             dateInput.setForeground(Color.RED);
             return;
         }
+        eventNameInput.setText("");
         dateInput.setText("YYYY-MM-DD");
         dateInput.setForeground(Color.GRAY);
     }
