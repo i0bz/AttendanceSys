@@ -32,6 +32,7 @@ public class NavigationBar {
     private final FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", 24, 24);
     private final FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", 24, 24);
     private final FlatSVGIcon quickAttendanceIcon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 24, 24);
+    private final FlatSVGIcon importIcon = new FlatSVGIcon("images/import-svgrepo-com.svg", 24, 24);
     private final FlatSVGIcon exportIcon = new FlatSVGIcon("images/export-svgrepo-com.svg", 24, 24);
 
 
@@ -96,6 +97,7 @@ public class NavigationBar {
         buttons.get(1).setIcon(attendanceManagementIcon);
         buttons.get(2).setIcon(systemIcon);
         buttons.get(3).setIcon(quickAttendanceIcon);
+        buttons.get(4).setIcon(importIcon);
         buttons.get(5).setIcon(exportIcon);
 
     }
