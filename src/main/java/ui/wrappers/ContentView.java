@@ -1,5 +1,6 @@
 package ui.wrappers;
 
+import ui.contents.exporter.ExporterUI;
 import ui.contents.management.attendance.ManagementUI;
 import ui.contents.system.QuickAttendanceUI;
 import ui.contents.system.AttendanceSystemUI;
@@ -20,7 +21,7 @@ public class ContentView {
     private final JPanel mainPanel = new JPanel(cardLayout);
 
 
-    public String[] views = {"<html><div>Student Management</div></html>", "<html><div>Attendance Management</div></html>", "<html><div>Attendance System</div></html>", "<html><div>Quick Attendance Mode</div></html>"};
+    public String[] views = {"<html><div>Student Management</div></html>", "<html><div>Attendance Management</div></html>", "<html><div>Attendance System</div></html>", "<html><div>Quick Attendance Mode</div></html>", "<html><div>Import</div></html>", "<html><div>Export</div></html>"};
 
 
 

@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import com.formdev.flatlaf.ui.FlatLineBorder;
+import ui.contents.exporter.ExporterUI;
+import ui.contents.importer.ImporterUI;
 import ui.utility.ConstraintUtils;
 import ui.wrappers.ContentView;
 
@@ -30,6 +32,7 @@ public class NavigationBar {
     private final FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", 24, 24);
     private final FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", 24, 24);
     private final FlatSVGIcon quickAttendanceIcon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 24, 24);
+    private final FlatSVGIcon exportIcon = new FlatSVGIcon("images/export-svgrepo-com.svg", 24, 24);
 
 
     //Border
@@ -72,6 +75,10 @@ public class NavigationBar {
         layout.setConstraints(buttons.get(2), constraints);
         ConstraintUtils.setCoords(constraints,0, 3);
         layout.setConstraints(buttons.get(3), constraints);
+        ConstraintUtils.setCoords(constraints,0, 4);
+        layout.setConstraints(buttons.get(4), constraints);
+        ConstraintUtils.setCoords(constraints,0, 5);
+        layout.setConstraints(buttons.get(5), constraints);
 
 
         //Glue buttons to the top
@@ -89,6 +96,7 @@ public class NavigationBar {
         buttons.get(1).setIcon(attendanceManagementIcon);
         buttons.get(2).setIcon(systemIcon);
         buttons.get(3).setIcon(quickAttendanceIcon);
+        buttons.get(5).setIcon(exportIcon);
 
     }
 
@@ -114,9 +122,13 @@ public class NavigationBar {
         int iterator = 0;
         for (JButton button : buttons) {
             int index = iterator;
+            if (iterator == 4) continue;
             button.addActionListener( e -> swapCards(index));
             iterator++;
         }
+
+        buttons.get(4).addActionListener(e -> ImporterUI.showImportUI());
+        buttons.get(5).addActionListener(e -> ExporterUI.showExportUI());
     }
 
 
