@@ -92,15 +92,15 @@ public class ExportService {
 
         iterator = 1;
         for (Integer id : students) {
-            Row row = attendancesSheet.createRow(iterator);
+            Row row = attendancesSheet.createRow(iterator++);
             row.createCell(0).setCellValue(ParseUtility.unparseUID(id));
         }
 
 
         int studentIterator = 1;
-        int eventIterator = 1;
         for (Integer id : students) {
             Row row = attendancesSheet.getRow(studentIterator++);
+            int eventIterator = 1;
             for (String event : events) {
                 Cell cell = row.createCell(eventIterator++);
                 if (attendanceService.isPresent(event, id)) cell.setCellValue("Present");
