@@ -2,8 +2,8 @@ package services;
 
 import entity.AttendanceSheet;
 import entity.Student;
-import repository.IAttendanceRegistry;
-import repository.IStudentRoster;
+import repository.AttendanceRegistry;
+import repository.StudentRoster;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class AttendanceService {
 
-    private final IAttendanceRegistry registry;
-    private final IStudentRoster roster;
+    private final AttendanceRegistry registry;
+    private final StudentRoster roster;
 
-    public AttendanceService(IAttendanceRegistry registry, IStudentRoster roster) {
+    public AttendanceService(AttendanceRegistry registry, StudentRoster roster) {
         this.registry = registry;
         this.roster = roster;
     }

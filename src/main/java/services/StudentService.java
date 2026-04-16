@@ -1,16 +1,16 @@
 package services;
 
 import entity.Student;
-import repository.IStudentRoster;
+import repository.StudentRoster;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class StudentService {
 
-    private final IStudentRoster roster;
+    private final StudentRoster roster;
 
-    public StudentService(IStudentRoster roster) {
+    public StudentService(StudentRoster roster) {
         this.roster = roster;
     }
 

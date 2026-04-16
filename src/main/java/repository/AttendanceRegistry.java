@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AttendanceRegistry implements Serializable, IAttendanceRegistry {
+public class AttendanceRegistry implements Serializable{
 
     private final HashMap<String, AttendanceSheet> registry;
 
