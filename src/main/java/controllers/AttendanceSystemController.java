@@ -11,13 +11,11 @@ import services.*;
 
 //Utilities
 import utility.ParseUtility;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
@@ -68,7 +66,7 @@ public class AttendanceSystemController {
         saveStateTracker.markDirty();
     }
 
-
+    //Attendance System
     public void toggleAttendance(String uid, String event) {
         attendanceService.toggleAttendance(event, ParseUtility.parseUID(uid));
         saveStateTracker.markDirty();
@@ -82,6 +80,7 @@ public class AttendanceSystemController {
     public boolean isPresent(String uid, String event) {
         return attendanceService.isPresent(event, ParseUtility.parseUID(uid));
     }
+
 
 
     //Querying (Student Management specific)
@@ -133,7 +132,6 @@ public class AttendanceSystemController {
                 .map(LocalDate::toString)
                 .toList();
     }
-
     public List<String> attendanceEventList() {
         return new ArrayList<>(attendanceService.getEventNames());
     }
@@ -143,7 +141,6 @@ public class AttendanceSystemController {
     public void exportFile(File file) throws IOException {
         exportService.exportExcel(file);
     }
-
     //import
     public void importAttendances(File file) throws IOException {
         importService.importAttendancesExcel(file);
