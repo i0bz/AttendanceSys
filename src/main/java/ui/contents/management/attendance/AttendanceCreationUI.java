@@ -1,5 +1,6 @@
 package ui.contents.management.attendance;
 
+import com.formdev.flatlaf.ui.FlatLineBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.Panel;
@@ -138,8 +139,11 @@ class AttendanceCreationUI extends Panel {
 
 
         //Create attendance button
-        addAttendanceButton.putClientProperty("FlatLaf.styleClass", "h3");
+        addAttendanceButton.setForeground(Color.WHITE);
+        addAttendanceButton.setBackground(Color.decode("#006B3C"));
         addAttendanceButton.putClientProperty("FlatLaf.style", "arc: 10");
+        addAttendanceButton.setFocusPainted(false);
+        addAttendanceButton.putClientProperty("FlatLaf.styleClass", "h3");
         constraints.insets = new Insets(0, 0, 0, 0);
         ConstraintUtils.setCoords(constraints, 2, 2);
         constraints.weightx = 0.1;

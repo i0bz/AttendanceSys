@@ -126,6 +126,10 @@ class QuickAttendance extends Panel {
 
 
         changeDateBtn.putClientProperty("FlatLaf.styleClass", "h3");
+        changeDateBtn.setForeground(Color.WHITE);
+        changeDateBtn.setBackground(Color.decode("#006B3C"));
+        changeDateBtn.putClientProperty("FlatLaf.style", "arc: 10");
+        changeDateBtn.setFocusPainted(false);
         constraints.insets = new Insets(10, 0, 10, 50);
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridx = 2;
@@ -164,6 +168,10 @@ class QuickAttendance extends Panel {
         entryLayout.setConstraints(inputField, constraints);
 
         markPresentBtn.putClientProperty("FlatLaf.styleClass", "h3");
+        markPresentBtn.setForeground(Color.WHITE);
+        markPresentBtn.setBackground(Color.decode("#006B3C"));
+        markPresentBtn.putClientProperty("FlatLaf.style", "arc: 10");
+        markPresentBtn.setFocusPainted(false);
         constraints.fill = GridBagConstraints.NONE;
         constraints.insets = new Insets(5, 10, 5, 10);
         constraints.gridy = 4;

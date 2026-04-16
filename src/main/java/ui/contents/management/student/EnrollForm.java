@@ -142,8 +142,11 @@ class EnrollForm extends Panel {
         layout.setConstraints(studentNameInput, constraints);
 
         //Enroll Button
-        enrollButton.putClientProperty("FlatLaf.styleClass", "h3");
+        enrollButton.setForeground(Color.WHITE);
+        enrollButton.setBackground(Color.decode("#006B3C"));
         enrollButton.putClientProperty("FlatLaf.style", "arc: 10");
+        enrollButton.setFocusPainted(false);
+        enrollButton.putClientProperty("FlatLaf.styleClass", "h3");
         ConstraintUtils.setCoords(constraints,0,3);
         ConstraintUtils.setWidth(constraints, 2);
         constraints.fill = GridBagConstraints.NONE;
