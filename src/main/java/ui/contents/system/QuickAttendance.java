@@ -116,24 +116,28 @@ class QuickAttendance extends Panel {
         layout.setConstraints(attendanceEntry, constraints);
 
 
+        activeDate.setHorizontalAlignment(SwingConstants.CENTER);
+        activeDate.putClientProperty("FlatLaf.styleClass", "h3");
         constraints.weighty = 0;
         constraints.insets = new Insets(10, 160, 10, 50);
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridy = 0;
-        activeDate.setHorizontalAlignment(SwingConstants.CENTER);
         dateInfoLayout.setConstraints(activeDate, constraints);
 
+
+        changeDateBtn.putClientProperty("FlatLaf.styleClass", "h3");
         constraints.insets = new Insets(10, 0, 10, 50);
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridx = 2;
         dateInfoLayout.setConstraints(changeDateBtn, constraints);
 
 
+        CompoundBorder descBorder = new CompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borderColor), new FlatEmptyBorder(0, 15, 5, 15));
+        description.setBorder(descBorder);
+        description.putClientProperty("FlatLaf.style", "font: 175% bold");
         constraints.insets = new Insets(0, 0, 0, 0);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weighty = 0.1;
-        CompoundBorder descBorder = new CompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borderColor), new FlatEmptyBorder(0, 15, 5, 15));
-        description.setBorder(descBorder);
         constraints.weightx = 1;
         constraints.gridx = 0;
         entryLayout.setConstraints(description, constraints);
@@ -142,6 +146,7 @@ class QuickAttendance extends Panel {
         constraints.gridy = 1;
         entryLayout.setConstraints(quickAttendanceIcon, constraints);
 
+        inputDescription.putClientProperty("FlatLaf.styleClass", "h3");
         inputDescription.setHorizontalAlignment(SwingConstants.CENTER);
         constraints.insets = new Insets(5, 10, 5, 10);
         constraints.weightx = 0;
@@ -150,12 +155,15 @@ class QuickAttendance extends Panel {
         entryLayout.setConstraints(inputDescription, constraints);
 
 
+        inputField.putClientProperty("FlatLaf.style", "font: 175% $h3.font");
+        inputField.setHorizontalAlignment(SwingConstants.CENTER);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.insets = new Insets(5, inputFieldGap, 5, inputFieldGap);
         constraints.gridy = 3;
         constraints.weighty = 0.1;
         entryLayout.setConstraints(inputField, constraints);
 
+        markPresentBtn.putClientProperty("FlatLaf.styleClass", "h3");
         constraints.fill = GridBagConstraints.NONE;
         constraints.insets = new Insets(5, 10, 5, 10);
         constraints.gridy = 4;

@@ -18,7 +18,7 @@ class AttendanceCreationUI extends Panel {
     private final JTextField dateInput = new JTextField();
     private final JLabel eventNameLabel = new JLabel("Event Name:");
     private final JTextField eventNameInput = new JTextField();
-    private final JButton addButton = new JButton("Add Date");
+    private final JButton addAttendanceButton = new JButton("Add Date");
 
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
@@ -28,7 +28,7 @@ class AttendanceCreationUI extends Panel {
         mainPanel.add(dateInput, constraints);
         mainPanel.add(eventNameLabel, constraints);
         mainPanel.add(eventNameInput, constraints);
-        mainPanel.add(addButton, constraints);
+        mainPanel.add(addAttendanceButton, constraints);
         mainPanel.add(horizontalGlue, constraints);
 
         dynamicPadding();
@@ -39,7 +39,7 @@ class AttendanceCreationUI extends Panel {
     }
 
     private void buttonListeners() {
-        addButton.addActionListener(e -> {
+        addAttendanceButton.addActionListener(e -> {
             createAttendance();
         });
 
@@ -98,26 +98,31 @@ class AttendanceCreationUI extends Panel {
     private void drawComponents() {
 
         //"Description"
+        descriptionLabel.putClientProperty("FlatLaf.styleClass", "h2");
+        constraints.insets = new Insets(0,0,10,0);
+        descriptionLabel.setHorizontalAlignment(SwingConstants.LEFT);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;
         ConstraintUtils.setWidth(constraints, 2);
-        descriptionLabel.setHorizontalAlignment(SwingConstants.LEFT);
         layout.setConstraints(descriptionLabel, constraints);
 
 
         //Name Header
+        eventNameLabel.putClientProperty("FlatLaf.styleClass", "h3");
         constraints.insets = new Insets(0, 0, 0, 0);
         ConstraintUtils.setWidth(constraints, 1);
         ConstraintUtils.setCoords(constraints, 0, 1);
         layout.setConstraints(eventNameLabel, constraints);
 
         //Date Header
+        dateLabel.putClientProperty("FlatLaf.styleClass", "h3");
         ConstraintUtils.setWidth(constraints, 1);
         ConstraintUtils.setCoords(constraints, 1, 1);
         layout.setConstraints(dateLabel, constraints);
 
         //Name Input
         eventNameInput.putClientProperty("FlatLaf.style", "arc: 10");
+        eventNameInput.putClientProperty("FlatLaf.styleClass", "h3");
         constraints.insets = new Insets(0, 0, 0, 10);
         ConstraintUtils.setCoords(constraints, 0, 2);
         constraints.weightx = 2;
@@ -126,17 +131,19 @@ class AttendanceCreationUI extends Panel {
 
         //Date Input
         dateInput.putClientProperty("FlatLaf.style", "arc: 10");
+        dateInput.putClientProperty("FlatLaf.styleClass", "h3");
         ConstraintUtils.setCoords(constraints, 1, 2);
         constraints.weightx = 2;
         layout.setConstraints(dateInput, constraints);
 
 
         //Create attendance button
-        addButton.putClientProperty("FlatLaf.style", "arc: 10");
+        addAttendanceButton.putClientProperty("FlatLaf.styleClass", "h3");
+        addAttendanceButton.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 0);
         ConstraintUtils.setCoords(constraints, 2, 2);
         constraints.weightx = 0.1;
-        layout.setConstraints(addButton, constraints);
+        layout.setConstraints(addAttendanceButton, constraints);
 
         //push things to the left
         ConstraintUtils.setCoords(constraints, 3, 2);

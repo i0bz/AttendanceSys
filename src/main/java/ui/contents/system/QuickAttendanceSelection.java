@@ -55,7 +55,7 @@ class QuickAttendanceSelection extends Panel {
         mainPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int descriptionPaddingSize = Math.min(10, (int) (e.getComponent().getWidth() * 0.04));
+                int descriptionPaddingSize = Math.min(15, (int) (e.getComponent().getWidth() * 0.06));
                 FlatEmptyBorder padding = new FlatEmptyBorder(0, descriptionPaddingSize, descriptionPaddingSize, descriptionPaddingSize);
                 CompoundBorder descriptionBorder = new CompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, borderColor), padding);
                 description.setBorder(descriptionBorder);
@@ -92,13 +92,13 @@ class QuickAttendanceSelection extends Panel {
     private void drawComponents() {
 
 
-
+        description.putClientProperty("FlatLaf.style", "font: 175% bold");
+        description.setHorizontalAlignment(SwingConstants.LEFT);
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = new Insets(10, 0, 0, 0);
+        constraints.insets = new Insets(0, 0, 0, 0);
         constraints.weightx = 1;
         constraints.weighty = 1;
         constraints.ipadx = 10;
-        description.setHorizontalAlignment(SwingConstants.LEFT);
         layout.setConstraints(description, constraints);
 
 
@@ -110,10 +110,10 @@ class QuickAttendanceSelection extends Panel {
         constraints.gridy = 1;
         layout.setConstraints(quickAttendanceIcon, constraints);
 
+        eventOptions.putClientProperty("FlatLaf.styleClass", "h3");
+        eventOptions.setSelectedIndex(0);
         constraints.gridy = 2;
         layout.setConstraints(eventOptions, constraints);
-
-        eventOptions.setSelectedIndex(0);
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;

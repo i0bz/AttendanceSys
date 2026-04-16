@@ -28,12 +28,14 @@ public class NavigationBar {
 
 
     //button icons
-    private final FlatSVGIcon studentManagementIcon = new FlatSVGIcon("images/calendar-user-svgrepo-com.svg", 24, 24);
-    private final FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", 24, 24);
-    private final FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", 24, 24);
-    private final FlatSVGIcon quickAttendanceIcon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 24, 24);
-    private final FlatSVGIcon importIcon = new FlatSVGIcon("images/import-svgrepo-com.svg", 24, 24);
-    private final FlatSVGIcon exportIcon = new FlatSVGIcon("images/export-svgrepo-com.svg", 24, 24);
+    int iconSize = 35;
+
+    private final FlatSVGIcon studentManagementIcon = new FlatSVGIcon("images/calendar-user-svgrepo-com.svg", iconSize, iconSize);
+    private final FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", iconSize, iconSize);
+    private final FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", iconSize, iconSize);
+    private final FlatSVGIcon quickAttendanceIcon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", iconSize, iconSize);
+    private final FlatSVGIcon importIcon = new FlatSVGIcon("images/import-svgrepo-com.svg", iconSize, iconSize);
+    private final FlatSVGIcon exportIcon = new FlatSVGIcon("images/export-svgrepo-com.svg", iconSize, iconSize);
 
 
     //Border
@@ -108,6 +110,7 @@ public class NavigationBar {
         }
         for (JButton button : buttons) {
             button.putClientProperty("FlatLaf.style", buttonArc);
+            button.putClientProperty("FlatLaf.styleClass", "h3");
             button.setHorizontalAlignment(SwingConstants.LEFT);
             button.setBorder(buttonBorders);
             button.setFocusPainted(false);

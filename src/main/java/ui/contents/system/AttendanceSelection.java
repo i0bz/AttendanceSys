@@ -32,11 +32,15 @@ class AttendanceSelection extends Panel {
         eventList.add("Select Attendance");
         eventOptions.setSelectedIndex(0);
 
+        description.putClientProperty("FlatLaf.styleClass", "h2");
         description.setHorizontalAlignment(SwingConstants.LEFT);
         constraints.weightx = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(0,0,10,0);
         layout.setConstraints(description, constraints);
 
+        eventOptions.putClientProperty("FlatLaf.styleClass", "h3");
+        constraints.insets = new Insets(0,0,0,0);
         constraints.gridy = 1;
         constraints.weightx = 0.5;
         constraints.fill = GridBagConstraints.HORIZONTAL;

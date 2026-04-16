@@ -16,7 +16,7 @@ class EnrollForm extends Panel {
     JTextField studentIdInput = new JTextField(9);
     JTextField studentNameInput = new JTextField(9);
     JButton enrollButton = new JButton("Enroll");
-    JLabel enrollLabel = new JLabel("Enroll new student");
+    JLabel enrollLabel = new JLabel("Enroll new students");
     JLabel studentNameLabel = new JLabel("Student Name:");
     JLabel studentIDLabel = new JLabel("Student ID:");
 
@@ -112,29 +112,37 @@ class EnrollForm extends Panel {
 
     private void drawComponents() {
 
+        enrollLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        enrollLabel.putClientProperty("FlatLaf.styleClass", "h2");
+        constraints.insets = new Insets(0,0,10,0);
         constraints.weightx = 1.0;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        enrollLabel.setHorizontalAlignment(SwingConstants.LEFT);
         layout.setConstraints(enrollLabel, constraints);
 
+        studentNameLabel.putClientProperty("FlatLaf.styleClass", "h3");
+        constraints.insets = new Insets(0,0,0,0);
         ConstraintUtils.setCoords(constraints, 0, 1);
         layout.setConstraints(studentNameLabel, constraints);
 
+        studentIDLabel.putClientProperty("FlatLaf.styleClass", "h3");
         ConstraintUtils.setCoords(constraints, 1, 1);
         layout.setConstraints(studentIDLabel, constraints);
 
         //ID input
         studentIdInput.putClientProperty("FlatLaf.style", "arc: 10");
+        studentIdInput.putClientProperty("FlatLaf.styleClass", "h3");
         ConstraintUtils.setCoords(constraints, 1, 2);
         layout.setConstraints(studentIdInput, constraints);
 
         //Name Input
+        studentNameInput.putClientProperty("FlatLaf.styleClass", "h3");
         studentNameInput.putClientProperty("FlatLaf.style", "arc: 10");
         constraints.insets = new Insets(0, 0, 0, 10);
         ConstraintUtils.setCoords(constraints, 0, 2);
         layout.setConstraints(studentNameInput, constraints);
 
         //Enroll Button
+        enrollButton.putClientProperty("FlatLaf.styleClass", "h3");
         enrollButton.putClientProperty("FlatLaf.style", "arc: 10");
         ConstraintUtils.setCoords(constraints,0,3);
         ConstraintUtils.setWidth(constraints, 2);

@@ -23,6 +23,7 @@ public class TableBtnEditor extends DefaultCellEditor {
         
         button.setOpaque(true);
         button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.putClientProperty("FlatLaf.styleClass", "h3");
         button.setBackground(UIManager.getColor("Table.background"));
         button.setBorder(border);
     }

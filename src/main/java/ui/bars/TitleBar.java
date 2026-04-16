@@ -20,8 +20,8 @@ public class TitleBar {
     }
 
     public void initComponents() {
-        JLabel title = new JLabel("AttendanceSystem");
-        title.putClientProperty( "FlatLaf.style", "font: bold $h2.regular.font" );
+        JLabel title = new JLabel("Attendance System");
+        title.putClientProperty( "FlatLaf.style", "font: bold $h0.font" );
         mainPanel.add(title);
         mainPanel.setBorder(border);
     }
