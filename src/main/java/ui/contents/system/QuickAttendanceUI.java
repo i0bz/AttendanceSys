@@ -14,13 +14,19 @@ public class QuickAttendanceUI {
     private final String[] views = {"Attendance Selection", "Attendance Mode"};
 
     public QuickAttendanceUI(AttendanceSystemController controller) {
-        QuickAttendanceView attendanceMode = new QuickAttendanceView(controller, mainPanel, cardLayout, views);
-        QuickAttendanceSelection attendanceModeSelection = new QuickAttendanceSelection(controller, mainPanel, cardLayout, views, attendanceMode);
+        QuickAttendanceView quickAttendanceMode = new QuickAttendanceView(controller, mainPanel, cardLayout, views);
+        QuickAttendanceSelection quickAttendanceSelection = new QuickAttendanceSelection(controller, mainPanel, cardLayout, views, quickAttendanceMode);
 
 
-        mainPanel.add(attendanceModeSelection.getPanel(), views[0]);
-        mainPanel.add(attendanceMode, views[1]);
+        mainPanel.add(quickAttendanceSelection.getPanel(), views[0]);
+        mainPanel.add(quickAttendanceMode, views[1]);
         cardLayout.show(mainPanel, views[0]);
+
+        controller.addPropertyChangeListener(e -> {
+            quickAttendanceSelection.refreshDates();
+            if (!controller.attendanceEventList().contains(quickAttendanceMode.currentEvent))
+                cardLayout.show(mainPanel, views[0]);
+        });
     }
 
     public JPanel getPanel() {

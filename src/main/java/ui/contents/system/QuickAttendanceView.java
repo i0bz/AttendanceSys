@@ -30,7 +30,7 @@ class QuickAttendanceView extends BasePanel {
     private final JTextField inputField = new JTextField();
     private final JButton markPresentBtn = new JButton("Mark Present");
 
-    String currentDate = "";
+    String currentEvent = "";
 
     private final JPanel parentPanel;
     private final String[] parentViews;
@@ -193,7 +193,7 @@ class QuickAttendanceView extends BasePanel {
     private void markPresent() {
         String uid = inputField.getText();
         try {
-            controller.markPresent(uid, currentDate);
+            controller.markPresent(uid, currentEvent);
         } catch (NoSuchElementException e) {
             inputField.setText("Student not enrolled!");
             inputField.setForeground(Color.RED);

@@ -25,7 +25,7 @@ public class AttendanceSystemUI {
         attendanceSelection = new AttendanceSelectionPanel(controller);
         attendanceSystemTable = new AttendanceSystemPanel(controller);
 
-        final SelectionMediator mediator = new SelectionMediator(attendanceSelection, attendanceSystemTable);
+        final SelectionMediator mediator = new SelectionMediator(attendanceSelection, attendanceSystemTable, controller);
         mainPanel.add(attendanceSelection, constraints);
         mainPanel.add(attendanceSystemTable, constraints);
 

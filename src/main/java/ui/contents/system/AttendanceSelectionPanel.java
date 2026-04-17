@@ -15,7 +15,7 @@ class AttendanceSelectionPanel extends BasePanel {
 
     private final JLabel description = new JLabel("Attendance Mode");
     private final Vector<String> eventList = new Vector<>();
-    private final JComboBox<String> eventOptions = new JComboBox<>(eventList);
+    final JComboBox<String> eventOptions = new JComboBox<>(eventList);
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
     AttendanceSelectionPanel(AttendanceSystemController controller) {

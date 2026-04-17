@@ -18,7 +18,7 @@ class QuickAttendanceSelection extends BasePanel {
     private final AttendanceSystemController controller;
 
     private final Vector<String> eventList = new Vector<>();
-    private final JComboBox<String> eventOptions = new JComboBox<>(eventList);
+    final JComboBox<String> eventOptions = new JComboBox<>(eventList);
     private final JLabel description = new JLabel("Select Attendance Sheet");
     private final GridBagLayout wrapperLayout = new GridBagLayout();
     private final JPanel wrapper = new JPanel(wrapperLayout);
@@ -33,8 +33,8 @@ class QuickAttendanceSelection extends BasePanel {
 
 
 
-    int marginSize = 0;
-    FlatEmptyBorder margin;
+    private int marginSize = 0;
+    private FlatEmptyBorder margin;
 
     @Override
     protected void dynamicPadding() {
@@ -127,11 +127,9 @@ class QuickAttendanceSelection extends BasePanel {
 
     private void actionHandlers() {
 
-        controller.addPropertyChangeListener(e -> refreshDates());
-
         eventOptions.addActionListener(e -> {
             if (eventOptions.getSelectedItem().equals("Select Attendance")) return;
-            attendanceMode.currentDate = eventOptions.getSelectedItem().toString();
+            attendanceMode.currentEvent = eventOptions.getSelectedItem().toString();
             attendanceMode.activeDate.setText("Active Event: " + eventOptions.getSelectedItem());
             parentCardLayout.show(parentPanel, parentViews[1]);
             eventOptions.setSelectedIndex(0);
@@ -139,7 +137,7 @@ class QuickAttendanceSelection extends BasePanel {
 
     }
 
-    private void refreshDates() {
+    void refreshDates() {
         List<String> refreshedEventList = controller.attendanceEventList();
 
         eventList.clear();

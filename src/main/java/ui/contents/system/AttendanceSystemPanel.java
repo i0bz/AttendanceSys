@@ -39,12 +39,10 @@ class AttendanceSystemPanel extends BasePanel {
         this.add(pane, constraints);
 
         drawComponents();
-        refreshTable(event);
         addEventHandlers();
     }
 
     private void addEventHandlers() {
-        controller.addPropertyChangeListener(e -> refreshTable(event));
 
         model.addTableModelListener(e -> {
             if (e.getType() != TableModelEvent.UPDATE) return;
@@ -95,7 +93,6 @@ class AttendanceSystemPanel extends BasePanel {
 
     public void refreshTable(String date) {
         Map<String, String> students = controller.getAllStudentsById();
-        if (tableView.isEditing()) tableView.getCellEditor().stopCellEditing();
 
         if (date == null || date.equals("Select Attendance")) {
             model.setRowCount(0);
