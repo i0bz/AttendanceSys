@@ -1,6 +1,6 @@
 package services;
 
-//For future can expand this to have seperate tracking for both repos
+//Save state tracking class
 public class SaveStateTracker {
     private boolean flushed = true;
 

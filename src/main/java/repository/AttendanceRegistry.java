@@ -25,10 +25,10 @@ public class AttendanceRegistry implements Serializable{
     }
 
 
+    //Query
     public AttendanceSheet queryAttendance(String event) {
         return registry.get(event);
     }
-
     public Map<String, LocalDate> queryEvents() {
         return new TreeMap<>(registry.entrySet()
                 .stream()

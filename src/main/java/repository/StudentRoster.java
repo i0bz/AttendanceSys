@@ -20,14 +20,13 @@ public class StudentRoster implements Serializable {
         studentRoster.remove(uid);
     }
 
-    //Query functions
+    //Query
     public Student queryStudent(int uid) {
         return studentRoster.get(uid);
     }
     public boolean studentExists(int uid) {
         return studentRoster.containsKey(uid);
     }
-    
     public Map<Integer, Student> queryRoster() {
         return new HashMap<>(studentRoster);
     }

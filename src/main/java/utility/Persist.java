@@ -10,9 +10,7 @@ public class Persist {
     static final String attendanceFile = "./attendances.dat";
     static final String studentRosterFile = "./roster.dat";
 
-    /*
-    Saving
-     */
+    //saving
     public static void saveRegistry(AttendanceRegistry registry) {
         try (FileOutputStream ofs = new FileOutputStream(attendanceFile);
              ObjectOutputStream objectStream = new ObjectOutputStream(ofs))
@@ -33,9 +31,7 @@ public class Persist {
     }
 
 
-    /*
-    Loading
-     */
+    //loading
     public static AttendanceRegistry loadRegistry() {
 
         AttendanceRegistry reg = null;

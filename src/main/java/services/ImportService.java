@@ -16,6 +16,7 @@ public class ImportService {
         this.attendanceService = attendanceService;
     }
 
+    //Excel Sheet Specific import methods
     public void importStudentsExcel(File file) throws IOException {
         Workbook workbook = WorkbookFactory.create(file);
         Sheet studentSheet = workbook.getSheet("Students List");
@@ -28,7 +29,6 @@ public class ImportService {
             studentManagement.enroll(name, ParseUtility.parseUID(uid));
         }
     }
-
     public void importEventsExcel(File file) throws IOException {
         Workbook workbook = WorkbookFactory.create(file);
         Sheet attendanceSheet = workbook.getSheet("Events List");
@@ -41,7 +41,6 @@ public class ImportService {
             attendanceService.createAttendance(event, ParseUtility.parseDate(date));
         }
     }
-
     public void importAttendancesExcel(File file) throws IOException {
         importStudentsExcel(file);
         importEventsExcel(file);

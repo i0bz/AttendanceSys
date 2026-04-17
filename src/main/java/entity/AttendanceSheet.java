@@ -11,13 +11,13 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
     private final Set<Integer> presentUIDs;
 
 
-    //Comparing Functions
+    //Comparison Function
     @Override
     public int compareTo(AttendanceSheet other) {
         return this.eventName.compareTo(other.eventName);
     }
 
-    //Hashing Functions
+    //Hashing Function
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof AttendanceSheet other)) return false;
@@ -35,12 +35,11 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
         this.presentUIDs = new HashSet<>();
     }
 
+    //Attendance Manipulation
     public void toggleAttendance(int studentUID) {
         if (!presentUIDs.contains(studentUID)) presentUIDs.add(studentUID);
         else presentUIDs.remove(studentUID);
     }
-
-
     public void markPresent(int studentUID) {
         presentUIDs.add(studentUID);
     }
@@ -48,15 +47,14 @@ public class AttendanceSheet implements Serializable,Comparable<AttendanceSheet>
     public boolean isPresent(int studentUID) {
         return presentUIDs.contains(studentUID);
     }
-
     public Set<Integer> presentIdSet() {
         return presentUIDs;
     }
 
+    //Getters
     public LocalDate date(){
         return this.date;
     }
-
     public String eventName(){
         return this.eventName;
     }

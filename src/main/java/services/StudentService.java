@@ -34,7 +34,6 @@ public class StudentService {
     public Map<Integer, Student> getAllStudentsByID() {
         return new TreeMap<>(roster.queryRoster());
     }
-
     public String getStudentName(int uid) {
         return roster.queryStudent(uid).name();
     }

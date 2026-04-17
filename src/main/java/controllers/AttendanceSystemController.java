@@ -1,6 +1,6 @@
 
 package controllers;
-
+//TODO remove unused
 
 //Domains
 import entity.AttendanceSheet;
@@ -27,11 +27,12 @@ public class AttendanceSystemController {
     private final ImportService importService;
 
 
+    // Property listener for model's update events
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
+
 
 
     AttendanceSystemController(StudentService managementService, AttendanceService attendanceService, SaveStateTracker saveStateTracker) {

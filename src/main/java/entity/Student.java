@@ -13,13 +13,13 @@ public class Student implements Serializable,Comparable<Student> {
     }
 
 
-    //Comparing Functions
+    //Comparison Function
     @Override
     public int compareTo(Student other) {
         return Integer.compare(this.uid, other.uid);
     }
 
-    //Hashing Functions
+    //Hashing Function
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Student student)) return false;

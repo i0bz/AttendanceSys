@@ -38,6 +38,8 @@ public class ExportService {
         }
     }
 
+
+    //Excel sheet writing methods
     private void writeStudentsExcel(Workbook workbook) {
         Sheet sheet = workbook.createSheet("Students List");
 
@@ -55,7 +57,6 @@ public class ExportService {
             iterator.getAndIncrement();
         });
     }
-
     private void writeEventsExcel(Workbook workbook) {
         Sheet eventsSheet = workbook.createSheet("Events List");
         CellStyle dateStyle = workbook.createCellStyle();
@@ -77,7 +78,6 @@ public class ExportService {
             iterator.getAndIncrement();
         });
     }
-
     private void writeAttendancesExcel(Workbook workbook) {
         Sheet attendancesSheet = workbook.createSheet("Attendance Sheet");
         Row header = attendancesSheet.createRow(0);

@@ -19,21 +19,6 @@ public class AttendanceService {
         this.roster = roster;
     }
 
-    public boolean isPresent(String event, int uid) {
-        AttendanceSheet attendance =  registry.queryAttendance(event);
-        if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
-        if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
-        return attendance.isPresent(uid);
-    }
-
-    public void markPresent(String event, int uid) {
-        AttendanceSheet attendance =  registry.queryAttendance(event);
-        if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
-        if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
-        attendance.markPresent(uid);
-    }
-
-
 
     //Attendance Management
     public void createAttendance(String event, LocalDate date) {
@@ -43,7 +28,6 @@ public class AttendanceService {
         registry.removeAttendance(event);
     }
 
-
     //Attendance Manipulation
     public void toggleAttendance(String event, int uid) {
         AttendanceSheet attendance =  registry.queryAttendance(event);
@@ -51,9 +35,20 @@ public class AttendanceService {
         if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
         attendance.toggleAttendance(uid);
     }
-
+    public void markPresent(String event, int uid) {
+        AttendanceSheet attendance =  registry.queryAttendance(event);
+        if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
+        if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
+        attendance.markPresent(uid);
+    }
 
     //Query functions
+    public boolean isPresent(String event, int uid) {
+        AttendanceSheet attendance =  registry.queryAttendance(event);
+        if (attendance == null) throw new NoSuchElementException("Date given has no attendance");
+        if (!roster.studentExists(uid)) throw new NoSuchElementException("Student does not exist in the roster.");
+        return attendance.isPresent(uid);
+    }
     public SortedSet<String> getEventNames() {
         return registry.attendanceEventNames();
     }
