@@ -6,19 +6,18 @@ import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 
 
 class AttendanceCreationPanel extends BasePanel {
     private final AttendanceSystemController controller;
 
-    private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
+    private final JLabel descriptionLabel = new JLabel("Add New Events");
     private final JLabel dateLabel = new JLabel("Date:");
     private final JTextField dateInput = new JTextField();
     private final JLabel eventNameLabel = new JLabel("Event Name:");
     private final JTextField eventNameInput = new JTextField();
-    private final JButton addAttendanceButton = new JButton("Add Date");
+    private final JButton addAttendanceButton = new JButton("Add");
 
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
@@ -52,6 +51,13 @@ class AttendanceCreationPanel extends BasePanel {
             createAttendance();
             dateInput.getParent().requestFocusInWindow();
         });
+
+        dateInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE && dateInput.getText().isEmpty()) eventNameInput.requestFocusInWindow();
+            }
+        });
     }
 
     private void focusListeners() {
@@ -75,11 +81,26 @@ class AttendanceCreationPanel extends BasePanel {
                 }
             }
         });
+
+        eventNameInput.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (eventNameInput.getText().equals("Empty Event Name!!!") || eventNameInput.getText().isEmpty()) {
+                    eventNameInput.setText("");
+                    eventNameInput.setForeground(Color.BLACK);
+                }
+            }
+        });
     }
 
     private void createAttendance() {
         String dateInputText = dateInput.getText();
         String eventInputText = eventNameInput.getText();
+        if (eventInputText.trim().isEmpty()) {
+            eventNameInput.setText("Empty Event Name!!!");
+            eventNameInput.setForeground(Color.RED);
+            return;
+        }
         try {
             controller.createAttendance(eventInputText, dateInputText);
         } catch (RuntimeException e) {
@@ -125,7 +146,7 @@ class AttendanceCreationPanel extends BasePanel {
         eventNameInput.putClientProperty("FlatLaf.styleClass", "h3");
         constraints.insets = new Insets(0, 0, 0, 10);
         ConstraintUtils.setCoords(constraints, 0, 2);
-        constraints.weightx = 2;
+        constraints.weightx = 5;
         layout.setConstraints(eventNameInput, constraints);
 
 

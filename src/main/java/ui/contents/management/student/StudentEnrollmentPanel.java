@@ -6,9 +6,7 @@ import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 
 class StudentEnrollmentPanel extends BasePanel {
 
@@ -17,7 +15,7 @@ class StudentEnrollmentPanel extends BasePanel {
     private final JTextField studentIdInput = new JTextField(9);
     private final JTextField studentNameInput = new JTextField(9);
     private final JButton enrollButton = new JButton("Enroll");
-    private final JLabel enrollLabel = new JLabel("Enroll new students");
+    private final JLabel enrollLabel = new JLabel("Enroll New Students");
     private final JLabel studentNameLabel = new JLabel("Student Name:");
     private final JLabel studentIDLabel = new JLabel("Student ID:");
 
@@ -45,6 +43,14 @@ class StudentEnrollmentPanel extends BasePanel {
     }
 
     private void focusEventListeners() {
+
+        //Backspace button event
+        studentIdInput.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE && studentIdInput.getText().isEmpty()) studentNameInput.requestFocusInWindow();
+            }
+        });
 
         //Enter button events
         studentNameInput.addActionListener(e -> {
@@ -79,7 +85,7 @@ class StudentEnrollmentPanel extends BasePanel {
         studentNameInput.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (studentNameInput.getText().equals("Empty Name!!!")) {
+                if (studentNameInput.getText().equals("Empty Name!!!") || studentNameInput.getText().isEmpty()) {
                     studentNameInput.setText("");
                     studentNameInput.setForeground(Color.BLACK);
                 }
