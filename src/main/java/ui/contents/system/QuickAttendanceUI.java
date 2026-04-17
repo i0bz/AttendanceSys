@@ -12,7 +12,7 @@ public class QuickAttendanceUI {
     private final String[] views = {"Attendance Selection", "Attendance Mode"};
 
     public QuickAttendanceUI() {
-        QuickAttendance attendanceMode = new QuickAttendance(mainPanel, cardLayout, views);
+        QuickAttendanceView attendanceMode = new QuickAttendanceView(mainPanel, cardLayout, views);
         QuickAttendanceSelection attendanceModeSelection = new QuickAttendanceSelection(mainPanel, cardLayout, views, attendanceMode);
 
 

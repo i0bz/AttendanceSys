@@ -14,8 +14,8 @@ public class AttendanceSystemUI {
     private final GridBagLayout layout = new GridBagLayout();
     private final JPanel mainPanel = new JPanel(layout);
     private final GridBagConstraints constraints = new GridBagConstraints();
-    private final AttendanceSelection attendanceSelection = new AttendanceSelection();
-    private final AttendanceSystem attendanceSystemTable = new AttendanceSystem();
+    private final AttendanceSelectionPanel attendanceSelection = new AttendanceSelectionPanel();
+    private final AttendanceSystemPanel attendanceSystemTable = new AttendanceSystemPanel();
 
 
     private int gapSize = 20;

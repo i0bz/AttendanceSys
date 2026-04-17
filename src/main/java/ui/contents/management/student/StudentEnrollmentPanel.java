@@ -11,7 +11,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-class EnrollForm extends BasePanel {
+class StudentEnrollmentPanel extends BasePanel {
 
     JTextField studentIdInput = new JTextField(9);
     JTextField studentNameInput = new JTextField(9);
@@ -20,7 +20,7 @@ class EnrollForm extends BasePanel {
     JLabel studentNameLabel = new JLabel("Student Name:");
     JLabel studentIDLabel = new JLabel("Student ID:");
 
-    EnrollForm() {
+    StudentEnrollmentPanel() {
 
         this.add(enrollLabel, constraints);
         this.add(studentNameLabel, constraints);

@@ -1,10 +1,10 @@
 package ui.contents.system;
 
 class SelectionMediator {
-    AttendanceSelection attendanceSelection;
-    AttendanceSystem attendanceSystem;
+    AttendanceSelectionPanel attendanceSelection;
+    AttendanceSystemPanel attendanceSystem;
 
-    SelectionMediator(AttendanceSelection attendanceSelection, AttendanceSystem attendanceSystem) {
+    SelectionMediator(AttendanceSelectionPanel attendanceSelection, AttendanceSystemPanel attendanceSystem) {
         this.attendanceSelection = attendanceSelection;
         this.attendanceSystem = attendanceSystem;
 

@@ -13,7 +13,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.Map;
 
-class AttendanceSystem extends BasePanel {
+class AttendanceSystemPanel extends BasePanel {
 
 
     private final String[] columnHeaders = {"Name:", "UID:", "Present:"};
@@ -32,7 +32,7 @@ class AttendanceSystem extends BasePanel {
 
     String event;
 
-    AttendanceSystem() {
+    AttendanceSystemPanel() {
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
         super.border = new CompoundBorder(super.line_border, super.padding);
         this.setBorder(border);

@@ -16,7 +16,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.Map;
 
-class StudentTable extends BasePanel {
+class StudentTablePanel extends BasePanel {
 
     private final String[] rowLabels = {"Name:", "UID:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(rowLabels,0) {
@@ -29,7 +29,7 @@ class StudentTable extends BasePanel {
     JScrollPane scrollPanel = new JScrollPane(tableView);
 
 
-    StudentTable() {
+    StudentTablePanel() {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         controller.addPropertyChangeListener(e -> refreshTableByName());
 

@@ -11,8 +11,8 @@ public class ManagementUI {
     private final GridBagLayout layout = new GridBagLayout();
     private final JPanel mainPanel = new JPanel(layout);
     private final GridBagConstraints constraints = new GridBagConstraints();
-    private final EnrollForm enrollForm = new EnrollForm();
-    private final StudentTable managementTable = new StudentTable();
+    private final StudentEnrollmentPanel enrollForm = new StudentEnrollmentPanel();
+    private final StudentTablePanel managementTable = new StudentTablePanel();
 
     private int gapSize = 20;
 

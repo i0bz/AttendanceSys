@@ -11,7 +11,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 
-class AttendanceCreationUI extends BasePanel {
+class AttendanceCreationPanel extends BasePanel {
 
     private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
     private final JLabel dateLabel = new JLabel("Date:");
@@ -22,7 +22,7 @@ class AttendanceCreationUI extends BasePanel {
 
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
-    AttendanceCreationUI() {
+    AttendanceCreationPanel() {
         this.add(descriptionLabel, constraints);
         this.add(dateLabel, constraints);
         this.add(dateInput, constraints);

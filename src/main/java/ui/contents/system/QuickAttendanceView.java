@@ -15,7 +15,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.NoSuchElementException;
 
-class QuickAttendance extends BasePanel {
+class QuickAttendanceView extends BasePanel {
     GridBagLayout dateInfoLayout = new GridBagLayout();
     GridBagLayout entryLayout = new GridBagLayout();
     JPanel activeDateInfo = new JPanel(dateInfoLayout);
@@ -38,7 +38,7 @@ class QuickAttendance extends BasePanel {
     JLabel quickAttendanceIcon = new JLabel(icon);
 
 
-    QuickAttendance(JPanel panel, CardLayout layout, String[] views) {
+    QuickAttendanceView(JPanel panel, CardLayout layout, String[] views) {
         parentCardLayout = layout;
         parentViews = views;
         parentPanel = panel;

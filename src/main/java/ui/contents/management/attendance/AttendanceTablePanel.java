@@ -16,7 +16,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.List;
 
-class AttendanceTable extends BasePanel {
+class AttendanceTablePanel extends BasePanel {
 
     private final String[] header = {"Event:","Date:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(header, 0) {
@@ -28,7 +28,7 @@ class AttendanceTable extends BasePanel {
     private final JTable table = new JTable(model);
     private final JScrollPane pane = new JScrollPane(table);
 
-    AttendanceTable() {
+    AttendanceTablePanel() {
         AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         controller.addPropertyChangeListener(e -> refreshTable());
 

@@ -26,7 +26,7 @@ class QuickAttendanceSelection extends BasePanel {
     String[] parentViews;
     CardLayout parentCardLayout;
 
-    QuickAttendance attendanceMode;
+    QuickAttendanceView attendanceMode;
     FlatSVGIcon icon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 128,128);
     JLabel quickAttendanceIcon = new JLabel(icon);
 
@@ -63,7 +63,7 @@ class QuickAttendanceSelection extends BasePanel {
         });
     }
 
-    QuickAttendanceSelection(JPanel panel, CardLayout layout, String[] views, QuickAttendance attendanceMode) {
+    QuickAttendanceSelection(JPanel panel, CardLayout layout, String[] views, QuickAttendanceView attendanceMode) {
         parentCardLayout = layout;
         parentViews = views;
         parentPanel = panel;
