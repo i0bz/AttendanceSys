@@ -7,8 +7,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import com.formdev.flatlaf.ui.FlatLineBorder;
-import ui.contents.exporter.ExporterUI;
-import ui.contents.importer.ImporterUI;
+import ui.contents.exporter.ExporterDialog;
+import ui.contents.importer.ImporterDialog;
 import ui.utility.ConstraintUtils;
 import ui.wrappers.ContentView;
 
@@ -169,8 +169,8 @@ public class NavigationBar {
             iterator++;
         }
 
-        buttons.get(4).addActionListener(e -> ImporterUI.showImportUI());
-        buttons.get(5).addActionListener(e -> ExporterUI.showExportUI());
+        buttons.get(4).addActionListener(e -> ImporterDialog.showImportUI());
+        buttons.get(5).addActionListener(e -> ExporterDialog.showExportUI());
     }
 
 

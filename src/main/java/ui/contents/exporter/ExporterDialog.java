@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
-public class ExporterUI {
+public class ExporterDialog {
 
     public static void showExportUI() {
         JFileChooser fileSelector = new JFileChooser();

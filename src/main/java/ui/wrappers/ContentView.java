@@ -1,6 +1,5 @@
 package ui.wrappers;
 
-import ui.contents.exporter.ExporterUI;
 import ui.contents.management.attendance.ManagementUI;
 import ui.contents.system.QuickAttendanceUI;
 import ui.contents.system.AttendanceSystemUI;

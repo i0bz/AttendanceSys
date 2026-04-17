@@ -8,7 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 
-public class ImporterUI {
+public class ImporterDialog {
 
     public static void showImportUI() {
         JFileChooser fileSelector = new JFileChooser();
