@@ -58,18 +58,6 @@ public class AttendanceService {
     public Map<String, LocalDate> queryEvents() {
         return registry.queryEvents();
     }
-    public AttendanceSheet getAttendance(String event) {
-        return registry.queryAttendance(event);
-    }
-    public Set<Student> getPresent(String event) {
-        AttendanceSheet sheet = registry.queryAttendance(event);
-        return roster.queryRoster()
-                .entrySet()
-                .stream()
-                .filter(entry -> sheet.presentIdSet().contains(entry.getKey()))
-                .map(Map.Entry::getValue)
-                .collect(Collectors.toCollection(HashSet::new));
-    }
 
 
 }

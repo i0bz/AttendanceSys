@@ -1,12 +1,7 @@
 
 package controllers;
-//TODO remove unused
-
-//Domains
-import entity.AttendanceSheet;
 
 //Services
-import entity.Student;
 import services.*;
 
 //Utilities
@@ -93,40 +88,12 @@ public class AttendanceSystemController {
                         .toMap(Map.Entry::getKey,
                                 entry -> ParseUtility.unparseUID(entry.getValue().uid()))));
     }
-    public SortedMap<String, String> getAllStudentsById() {
-        return new TreeMap<>(studentManagement.getAllStudentsByID()
-                .entrySet()
-                .stream()
-                .collect(Collectors
-                        .toMap(entry -> ParseUtility.unparseUID(entry.getKey()),
-                                entry -> entry.getValue().name())));
-    }
     public String getStudentName(String uid) {
         return studentManagement.getStudentName(ParseUtility.parseUID(uid));
     }
 
 
-    //Querying (Attendance specific)
-    public Set<String> attendancePresentIdSet(String event) {
-        Set<Student> present  = attendanceService.getPresent(event);
-        return present
-                .stream()
-                .map(student -> ParseUtility.unparseUID(student.uid()))
-                .collect(Collectors.toCollection(TreeSet::new));
-    }
-    public Map<String, String> attendancePresentList(String event) {
-        Set<Student> present = attendanceService.getPresent(event);
-        return present
-                .stream()
-                .collect(Collectors.toMap(student -> ParseUtility.unparseUID(student.uid()), Student::name));
-    }
-
-
     //Querying (Registry)
-    public AttendanceSheet queryAttendance(String event) {
-        return attendanceService.getAttendance(event);
-    }
-
     public List<String> attendanceDateList() {
         return attendanceService.getDates()
                 .stream()
