@@ -16,20 +16,30 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class NavigationBar {
+
     //Panel and Layout
     private final GridBagLayout layout = new GridBagLayout();
     private final JPanel mainPanel = new JPanel(layout);
     private final GridBagConstraints constraints = new GridBagConstraints();
 
-    //Buttons
+    //Border
+    private final Color borderColor = Color.decode("#cecfd1");
+    private final MatteBorder lineBorder = BorderFactory.createMatteBorder(0,0,0,1, borderColor);
+    private final EmptyBorder padding = new EmptyBorder(10,10,10,10);
+    private final CompoundBorder border = new CompoundBorder(lineBorder, padding);
+
+
+    //Buttons and configs
     private final String[] labels;
     private final ArrayList<JButton> buttons = new ArrayList<>();
     private final FlatLineBorder buttonBorders = new FlatLineBorder(new Insets(10,10,10,10), null, 0, 15);
 
+    private final Insets buttonGaps = new Insets(0,0,10,0);
+    private final String buttonArc = "arc: 15";
+    private JButton latestClickedBtn;
 
     //button icons
     int iconSize = 35;
-
     private final FlatSVGIcon studentManagementIcon = new FlatSVGIcon("images/calendar-user-svgrepo-com.svg", iconSize, iconSize);
     private final FlatSVGIcon attendanceManagementIcon = new FlatSVGIcon("images/calendar-plus-alt-svgrepo-com.svg", iconSize, iconSize);
     private final FlatSVGIcon systemIcon = new FlatSVGIcon("images/calendar-lines-pen-svgrepo-com.svg", iconSize, iconSize);
@@ -39,20 +49,8 @@ public class NavigationBar {
     private final FlatSVGIcon[] icons = {studentManagementIcon, attendanceManagementIcon, systemIcon, quickAttendanceIcon, importIcon, exportIcon};
 
 
-    //Border
-    private final Color borderColor = Color.decode("#cecfd1");
-    private final MatteBorder lineBorder = BorderFactory.createMatteBorder(0,0,0,1, borderColor);
-    private final EmptyBorder padding = new EmptyBorder(10,10,10,10);
-    private final CompoundBorder border = new CompoundBorder(lineBorder, padding);
-
-    //Button
-    private final Insets buttonGaps = new Insets(0,0,10,0);
-    private final String buttonArc = "arc: 15";
-    private JButton latestClickedBtn;
-    
-    //External Shits
+    //Dependency Injected shits
     private final ContentView contents;
-
 
 
     public NavigationBar(ContentView contents) {
@@ -62,34 +60,39 @@ public class NavigationBar {
     }
 
 
-    private void recolorButtons(JButton inputSource){
-        if (latestClickedBtn == null || !(latestClickedBtn.equals(inputSource))) {
-            latestClickedBtn = inputSource;
 
-            for (FlatSVGIcon icon : icons) {
-                icon.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.BLACK));
-            }
-            int i = 0;
-            for (JButton button : buttons) {
-                if (button.equals(inputSource))
-                    icons[i].setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
-                button.setForeground(Color.BLACK);
-                button.setBackground(Color.decode("#f2f2f2"));
-
-                i++;
-            }
-
-            inputSource.setForeground(Color.WHITE);
-            inputSource.setBackground(Color.decode("#006B3C"));
-
-            mainPanel.validate();
-            mainPanel.repaint();
+    //Component creation
+    private void createButtons() {
+        for(String label : labels) {
+            buttons.add(new JButton(label));
+        }
+        for (JButton button : buttons) {
+            button.putClientProperty("FlatLaf.styleClass", "h3");
+            button.putClientProperty("FlatLaf.style", buttonArc);
+            button.setHorizontalAlignment(SwingConstants.LEFT);
+            button.setBorder(buttonBorders);
+            button.setFocusPainted(false);
+            mainPanel.add(button, constraints);
+        }
+        buttons.getFirst().setForeground(Color.WHITE);
+        buttons.getFirst().setBackground(Color.decode("#006B3C"));
+        icons[0].setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
+    }
+    private void initBtnListeners() {
+        int iterator = 0;
+        for (JButton button : buttons) {
+            int index = iterator;
+            if (iterator == 4) continue;
+            button.addActionListener( e -> {
+                swapCards(index);
+                recolorButtons((JButton) e.getSource());
+            });
+            iterator++;
         }
 
-
+        buttons.get(4).addActionListener(e -> ImporterDialog.showImportUI());
+        buttons.get(5).addActionListener(e -> ExporterDialog.showExportUI());
     }
-
-
     private void drawComponents() {
 
         mainPanel.setBorder(border);
@@ -135,45 +138,40 @@ public class NavigationBar {
 
     }
 
-    private void createButtons() {
-        for(String label : labels) {
-            buttons.add(new JButton(label));
-        }
-        for (JButton button : buttons) {
-            button.putClientProperty("FlatLaf.styleClass", "h3");
-            button.putClientProperty("FlatLaf.style", buttonArc);
-            button.setHorizontalAlignment(SwingConstants.LEFT);
-            button.setBorder(buttonBorders);
-            button.setFocusPainted(false);
-            mainPanel.add(button, constraints);
-        }
-        buttons.getFirst().setForeground(Color.WHITE);
-        buttons.getFirst().setBackground(Color.decode("#006B3C"));
-        icons[0].setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
-    }
 
-
+    //Button events actions
     private void swapCards(int iterator) {
         contents.getCardLayout().show(contents.getPanel(), buttons.get(iterator).getText());
     }
+    private void recolorButtons(JButton inputSource){
+        if (latestClickedBtn == null || !(latestClickedBtn.equals(inputSource))) {
+            latestClickedBtn = inputSource;
 
-    private void initBtnListeners() {
-        int iterator = 0;
-        for (JButton button : buttons) {
-            int index = iterator;
-            if (iterator == 4) continue;
-            button.addActionListener( e -> {
-                swapCards(index);
-                recolorButtons((JButton) e.getSource());
-            });
-            iterator++;
+            for (FlatSVGIcon icon : icons) {
+                icon.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.BLACK));
+            }
+            int i = 0;
+            for (JButton button : buttons) {
+                if (button.equals(inputSource))
+                    icons[i].setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
+                button.setForeground(Color.BLACK);
+                button.setBackground(Color.decode("#f2f2f2"));
+
+                i++;
+            }
+
+            inputSource.setForeground(Color.WHITE);
+            inputSource.setBackground(Color.decode("#006B3C"));
+
+            mainPanel.validate();
+            mainPanel.repaint();
         }
 
-        buttons.get(4).addActionListener(e -> ImporterDialog.showImportUI());
-        buttons.get(5).addActionListener(e -> ExporterDialog.showExportUI());
+
     }
 
 
+    //getter
     public JPanel getPanel() {
         return  mainPanel;
     }

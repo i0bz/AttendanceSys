@@ -10,7 +10,6 @@ public class AttTableBtnEditor extends TableBtnEditor {
 
     public AttTableBtnEditor(JCheckBox checkBox) {
         super(checkBox);
-
         button.addActionListener(e -> {
             String event = table.getValueAt(row, 0).toString();
             ControllerBootstrapSingleton.getController().removeAttendance(event);

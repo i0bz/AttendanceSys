@@ -2,6 +2,8 @@ package ui.utility;
 
 import java.awt.*;
 
+
+// GridBagConstraint Manipulation utility class
 public class ConstraintUtils {
     public static void setCoords(GridBagConstraints constraints, int x, int y) {
         constraints.gridx = x;
