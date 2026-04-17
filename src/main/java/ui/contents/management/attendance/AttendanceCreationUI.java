@@ -1,9 +1,8 @@
 package ui.contents.management.attendance;
 
-import com.formdev.flatlaf.ui.FlatLineBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -12,7 +11,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 
-class AttendanceCreationUI extends Panel {
+class AttendanceCreationUI extends BasePanel {
 
     private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
     private final JLabel dateLabel = new JLabel("Date:");

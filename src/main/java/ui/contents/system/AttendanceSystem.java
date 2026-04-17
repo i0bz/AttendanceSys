@@ -3,7 +3,7 @@ package ui.contents.system;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -13,7 +13,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.Map;
 
-class AttendanceSystem extends Panel {
+class AttendanceSystem extends BasePanel {
 
 
     private final String[] columnHeaders = {"Name:", "UID:", "Present:"};

@@ -3,7 +3,7 @@ package ui.contents.management.student;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 import ui.contents.components.StudTableBtnEditor;
 import ui.contents.components.StudTableBtnRenderer;
 import ui.utility.ConstraintUtils;
@@ -16,7 +16,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.Map;
 
-class StudentTable extends Panel {
+class StudentTable extends BasePanel {
 
     private final String[] rowLabels = {"Name:", "UID:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(rowLabels,0) {

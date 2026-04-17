@@ -10,7 +10,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 
-public class Panel {
+public class BasePanel {
     protected GridBagLayout layout = new GridBagLayout();
     protected JPanel mainPanel = new JPanel(layout);
     protected GridBagConstraints constraints = new GridBagConstraints();
@@ -37,7 +37,7 @@ public class Panel {
         });
     }
 
-    protected Panel() {
+    protected BasePanel() {
         mainPanel.setBorder(border);
     }
 }

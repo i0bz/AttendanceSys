@@ -3,7 +3,7 @@ package ui.contents.system;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -15,7 +15,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.NoSuchElementException;
 
-class QuickAttendance extends Panel {
+class QuickAttendance extends BasePanel {
     GridBagLayout dateInfoLayout = new GridBagLayout();
     GridBagLayout entryLayout = new GridBagLayout();
     JPanel activeDateInfo = new JPanel(dateInfoLayout);

@@ -1,7 +1,7 @@
 package ui.contents.system;
 
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
-class AttendanceSelection extends Panel {
+class AttendanceSelection extends BasePanel {
     private final JLabel description = new JLabel("Attendance Mode");
     private final Vector<String> eventList = new Vector<>();
     private final JComboBox<String> eventOptions = new JComboBox<>(eventList);

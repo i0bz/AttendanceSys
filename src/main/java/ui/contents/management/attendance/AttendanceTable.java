@@ -5,7 +5,7 @@ import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.AttTableBtnEditor;
 import ui.contents.components.AttTableBtnRenderer;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -16,7 +16,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.List;
 
-class AttendanceTable extends Panel {
+class AttendanceTable extends BasePanel {
 
     private final String[] header = {"Event:","Date:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(header, 0) {

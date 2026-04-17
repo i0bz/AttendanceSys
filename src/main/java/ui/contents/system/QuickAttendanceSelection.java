@@ -3,7 +3,7 @@ package ui.contents.system;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.awt.event.ComponentEvent;
 import java.util.List;
 import java.util.Vector;
 
-class QuickAttendanceSelection extends Panel {
+class QuickAttendanceSelection extends BasePanel {
 
     Vector<String> eventList = new Vector<>();
     JComboBox<String> eventOptions = new JComboBox<>(eventList);

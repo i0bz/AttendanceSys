@@ -2,7 +2,7 @@ package ui.contents.management.student;
 
 import controllers.AttendanceSystemController;
 import controllers.ControllerBootstrapSingleton;
-import ui.contents.components.Panel;
+import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-class EnrollForm extends Panel {
+class EnrollForm extends BasePanel {
 
     JTextField studentIdInput = new JTextField(9);
     JTextField studentNameInput = new JTextField(9);
