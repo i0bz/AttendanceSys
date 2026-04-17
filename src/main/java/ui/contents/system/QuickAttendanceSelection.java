@@ -124,9 +124,7 @@ class QuickAttendanceSelection extends BasePanel {
 
     private void actionHandlers() {
 
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> {
-            refreshDates();
-        });
+        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> refreshDates());
 
         eventOptions.addActionListener(e -> {
             if (eventOptions.getSelectedItem().equals("Select Attendance")) return;
