@@ -7,7 +7,6 @@ import services.SaveStateTracker;
 import services.StudentService;
 import utility.Persist;
 
-//TODO rewrite code base to no longer depend on this singleton
 
 public class ControllerBootstrap {
     public final StudentRoster roster;
@@ -31,10 +30,6 @@ public class ControllerBootstrap {
         Persist.saveRegistry(registry);
 
     }
-
-//    public static AttendanceSystemController getController() {
-//        return Holder.CONTROLLER_INSTANCE;
-//    }
 }
 
 
