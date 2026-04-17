@@ -2,7 +2,6 @@ package ui.contents.system;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
-import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.BasePanel;
 
 import javax.swing.*;
@@ -14,7 +13,7 @@ import java.awt.*;
 import java.util.Map;
 
 class AttendanceSystemPanel extends BasePanel {
-
+    private final AttendanceSystemController controller;
 
     private final String[] columnHeaders = {"Name:", "UID:", "Present:"};
     private final DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) {
@@ -32,7 +31,8 @@ class AttendanceSystemPanel extends BasePanel {
 
     String event;
 
-    AttendanceSystemPanel() {
+    AttendanceSystemPanel(AttendanceSystemController controller) {
+        this.controller = controller;
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
         super.border = new CompoundBorder(super.line_border, super.padding);
         this.setBorder(border);
@@ -44,7 +44,7 @@ class AttendanceSystemPanel extends BasePanel {
     }
 
     private void addEventHandlers() {
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> refreshTable(event));
+        controller.addPropertyChangeListener(e -> refreshTable(event));
 
         model.addTableModelListener(e -> {
             if (e.getType() != TableModelEvent.UPDATE) return;
@@ -55,7 +55,7 @@ class AttendanceSystemPanel extends BasePanel {
             DefaultTableModel model = (DefaultTableModel) e.getSource();
             String uid = (String) model.getValueAt(row, 1);
 
-            ControllerBootstrapSingleton.getController().toggleAttendance(uid, event);
+            controller.toggleAttendance(uid, event);
 
         });
     }
@@ -94,7 +94,6 @@ class AttendanceSystemPanel extends BasePanel {
     }
 
     public void refreshTable(String date) {
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         Map<String, String> students = controller.getAllStudentsByName();
 
         if (date == null || date.equals("Select Attendance")) {

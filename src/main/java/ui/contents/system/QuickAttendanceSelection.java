@@ -2,7 +2,7 @@ package ui.contents.system;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
-import controllers.ControllerBootstrapSingleton;
+import controllers.AttendanceSystemController;
 import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
@@ -15,20 +15,21 @@ import java.util.List;
 import java.util.Vector;
 
 class QuickAttendanceSelection extends BasePanel {
+    private final AttendanceSystemController controller;
 
-    Vector<String> eventList = new Vector<>();
-    JComboBox<String> eventOptions = new JComboBox<>(eventList);
-    JLabel description = new JLabel("Select Attendance Sheet");
-    GridBagLayout wrapperLayout = new GridBagLayout();
-    JPanel wrapper = new JPanel(wrapperLayout);
+    private final Vector<String> eventList = new Vector<>();
+    private final JComboBox<String> eventOptions = new JComboBox<>(eventList);
+    private final JLabel description = new JLabel("Select Attendance Sheet");
+    private final GridBagLayout wrapperLayout = new GridBagLayout();
+    private final JPanel wrapper = new JPanel(wrapperLayout);
 
-    JPanel parentPanel;
-    String[] parentViews;
-    CardLayout parentCardLayout;
+    private final JPanel parentPanel;
+    private final String[] parentViews;
+    private final CardLayout parentCardLayout;
 
-    QuickAttendanceView attendanceMode;
-    FlatSVGIcon icon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 128,128);
-    JLabel quickAttendanceIcon = new JLabel(icon);
+    private final QuickAttendanceView attendanceMode;
+    private final FlatSVGIcon icon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 128,128);
+    private final JLabel quickAttendanceIcon = new JLabel(icon);
 
 
 
@@ -63,7 +64,9 @@ class QuickAttendanceSelection extends BasePanel {
         });
     }
 
-    QuickAttendanceSelection(JPanel panel, CardLayout layout, String[] views, QuickAttendanceView attendanceMode) {
+
+    QuickAttendanceSelection(AttendanceSystemController controller, JPanel panel, CardLayout layout, String[] views, QuickAttendanceView attendanceMode) {
+        this.controller = controller;
         parentCardLayout = layout;
         parentViews = views;
         parentPanel = panel;
@@ -124,7 +127,7 @@ class QuickAttendanceSelection extends BasePanel {
 
     private void actionHandlers() {
 
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> refreshDates());
+        controller.addPropertyChangeListener(e -> refreshDates());
 
         eventOptions.addActionListener(e -> {
             if (eventOptions.getSelectedItem().equals("Select Attendance")) return;
@@ -137,7 +140,7 @@ class QuickAttendanceSelection extends BasePanel {
     }
 
     private void refreshDates() {
-        List<String> refreshedEventList = ControllerBootstrapSingleton.getController().attendanceEventList();
+        List<String> refreshedEventList = controller.attendanceEventList();
 
         eventList.clear();
         eventList.add("Select Attendance");

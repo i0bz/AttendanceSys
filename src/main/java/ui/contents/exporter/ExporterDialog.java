@@ -1,14 +1,20 @@
 package ui.contents.exporter;
 
-import controllers.ControllerBootstrapSingleton;
+import controllers.AttendanceSystemController;
+import controllers.ControllerBootstrap;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
 public class ExporterDialog {
+    private final AttendanceSystemController controller;
 
-    public static void showExportUI() {
+    public ExporterDialog(AttendanceSystemController controller) {
+        this.controller = controller;
+    }
+
+    public void showExportUI() {
         JFileChooser fileSelector = new JFileChooser();
         fileSelector.setDialogTitle("Choose Excel Save Path");
 
@@ -21,7 +27,7 @@ public class ExporterDialog {
             file = new File(file.getAbsolutePath() + ".xlsx");
 
         try {
-            ControllerBootstrapSingleton.getController().exportFile(file);
+            controller.exportFile(file);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Unable to save file!", "IO error", JOptionPane.ERROR_MESSAGE);
         }

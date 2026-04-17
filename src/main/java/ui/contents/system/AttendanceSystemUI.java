@@ -1,6 +1,7 @@
 package ui.contents.system;
 
 
+import controllers.AttendanceSystemController;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -14,15 +15,17 @@ public class AttendanceSystemUI {
     private final GridBagLayout layout = new GridBagLayout();
     private final JPanel mainPanel = new JPanel(layout);
     private final GridBagConstraints constraints = new GridBagConstraints();
-    private final AttendanceSelectionPanel attendanceSelection = new AttendanceSelectionPanel();
-    private final AttendanceSystemPanel attendanceSystemTable = new AttendanceSystemPanel();
+    private final AttendanceSelectionPanel attendanceSelection;
+    private final AttendanceSystemPanel attendanceSystemTable;
 
 
     private int gapSize = 20;
 
-    public AttendanceSystemUI() {
-        final SelectionMediator mediator = new SelectionMediator(attendanceSelection, attendanceSystemTable);
+    public AttendanceSystemUI(AttendanceSystemController controller) {
+        attendanceSelection = new AttendanceSelectionPanel(controller);
+        attendanceSystemTable = new AttendanceSystemPanel(controller);
 
+        final SelectionMediator mediator = new SelectionMediator(attendanceSelection, attendanceSystemTable);
         mainPanel.add(attendanceSelection, constraints);
         mainPanel.add(attendanceSystemTable, constraints);
 

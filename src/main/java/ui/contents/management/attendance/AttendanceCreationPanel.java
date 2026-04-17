@@ -1,7 +1,6 @@
 package ui.contents.management.attendance;
 
 import controllers.AttendanceSystemController;
-import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
@@ -12,6 +11,7 @@ import java.awt.event.FocusListener;
 
 
 class AttendanceCreationPanel extends BasePanel {
+    private final AttendanceSystemController controller;
 
     private final JLabel descriptionLabel = new JLabel("Add New Attendance Date:");
     private final JLabel dateLabel = new JLabel("Date:");
@@ -22,7 +22,8 @@ class AttendanceCreationPanel extends BasePanel {
 
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
-    AttendanceCreationPanel() {
+    AttendanceCreationPanel(AttendanceSystemController controller) {
+        this.controller = controller;
         this.add(descriptionLabel, constraints);
         this.add(dateLabel, constraints);
         this.add(dateInput, constraints);
@@ -77,7 +78,6 @@ class AttendanceCreationPanel extends BasePanel {
     }
 
     private void createAttendance() {
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         String dateInputText = dateInput.getText();
         String eventInputText = eventNameInput.getText();
         try {

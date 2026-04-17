@@ -1,6 +1,6 @@
 package ui.contents.system;
 
-import controllers.ControllerBootstrapSingleton;
+import controllers.AttendanceSystemController;
 import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
@@ -11,12 +11,15 @@ import java.util.List;
 import java.util.Vector;
 
 class AttendanceSelectionPanel extends BasePanel {
+    private final AttendanceSystemController controller;
+
     private final JLabel description = new JLabel("Attendance Mode");
     private final Vector<String> eventList = new Vector<>();
     private final JComboBox<String> eventOptions = new JComboBox<>(eventList);
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
-    AttendanceSelectionPanel() {
+    AttendanceSelectionPanel(AttendanceSystemController controller) {
+        this.controller = controller;
         this.add(description, constraints);
         this.add(eventOptions, constraints);
         this.add(horizontalGlue, constraints);
@@ -24,7 +27,7 @@ class AttendanceSelectionPanel extends BasePanel {
         dynamicPadding();
         drawComponents();
         refreshEvents();
-        ControllerBootstrapSingleton.getController().addPropertyChangeListener(e -> refreshEvents());
+        controller.addPropertyChangeListener(e -> refreshEvents());
     }
 
 
@@ -54,7 +57,7 @@ class AttendanceSelectionPanel extends BasePanel {
     }
 
     private void refreshEvents() {
-        List<String> registryEventList = ControllerBootstrapSingleton.getController().attendanceEventList();
+        List<String> registryEventList = controller.attendanceEventList();
         eventList.clear();
         eventList.add("Select Attendance");
         registryEventList.forEach(eventList::addLast);

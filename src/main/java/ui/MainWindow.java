@@ -1,6 +1,7 @@
 package ui;
 
-import controllers.ControllerBootstrapSingleton;
+import controllers.AttendanceSystemController;
+import controllers.ControllerBootstrap;
 import ui.wrappers.Container;
 
 import javax.swing.*;
@@ -17,11 +18,10 @@ class Config {
 
 
 public class MainWindow {
-    JFrame mainFrame;
 
-    public MainWindow() {
+    public MainWindow(ControllerBootstrap bootstrap) {
+        JFrame mainFrame = new JFrame();
 
-        mainFrame = new JFrame();
         //configure
         mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainFrame.setSize(Config.width, Config.height);
@@ -30,7 +30,7 @@ public class MainWindow {
         mainFrame.setLayout(new BorderLayout());
 
         //Content wrappers
-        Container contents = new Container();
+        Container contents = new Container(bootstrap.controller);
         mainFrame.add(contents.getPanel(), BorderLayout.CENTER);
 
 
@@ -39,7 +39,7 @@ public class MainWindow {
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ControllerBootstrapSingleton.getInstance().saveData();
+                bootstrap.saveData();
                 System.exit(0);
             }
         });

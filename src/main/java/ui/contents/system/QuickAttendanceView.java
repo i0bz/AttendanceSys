@@ -2,7 +2,7 @@ package ui.contents.system;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
-import controllers.ControllerBootstrapSingleton;
+import controllers.AttendanceSystemController;
 import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
@@ -16,29 +16,32 @@ import java.awt.event.FocusListener;
 import java.util.NoSuchElementException;
 
 class QuickAttendanceView extends BasePanel {
-    GridBagLayout dateInfoLayout = new GridBagLayout();
-    GridBagLayout entryLayout = new GridBagLayout();
-    JPanel activeDateInfo = new JPanel(dateInfoLayout);
-    JPanel attendanceEntry = new JPanel(entryLayout);
+    private final AttendanceSystemController controller;
 
-    JLabel activeDate = new JLabel("");
-    JButton changeDateBtn = new JButton("Change");
-    JLabel description = new JLabel("Quick Attendance Entry");
-    JLabel inputDescription = new JLabel("Enter Student UID:");
-    JTextField inputField = new JTextField();
-    JButton markPresentBtn = new JButton("Mark Present");
+    private final GridBagLayout dateInfoLayout = new GridBagLayout();
+    private final GridBagLayout entryLayout = new GridBagLayout();
+    private final JPanel activeDateInfo = new JPanel(dateInfoLayout);
+    private final JPanel attendanceEntry = new JPanel(entryLayout);
+
+    final JLabel activeDate = new JLabel("");
+    private final JButton changeDateBtn = new JButton("Change");
+    private final JLabel description = new JLabel("Quick Attendance Entry");
+    private final JLabel inputDescription = new JLabel("Enter Student UID:");
+    private final JTextField inputField = new JTextField();
+    private final JButton markPresentBtn = new JButton("Mark Present");
 
     String currentDate = "";
 
-    JPanel parentPanel;
-    String[] parentViews;
-    CardLayout parentCardLayout;
+    private final JPanel parentPanel;
+    private final String[] parentViews;
+    private final CardLayout parentCardLayout;
 
-    FlatSVGIcon icon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 128,128);
-    JLabel quickAttendanceIcon = new JLabel(icon);
+    private final FlatSVGIcon icon = new FlatSVGIcon("images/calendar-check-svgrepo-com.svg", 128,128);
+    private final JLabel quickAttendanceIcon = new JLabel(icon);
 
 
-    QuickAttendanceView(JPanel panel, CardLayout layout, String[] views) {
+    QuickAttendanceView(AttendanceSystemController controller, JPanel panel, CardLayout layout, String[] views) {
+        this.controller = controller;
         parentCardLayout = layout;
         parentViews = views;
         parentPanel = panel;
@@ -190,7 +193,7 @@ class QuickAttendanceView extends BasePanel {
     private void markPresent() {
         String uid = inputField.getText();
         try {
-            ControllerBootstrapSingleton.getController().markPresent(uid, currentDate);
+            controller.markPresent(uid, currentDate);
         } catch (NoSuchElementException e) {
             inputField.setText("Student not enrolled!");
             inputField.setForeground(Color.RED);
@@ -202,7 +205,7 @@ class QuickAttendanceView extends BasePanel {
             inputField.getParent().requestFocusInWindow();
             return;
         }
-        JOptionPane.showMessageDialog(null, "Welcome " + ControllerBootstrapSingleton.getController().getStudentName(uid));
+        JOptionPane.showMessageDialog(null, "Welcome " + controller.getStudentName(uid));
         inputField.setText("");
     }
 

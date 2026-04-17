@@ -1,5 +1,6 @@
 package ui.contents.management.student;
 
+import controllers.AttendanceSystemController;
 import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
@@ -8,15 +9,19 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 public class ManagementUI {
+
     private final GridBagLayout layout = new GridBagLayout();
     private final JPanel mainPanel = new JPanel(layout);
     private final GridBagConstraints constraints = new GridBagConstraints();
-    private final StudentEnrollmentPanel enrollForm = new StudentEnrollmentPanel();
-    private final StudentTablePanel managementTable = new StudentTablePanel();
+    private final StudentEnrollmentPanel enrollForm;
+    private final StudentTablePanel managementTable;
 
     private int gapSize = 20;
 
-    public ManagementUI() {
+    public ManagementUI(AttendanceSystemController controller) {
+        enrollForm = new StudentEnrollmentPanel(controller);
+        managementTable = new StudentTablePanel(controller);
+
         mainPanel.add(enrollForm, constraints);
         mainPanel.add(managementTable, constraints);
 

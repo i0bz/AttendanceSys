@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import com.formdev.flatlaf.ui.FlatLineBorder;
+import controllers.AttendanceSystemController;
 import ui.contents.exporter.ExporterDialog;
 import ui.contents.importer.ImporterDialog;
 import ui.utility.ConstraintUtils;
@@ -16,6 +17,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class NavigationBar {
+    private AttendanceSystemController controller;
+
 
     //Panel and Layout
     private final GridBagLayout layout = new GridBagLayout();
@@ -53,7 +56,12 @@ public class NavigationBar {
     private final ContentView contents;
 
 
-    public NavigationBar(ContentView contents) {
+    //Export Import dialogs
+    private final ExporterDialog exporterDialog = new ExporterDialog(controller);
+    private final ImporterDialog importerDialog = new ImporterDialog(controller);
+
+    public NavigationBar(AttendanceSystemController controller, ContentView contents) {
+        this.controller = controller;
         this.contents = contents;
         labels = contents.getContainerNames();
         drawComponents();
@@ -90,8 +98,8 @@ public class NavigationBar {
             iterator++;
         }
 
-        buttons.get(4).addActionListener(e -> ImporterDialog.showImportUI());
-        buttons.get(5).addActionListener(e -> ExporterDialog.showExportUI());
+        buttons.get(4).addActionListener(e -> importerDialog.showImportUI());
+        buttons.get(5).addActionListener(e -> exporterDialog.showExportUI());
     }
     private void drawComponents() {
 

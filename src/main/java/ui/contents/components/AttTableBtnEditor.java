@@ -2,17 +2,18 @@ package ui.contents.components;
 
 import javax.swing.*;
 
-import controllers.ControllerBootstrapSingleton;
+import controllers.AttendanceSystemController;
+import controllers.ControllerBootstrap;
 
 import java.awt.*;
 
 public class AttTableBtnEditor extends TableBtnEditor {
 
-    public AttTableBtnEditor(JCheckBox checkBox) {
+    public AttTableBtnEditor(JCheckBox checkBox, AttendanceSystemController controller) {
         super(checkBox);
         button.addActionListener(e -> {
             String event = table.getValueAt(row, 0).toString();
-            ControllerBootstrapSingleton.getController().removeAttendance(event);
+            controller.removeAttendance(event);
         });
     }
 

@@ -1,21 +1,33 @@
 import com.formdev.flatlaf.FlatLightLaf;
-import controllers.ControllerBootstrapSingleton;
-import controllers.AttendanceSystemController;
 
+import controllers.ControllerBootstrap;
+import repository.AttendanceRegistry;
+import repository.StudentRoster;
+import services.SaveStateTracker;
 import ui.MainWindow;
+import utility.Persist;
 import utility.PersistenceFlusher;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class  Main {
-    static void main(String[] args) {
 
-        PersistenceFlusher.startDaemon();
+    static void main(String[] args) {
+        StudentRoster roster = Persist.loadRoster();
+        AttendanceRegistry registry = Persist.loadRegistry();
+
+        ControllerBootstrap bootstrap = new ControllerBootstrap(roster, registry);
+
+
+
+
+
+        PersistenceFlusher.startDaemon(bootstrap);
 
         FlatLightLaf.setup();
         initializeTheme();
-        SwingUtilities.invokeLater(MainWindow::new);
+        SwingUtilities.invokeLater(() -> new MainWindow(bootstrap));
 
 
     }

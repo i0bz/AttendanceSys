@@ -2,7 +2,6 @@ package ui.contents.management.student;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
-import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.BasePanel;
 import ui.contents.components.StudTableBtnEditor;
 import ui.contents.components.StudTableBtnRenderer;
@@ -17,6 +16,8 @@ import java.awt.*;
 import java.util.Map;
 
 class StudentTablePanel extends BasePanel {
+    private final AttendanceSystemController controller;
+
 
     private final String[] rowLabels = {"Name:", "UID:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(rowLabels,0) {
@@ -29,8 +30,8 @@ class StudentTablePanel extends BasePanel {
     JScrollPane scrollPanel = new JScrollPane(tableView);
 
 
-    StudentTablePanel() {
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
+    StudentTablePanel(AttendanceSystemController controller) {
+        this.controller = controller;
         controller.addPropertyChangeListener(e -> refreshTableByName());
 
         super.padding = new FlatEmptyBorder(0,0,0,0);
@@ -46,13 +47,13 @@ class StudentTablePanel extends BasePanel {
 
 
     private void refreshTableByName() {
-        Map<String, String> rosterMap = ControllerBootstrapSingleton.getController().getAllStudentsByName();
+        Map<String, String> rosterMap = controller.getAllStudentsByName();
 
         model.setRowCount(0);
         rosterMap.forEach((key, value) -> model.addRow(new Object[]{key, value, "Drop"}));
 
         tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
-        tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox()));
+        tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox(), controller));
 
     }
 

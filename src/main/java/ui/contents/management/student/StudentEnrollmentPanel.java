@@ -1,7 +1,6 @@
 package ui.contents.management.student;
 
 import controllers.AttendanceSystemController;
-import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.BasePanel;
 import ui.utility.ConstraintUtils;
 
@@ -13,14 +12,17 @@ import java.awt.event.FocusListener;
 
 class StudentEnrollmentPanel extends BasePanel {
 
-    JTextField studentIdInput = new JTextField(9);
-    JTextField studentNameInput = new JTextField(9);
-    JButton enrollButton = new JButton("Enroll");
-    JLabel enrollLabel = new JLabel("Enroll new students");
-    JLabel studentNameLabel = new JLabel("Student Name:");
-    JLabel studentIDLabel = new JLabel("Student ID:");
+    private final AttendanceSystemController controller;
 
-    StudentEnrollmentPanel() {
+    private final JTextField studentIdInput = new JTextField(9);
+    private final JTextField studentNameInput = new JTextField(9);
+    private final JButton enrollButton = new JButton("Enroll");
+    private final JLabel enrollLabel = new JLabel("Enroll new students");
+    private final JLabel studentNameLabel = new JLabel("Student Name:");
+    private final JLabel studentIDLabel = new JLabel("Student ID:");
+
+    StudentEnrollmentPanel(AttendanceSystemController controller) {
+        this.controller = controller;
 
         this.add(enrollLabel, constraints);
         this.add(studentNameLabel, constraints);
@@ -87,7 +89,6 @@ class StudentEnrollmentPanel extends BasePanel {
     }
 
     private void enrollingStudent() {
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
         String studId = studentIdInput.getText();
         String name = studentNameInput.getText();
 

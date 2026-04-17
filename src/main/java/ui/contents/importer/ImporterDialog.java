@@ -1,7 +1,8 @@
 package ui.contents.importer;
 
 
-import controllers.ControllerBootstrapSingleton;
+import controllers.AttendanceSystemController;
+import controllers.ControllerBootstrap;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -9,8 +10,14 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImporterDialog {
+    private final AttendanceSystemController controller;
 
-    public static void showImportUI() {
+    public ImporterDialog(AttendanceSystemController controller) {
+        this.controller = controller;
+    }
+
+
+    public void showImportUI() {
         JFileChooser fileSelector = new JFileChooser();
         FileNameExtensionFilter fileNameExtensionFilter = new FileNameExtensionFilter("Excel file types", "xlsx", "xls");
         fileSelector.setFileFilter(fileNameExtensionFilter);
@@ -22,7 +29,7 @@ public class ImporterDialog {
         File file = fileSelector.getSelectedFile();
 
         try {
-            ControllerBootstrapSingleton.getController().importAttendances(file);
+            controller.importAttendances(file);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Unable to load file!", "IO error", JOptionPane.ERROR_MESSAGE);
         }

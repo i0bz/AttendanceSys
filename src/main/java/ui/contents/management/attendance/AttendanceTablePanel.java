@@ -2,7 +2,6 @@ package ui.contents.management.attendance;
 
 import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import controllers.AttendanceSystemController;
-import controllers.ControllerBootstrapSingleton;
 import ui.contents.components.AttTableBtnEditor;
 import ui.contents.components.AttTableBtnRenderer;
 import ui.contents.components.BasePanel;
@@ -17,7 +16,7 @@ import java.awt.*;
 import java.util.List;
 
 class AttendanceTablePanel extends BasePanel {
-
+    private final AttendanceSystemController controller;
     private final String[] header = {"Event:","Date:", "Action:"};
     private final DefaultTableModel model = new DefaultTableModel(header, 0) {
         @Override
@@ -28,8 +27,8 @@ class AttendanceTablePanel extends BasePanel {
     private final JTable table = new JTable(model);
     private final JScrollPane pane = new JScrollPane(table);
 
-    AttendanceTablePanel() {
-        AttendanceSystemController controller = ControllerBootstrapSingleton.getController();
+    AttendanceTablePanel(AttendanceSystemController controller) {
+        this.controller = controller;
         controller.addPropertyChangeListener(e -> refreshTable());
 
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
@@ -44,15 +43,15 @@ class AttendanceTablePanel extends BasePanel {
 
     private void refreshTable() {
         model.setRowCount(0);
-        List<String> eventList = ControllerBootstrapSingleton.getController().attendanceEventList();
-        List<String> dateList = ControllerBootstrapSingleton.getController().attendanceDateList();
+        List<String> eventList = controller.attendanceEventList();
+        List<String> dateList = controller.attendanceDateList();
 
         for (int i = 0; i < eventList.size(); i++) {
             model.addRow(new Object[]{eventList.get(i), dateList.get(i), "Remove"});
         }
 
         table.getColumnModel().getColumn(2).setCellRenderer(new AttTableBtnRenderer());
-        table.getColumnModel().getColumn(2).setCellEditor(new AttTableBtnEditor(new JCheckBox()));
+        table.getColumnModel().getColumn(2).setCellEditor(new AttTableBtnEditor(new JCheckBox(), controller));
 
     }
 

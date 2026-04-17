@@ -1,5 +1,6 @@
 package ui.wrappers;
 
+import controllers.AttendanceSystemController;
 import ui.contents.management.attendance.ManagementUI;
 import ui.contents.system.QuickAttendanceUI;
 import ui.contents.system.AttendanceSystemUI;
@@ -9,13 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ContentView {
-    ui.contents.management.student.ManagementUI studentManagement = new ui.contents.management.student.ManagementUI();
-    ManagementUI attendanceManagement = new ManagementUI();
-    QuickAttendanceUI attendanceMode = new QuickAttendanceUI();
-    AttendanceSystemUI attendanceSystem = new AttendanceSystemUI();
-
-
-
     public CardLayout cardLayout = new CardLayout();
     private final JPanel mainPanel = new JPanel(cardLayout);
 
@@ -24,7 +18,13 @@ public class ContentView {
 
 
 
-    ContentView() {
+    ContentView(AttendanceSystemController controller) {
+
+        ui.contents.management.student.ManagementUI studentManagement = new ui.contents.management.student.ManagementUI(controller);
+        ManagementUI attendanceManagement = new ManagementUI(controller);
+        QuickAttendanceUI attendanceMode = new QuickAttendanceUI(controller);
+        AttendanceSystemUI attendanceSystem = new AttendanceSystemUI(controller);
+
 
         mainPanel.add(studentManagement.getPanel(), views[0]);
         mainPanel.add(attendanceManagement.getPanel(), views[1]);
