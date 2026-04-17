@@ -10,9 +10,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 
-public class BasePanel {
+public class BasePanel extends JPanel {
     protected GridBagLayout layout = new GridBagLayout();
-    protected JPanel mainPanel = new JPanel(layout);
     protected GridBagConstraints constraints = new GridBagConstraints();
 
 
@@ -26,18 +25,22 @@ public class BasePanel {
 
 
     protected void dynamicPadding() {
-        mainPanel.addComponentListener(new ComponentAdapter() {
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 paddingSize = (int) Math.min(25, e.getComponent().getWidth() * 0.04);
                 padding = new FlatEmptyBorder(paddingSize,paddingSize,paddingSize,paddingSize);
                 border = new CompoundBorder(line_border, padding);
-                mainPanel.setBorder(border);
+                ((BasePanel)e.getSource()).setBorder(border);
             }
         });
     }
 
     protected BasePanel() {
-        mainPanel.setBorder(border);
+        setLayout(layout);
+    }
+
+    protected void setDefaultBorder() {
+        this.setBorder(border);
     }
 }

@@ -34,9 +34,9 @@ class AttendanceTable extends BasePanel {
 
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
         super.border = new CompoundBorder(super.line_border, super.padding);
-        mainPanel.setBorder(super.border);
+        this.setBorder(super.border);
 
-        mainPanel.add(pane, constraints);
+        this.add(pane, constraints);
 
         drawComponents();
         refreshTable();
@@ -91,6 +91,6 @@ class AttendanceTable extends BasePanel {
     }
 
     public JPanel getPanel() {
-        return mainPanel;
+        return this;
     }
 }

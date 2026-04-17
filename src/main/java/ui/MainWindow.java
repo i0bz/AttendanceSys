@@ -5,6 +5,8 @@ import ui.wrappers.Container;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -29,17 +31,23 @@ public class MainWindow {
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setLayout(new BorderLayout());
 
-
-        //add contents
+        //Content wrappers
         Container contents = new Container();
         mainFrame.add(contents.getPanel(), BorderLayout.CENTER);
 
 
-
+        //listeners
+        // may or may not help with the resizing performance
+//        mainFrame.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                mainFrame.validate();
+//                mainFrame.repaint();
+//            }
+//        });
         mainFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-
                 ControllerBootstrapSingleton.getInstance().saveData();
                 System.exit(0);
             }

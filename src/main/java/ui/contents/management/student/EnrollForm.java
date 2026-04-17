@@ -22,12 +22,12 @@ class EnrollForm extends BasePanel {
 
     EnrollForm() {
 
-        mainPanel.add(enrollLabel, constraints);
-        mainPanel.add(studentNameLabel, constraints);
-        mainPanel.add(studentIDLabel, constraints);
-        mainPanel.add(studentIdInput, constraints);
-        mainPanel.add(studentNameInput, constraints);
-        mainPanel.add(enrollButton, constraints);
+        this.add(enrollLabel, constraints);
+        this.add(studentNameLabel, constraints);
+        this.add(studentIDLabel, constraints);
+        this.add(studentIdInput, constraints);
+        this.add(studentNameInput, constraints);
+        this.add(enrollButton, constraints);
 
         drawComponents();
         dynamicPadding();
@@ -156,6 +156,6 @@ class EnrollForm extends BasePanel {
     }
 
     public JPanel getPanel() {
-        return mainPanel;
+        return this;
     }
 }

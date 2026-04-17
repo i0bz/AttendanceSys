@@ -35,9 +35,9 @@ class StudentTable extends BasePanel {
 
         super.padding = new FlatEmptyBorder(0,0,0,0);
         super.border = new CompoundBorder(super.line_border, super.padding);
-        mainPanel.setBorder(super.border);
+        this.setBorder(super.border);
 
-        mainPanel.add(scrollPanel);
+        this.add(scrollPanel);
 
         drawComponents();
         refreshTableByName();
@@ -88,7 +88,7 @@ class StudentTable extends BasePanel {
     }
 
     public JPanel getPanel() {
-        return mainPanel;
+        return this;
     }
 
 

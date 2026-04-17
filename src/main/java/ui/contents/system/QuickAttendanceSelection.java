@@ -37,7 +37,7 @@ class QuickAttendanceSelection extends BasePanel {
 
     @Override
     protected void dynamicPadding() {
-        mainPanel.addComponentListener(new ComponentAdapter() {
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 paddingSize = (int) Math.min(15, e.getComponent().getWidth() * 0.07);
@@ -46,13 +46,13 @@ class QuickAttendanceSelection extends BasePanel {
                 padding = new FlatEmptyBorder(paddingSize,0,paddingSize,0);
                 border = new CompoundBorder(line_border, padding);
                 border = new CompoundBorder(margin, border);
-                mainPanel.setBorder(border);
+                ((BasePanel)e.getSource()).setBorder(border);
             }
         });
     }
 
     private void dynamicDescriptionSpacing() {
-        mainPanel.addComponentListener(new ComponentAdapter() {
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 int descriptionPaddingSize = Math.min(15, (int) (e.getComponent().getWidth() * 0.06));
@@ -72,13 +72,13 @@ class QuickAttendanceSelection extends BasePanel {
         super.padding = new FlatEmptyBorder(10, 0, 0, 0);
         super.border = new CompoundBorder(line_border, padding);
 
-        mainPanel.setBorder(border);
+        this.setBorder(border);
 
 
-        mainPanel.add(description, constraints);
-        mainPanel.add(eventOptions, constraints);
-        mainPanel.add(quickAttendanceIcon, constraints);
-        wrapper.add(mainPanel, constraints);
+        this.add(description, constraints);
+        this.add(eventOptions, constraints);
+        this.add(quickAttendanceIcon, constraints);
+        wrapper.add(this, constraints);
 
 
         dynamicPadding();
@@ -117,7 +117,7 @@ class QuickAttendanceSelection extends BasePanel {
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1;
-        wrapperLayout.setConstraints(mainPanel, constraints);
+        wrapperLayout.setConstraints(this, constraints);
 
         ConstraintUtils.reset(constraints);
     }

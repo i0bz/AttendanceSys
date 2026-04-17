@@ -43,8 +43,8 @@ class QuickAttendance extends BasePanel {
         parentViews = views;
         parentPanel = panel;
 
-        mainPanel.add(activeDateInfo, constraints);
-        mainPanel.add(attendanceEntry, constraints);
+        this.add(activeDateInfo, constraints);
+        this.add(attendanceEntry, constraints);
 
         activeDateInfo.add(activeDate, constraints);
         activeDateInfo.add(changeDateBtn, constraints);
@@ -209,18 +209,18 @@ class QuickAttendance extends BasePanel {
 
     @Override
     protected void dynamicPadding() {
-        mainPanel.addComponentListener(new ComponentAdapter() {
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 paddingSize = (int) Math.min(25, e.getComponent().getWidth() * 0.04);
                 padding = new FlatEmptyBorder(paddingSize,paddingSize,paddingSize,paddingSize);
-                mainPanel.setBorder(padding);
+                ((BasePanel)e.getSource()).setBorder(padding);
             }
         });
     }
 
 
     public JPanel getPanel() {
-        return mainPanel;
+        return this;
     }
 }

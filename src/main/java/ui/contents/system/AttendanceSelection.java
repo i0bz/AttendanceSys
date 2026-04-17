@@ -17,9 +17,9 @@ class AttendanceSelection extends BasePanel {
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
     AttendanceSelection() {
-        mainPanel.add(description, constraints);
-        mainPanel.add(eventOptions, constraints);
-        mainPanel.add(horizontalGlue, constraints);
+        this.add(description, constraints);
+        this.add(eventOptions, constraints);
+        this.add(horizontalGlue, constraints);
 
         dynamicPadding();
         drawComponents();
@@ -68,7 +68,7 @@ class AttendanceSelection extends BasePanel {
     }
 
     public JPanel getPanel() {
-        return mainPanel;
+        return this;
     }
 
 

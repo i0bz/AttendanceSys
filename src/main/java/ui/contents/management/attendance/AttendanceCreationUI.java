@@ -23,13 +23,13 @@ class AttendanceCreationUI extends BasePanel {
     private final Component horizontalGlue = Box.createHorizontalGlue();
 
     AttendanceCreationUI() {
-        mainPanel.add(descriptionLabel, constraints);
-        mainPanel.add(dateLabel, constraints);
-        mainPanel.add(dateInput, constraints);
-        mainPanel.add(eventNameLabel, constraints);
-        mainPanel.add(eventNameInput, constraints);
-        mainPanel.add(addAttendanceButton, constraints);
-        mainPanel.add(horizontalGlue, constraints);
+        this.add(descriptionLabel, constraints);
+        this.add(dateLabel, constraints);
+        this.add(dateInput, constraints);
+        this.add(eventNameLabel, constraints);
+        this.add(eventNameInput, constraints);
+        this.add(addAttendanceButton, constraints);
+        this.add(horizontalGlue, constraints);
 
         dynamicPadding();
         drawComponents();
@@ -157,6 +157,6 @@ class AttendanceCreationUI extends BasePanel {
     }
 
     public JPanel getPanel() {
-        return mainPanel;
+        return this;
     }
 }
