@@ -14,7 +14,7 @@ public class ParseUtility {
 
 
     public static int parseUID(String uid) throws IllegalArgumentException {
-        uid.replaceAll("-", "");
+        uid = uid.replaceAll("-", "");
         if (uid.length() != 8) throw new IllegalArgumentException("Invalid UID");
         return  Integer.parseInt(uid);
     }
