@@ -14,8 +14,9 @@ public class ParseUtility {
 
 
     public static int parseUID(String uid) throws RuntimeException {
-        if (uid.length() != 9) throw new RuntimeException("UID is not of length 9.");
-        return Integer.parseInt(uid.replaceAll("[-]", ""));
+        int id = Integer.parseInt(uid.replaceAll("[-]", ""));
+        if (uid.length() != 8) throw new RuntimeException("Invalid UID");
+        return  id;
     }
 
     public static String unparseUID(int uid) throws RuntimeException {
