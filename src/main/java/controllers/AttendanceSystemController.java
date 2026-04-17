@@ -80,13 +80,13 @@ public class AttendanceSystemController {
 
 
     //Querying (Student Management specific)
-    public SortedMap<String, String> getAllStudentsByName() {
-        return new TreeMap<>(studentManagement.getAllStudentsByName()
+    public SortedMap<String, String> getAllStudentsById() {
+        return new TreeMap<>(studentManagement.getAllStudentsByID()
                 .entrySet()
                 .stream()
                 .collect(Collectors
-                        .toMap(Map.Entry::getKey,
-                                entry -> ParseUtility.unparseUID(entry.getValue().uid()))));
+                        .toMap(entry -> ParseUtility.unparseUID(entry.getKey()),
+                                entry -> entry.getValue().name())));
     }
     public String getStudentName(String uid) {
         return studentManagement.getStudentName(ParseUtility.parseUID(uid));

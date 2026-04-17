@@ -94,7 +94,8 @@ class AttendanceSystemPanel extends BasePanel {
     }
 
     public void refreshTable(String date) {
-        Map<String, String> students = controller.getAllStudentsByName();
+        Map<String, String> students = controller.getAllStudentsById();
+        if (tableView.isEditing()) tableView.getCellEditor().stopCellEditing();
 
         if (date == null || date.equals("Select Attendance")) {
             model.setRowCount(0);
@@ -103,8 +104,8 @@ class AttendanceSystemPanel extends BasePanel {
         model.setRowCount(0);
 
         for (Map.Entry<String, String> entry : students.entrySet()) {
-            String name = entry.getKey();
-            String uid = entry.getValue();
+            String uid = entry.getKey();
+            String name = entry.getValue();
 
             model.addRow(new Object[]{
                     name,

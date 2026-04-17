@@ -47,10 +47,10 @@ class StudentTablePanel extends BasePanel {
 
 
     private void refreshTableByName() {
-        Map<String, String> rosterMap = controller.getAllStudentsByName();
-
+        Map<String, String> rosterMap = controller.getAllStudentsById();
+        if (tableView.isEditing()) tableView.getCellEditor().stopCellEditing();
         model.setRowCount(0);
-        rosterMap.forEach((key, value) -> model.addRow(new Object[]{key, value, "Drop"}));
+        rosterMap.forEach((key, value) -> model.addRow(new Object[]{value, key, "Drop"}));
 
         tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
         tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox(), controller));

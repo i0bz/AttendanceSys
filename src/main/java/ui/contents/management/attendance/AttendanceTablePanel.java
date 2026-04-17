@@ -42,6 +42,9 @@ class AttendanceTablePanel extends BasePanel {
     }
 
     private void refreshTable() {
+
+        if (table.isEditing()) table.getCellEditor().stopCellEditing();
+
         model.setRowCount(0);
         List<String> eventList = controller.attendanceEventList();
         List<String> dateList = controller.attendanceDateList();
