@@ -4,8 +4,11 @@ import repository.AttendanceRegistry;
 import repository.StudentRoster;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Persist {
+    private static final Logger logger = Logger.getLogger(Persist.class.getName());
 
     static final String attendanceFile = "./attendances.dat";
     static final String studentRosterFile = "./roster.dat";
@@ -17,7 +20,7 @@ public class Persist {
         {
             objectStream.writeObject(registry);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Roster file did not save successfully", e);
         }
     }
     public static void saveRosterFile(StudentRoster roster) {
@@ -26,7 +29,7 @@ public class Persist {
         {
             objectStream.writeObject(roster);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Registry file did not save successfully", e);
         }
     }
 
@@ -44,11 +47,13 @@ public class Persist {
         }
 
         catch (IOException e) {
+            logger.log(Level.SEVERE, "Unable to open Registry file", e);
             reg = new AttendanceRegistry();
         }
 
         catch (ClassNotFoundException e2) {
-            e2.printStackTrace();
+            logger.log(Level.SEVERE, "Corrupted registry file", e2);
+            System.exit(1);
         }
 
         return reg;
@@ -66,11 +71,13 @@ public class Persist {
         }
 
         catch (IOException e) {
+            logger.log(Level.SEVERE, "Unable to open Roster file", e);
             reg = new StudentRoster();
         }
 
         catch (ClassNotFoundException e2) {
-            e2.printStackTrace();
+            logger.log(Level.SEVERE, "Corrupted Roster file", e2);
+            System.exit(1);
         }
 
         return reg;
