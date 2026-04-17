@@ -146,7 +146,6 @@ class QuickAttendanceSelection extends BasePanel {
         eventList.addAll(refreshedEventList);
     }
 
-
     public JPanel getPanel() {
         return wrapper;
     }

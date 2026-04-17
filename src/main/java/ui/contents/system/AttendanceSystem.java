@@ -115,8 +115,4 @@ class AttendanceSystem extends BasePanel {
         }
     }
 
-    public JPanel getPanel() {
-        return this;
-    }
-
 }

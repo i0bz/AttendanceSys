@@ -17,8 +17,8 @@ public class ManagementUI {
     private int gapSize = 20;
 
     public ManagementUI() {
-        mainPanel.add(enrollForm.getPanel(), constraints);
-        mainPanel.add(managementTable.getPanel(), constraints);
+        mainPanel.add(enrollForm, constraints);
+        mainPanel.add(managementTable, constraints);
 
         drawComponents();
         dynamicPadding();
@@ -43,7 +43,7 @@ public class ManagementUI {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1.0;
 
-        layout.setConstraints(enrollForm.getPanel(), constraints);
+        layout.setConstraints(enrollForm, constraints);
         mainPanel.revalidate();
         mainPanel.repaint();
 
@@ -52,7 +52,7 @@ public class ManagementUI {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.insets = new Insets(gapSize,gapSize,gapSize,gapSize);
 
-        layout.setConstraints(managementTable.getPanel(), constraints);
+        layout.setConstraints(managementTable, constraints);
         mainPanel.revalidate();
         mainPanel.repaint();
         ConstraintUtils.reset(constraints);

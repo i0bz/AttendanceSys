@@ -17,8 +17,8 @@ public class ManagementUI {
     private int gapSize = 20;
 
     public ManagementUI() {
-        mainPanel.add(attendanceCreationView.getPanel(), constraints);
-        mainPanel.add(attendanceTable.getPanel(), constraints);
+        mainPanel.add(attendanceCreationView, constraints);
+        mainPanel.add(attendanceTable, constraints);
 
         drawComponents();
         dynamicPadding();
@@ -42,12 +42,12 @@ public class ManagementUI {
         constraints.insets = new Insets(gapSize,gapSize,0,gapSize);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1.0;
-        layout.setConstraints(attendanceCreationView.getPanel(), constraints);
+        layout.setConstraints(attendanceCreationView, constraints);
 
         ConstraintUtils.setCoords(constraints, 0, 1);
         constraints.insets = new Insets(gapSize,gapSize,gapSize,gapSize);
         constraints.weighty = 1.0;
-        layout.setConstraints(attendanceTable.getPanel(), constraints);
+        layout.setConstraints(attendanceTable, constraints);
 
         ConstraintUtils.reset(constraints);
     }

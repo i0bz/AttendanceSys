@@ -17,7 +17,7 @@ public class QuickAttendanceUI {
 
 
         mainPanel.add(attendanceModeSelection.getPanel(), views[0]);
-        mainPanel.add(attendanceMode.getPanel(), views[1]);
+        mainPanel.add(attendanceMode, views[1]);
         cardLayout.show(mainPanel, views[0]);
     }
 

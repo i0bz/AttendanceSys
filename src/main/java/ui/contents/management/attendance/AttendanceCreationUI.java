@@ -155,8 +155,4 @@ class AttendanceCreationUI extends BasePanel {
 
         ConstraintUtils.reset(constraints);
     }
-
-    public JPanel getPanel() {
-        return this;
-    }
 }

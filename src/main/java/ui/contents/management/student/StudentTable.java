@@ -84,12 +84,6 @@ class StudentTable extends BasePanel {
         layout.setConstraints(scrollPanel, constraints);
         ConstraintUtils.reset(constraints);
 
-
     }
-
-    public JPanel getPanel() {
-        return this;
-    }
-
 
 }

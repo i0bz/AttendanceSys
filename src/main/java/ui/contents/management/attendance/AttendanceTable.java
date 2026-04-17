@@ -89,8 +89,4 @@ class AttendanceTable extends BasePanel {
 
         ConstraintUtils.reset(constraints);
     }
-
-    public JPanel getPanel() {
-        return this;
-    }
 }

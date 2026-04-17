@@ -23,8 +23,8 @@ public class AttendanceSystemUI {
     public AttendanceSystemUI() {
         final SelectionMediator mediator = new SelectionMediator(attendanceSelection, attendanceSystemTable);
 
-        mainPanel.add(attendanceSelection.getPanel(), constraints);
-        mainPanel.add(attendanceSystemTable.getPanel(), constraints);
+        mainPanel.add(attendanceSelection, constraints);
+        mainPanel.add(attendanceSystemTable, constraints);
 
         dynamicPadding();
         drawComponents();
@@ -35,13 +35,13 @@ public class AttendanceSystemUI {
         constraints.insets = new Insets(gapSize,gapSize,0,gapSize);
         constraints.weightx = 1;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        layout.setConstraints(attendanceSelection.getPanel(), constraints);
+        layout.setConstraints(attendanceSelection, constraints);
 
         ConstraintUtils.setCoords(constraints, 0, 1);
         constraints.weighty = 1;
         constraints.insets = new Insets(gapSize,gapSize,gapSize,gapSize);
         constraints.fill = GridBagConstraints.BOTH;
-        layout.setConstraints(attendanceSystemTable.getPanel(), constraints);
+        layout.setConstraints(attendanceSystemTable, constraints);
 
         ConstraintUtils.reset(constraints);
     }

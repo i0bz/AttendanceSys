@@ -154,8 +154,4 @@ class EnrollForm extends BasePanel {
         layout.setConstraints(enrollButton, constraints);
 
     }
-
-    public JPanel getPanel() {
-        return this;
-    }
 }

@@ -218,9 +218,4 @@ class QuickAttendance extends BasePanel {
             }
         });
     }
-
-
-    public JPanel getPanel() {
-        return this;
-    }
 }

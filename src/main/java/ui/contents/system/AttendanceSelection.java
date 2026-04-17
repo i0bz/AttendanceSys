@@ -67,9 +67,5 @@ class AttendanceSelection extends BasePanel {
         eventOptions.addActionListener(listener);
     }
 
-    public JPanel getPanel() {
-        return this;
-    }
-
 
 }
