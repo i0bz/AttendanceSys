@@ -50,20 +50,23 @@ public class ImportService {
         if (attendanceSheet == null) throw new IOException("Attendance Sheet not found");
         Row headerRow = attendanceSheet.getRow(0);
 
-        int i = 0;
 
         for (Row row : attendanceSheet) {
+            int i = 0;
             if (row.equals(headerRow)) continue;
             Cell uidCell = row.getCell(0);
             int uid = ParseUtility.parseUID(dataFormatter.formatCellValue(uidCell));
 
             for (Cell cell : row) {
-                i++;
-                if (cell.equals(uidCell)) continue;
+                if (cell.equals(uidCell)) {
+                    i++;
+                    continue;
+                }
                 if (dataFormatter.formatCellValue(cell).equals("Present")) {
                     String event = dataFormatter.formatCellValue(headerRow.getCell(i));
                     attendanceService.markPresent(event, uid);
                 }
+                i++;
             }
         }
 
