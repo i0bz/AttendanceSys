@@ -57,12 +57,15 @@ public class NavigationBar {
 
 
     //Export Import dialogs
-    private final ExporterDialog exporterDialog = new ExporterDialog(controller);
-    private final ImporterDialog importerDialog = new ImporterDialog(controller);
+    private final ExporterDialog exporterDialog;
+    private final ImporterDialog importerDialog;
 
     public NavigationBar(AttendanceSystemController controller, ContentView contents) {
         this.controller = controller;
         this.contents = contents;
+        this.exporterDialog = new ExporterDialog(controller);
+        this.importerDialog = new ImporterDialog(controller);
+
         labels = contents.getContainerNames();
         drawComponents();
     }
