@@ -16,17 +16,11 @@ public class TitleBar {
 
 
     public TitleBar() {
-        initComponents();
-    }
-
-    public void initComponents() {
         JLabel title = new JLabel("Attendance System");
         title.putClientProperty( "FlatLaf.style", "font: bold $h0.font" );
         mainPanel.add(title);
         mainPanel.setBorder(border);
     }
-
-
 
     public JPanel getPanel() {
         return  mainPanel;
