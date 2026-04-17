@@ -13,15 +13,15 @@ public class ParseUtility {
     }
 
 
-    public static int parseUID(String uid) throws RuntimeException {
+    public static int parseUID(String uid) throws IllegalArgumentException {
         int id = Integer.parseInt(uid.replaceAll("[-]", ""));
-        if (uid.length() != 8) throw new RuntimeException("Invalid UID");
+        if (uid.length() != 8) throw new IllegalArgumentException("Invalid UID");
         return  id;
     }
 
-    public static String unparseUID(int uid) throws RuntimeException {
+    public static String unparseUID(int uid) throws IllegalArgumentException {
         String stringUID = String.valueOf(uid);
-        if (stringUID.length() != 8) throw new RuntimeException("Invalid UID");
+        if (stringUID.length() != 8) throw new IllegalArgumentException("Invalid UID");
         StringBuilder sb = new StringBuilder(stringUID);
         sb.insert(2, '-');
         return sb.toString();
