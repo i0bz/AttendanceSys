@@ -53,8 +53,6 @@ class AttendanceTablePanel extends BasePanel {
             model.addRow(new Object[]{eventList.get(i), dateList.get(i), "Remove"});
         }
 
-        table.getColumnModel().getColumn(2).setCellRenderer(new AttTableBtnRenderer());
-        table.getColumnModel().getColumn(2).setCellEditor(new AttTableBtnEditor(new JCheckBox(), controller));
 
     }
 
@@ -65,6 +63,8 @@ class AttendanceTablePanel extends BasePanel {
         table.setRowSelectionAllowed(false);
         table.setRowHeight(50);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.getColumnModel().getColumn(2).setCellRenderer(new AttTableBtnRenderer());
+        table.getColumnModel().getColumn(2).setCellEditor(new AttTableBtnEditor(new JCheckBox(), controller));
 
         TableColumnModel columnModel = table.getColumnModel();
 

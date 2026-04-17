@@ -52,8 +52,6 @@ class StudentTablePanel extends BasePanel {
         model.setRowCount(0);
         rosterMap.forEach((key, value) -> model.addRow(new Object[]{value, key, "Drop"}));
 
-        tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
-        tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox(), controller));
 
     }
 
@@ -63,6 +61,8 @@ class StudentTablePanel extends BasePanel {
         tableView.getTableHeader().setReorderingAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
         tableView.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
+        tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox(), controller));
 
         TableColumnModel columnModel = tableView.getColumnModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
