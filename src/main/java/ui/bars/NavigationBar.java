@@ -39,7 +39,7 @@ public class NavigationBar {
 
     private final Insets buttonGaps = new Insets(0,0,10,0);
     private final String buttonArc = "arc: 15";
-    private JButton latestClickedBtn;
+    private int latestClickedIndex;
 
     //button icons
     int iconSize = 35;
@@ -95,8 +95,8 @@ public class NavigationBar {
             int index = iterator;
             if (iterator == 4) continue;
             button.addActionListener( e -> {
-                swapCards(index);
                 recolorButtons((JButton) e.getSource());
+                swapCards(index);
             });
             iterator++;
         }
@@ -153,30 +153,25 @@ public class NavigationBar {
     //Button events actions
     private void swapCards(int iterator) {
         contents.getCardLayout().show(contents.getPanel(), buttons.get(iterator).getText());
+        latestClickedIndex = iterator;
     }
     private void recolorButtons(JButton inputSource){
-        if (latestClickedBtn == null || !(latestClickedBtn.equals(inputSource))) {
-            latestClickedBtn = inputSource;
 
-            for (FlatSVGIcon icon : icons) {
-                icon.setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.BLACK));
-            }
+            icons[latestClickedIndex].setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.BLACK));
+            buttons.get(latestClickedIndex).setForeground(Color.BLACK);
+            buttons.get(latestClickedIndex).setBackground(Color.decode("#f2f2f2"));
+
             int i = 0;
             for (JButton button : buttons) {
                 if (button.equals(inputSource))
                     icons[i].setColorFilter(new FlatSVGIcon.ColorFilter(color -> Color.WHITE));
-                button.setForeground(Color.BLACK);
-                button.setBackground(Color.decode("#f2f2f2"));
-
                 i++;
             }
-
             inputSource.setForeground(Color.WHITE);
             inputSource.setBackground(Color.decode("#006B3C"));
 
             mainPanel.validate();
             mainPanel.repaint();
-        }
 
 
     }
