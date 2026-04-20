@@ -60,6 +60,8 @@ class StudentTablePanel extends BasePanel {
         tableView.setRowHeight(50);
         tableView.getTableHeader().setReorderingAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
+        tableView.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
+        tableView.putClientProperty("FlatLaf.styleClass", "h3");
         tableView.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
         tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox(), controller));

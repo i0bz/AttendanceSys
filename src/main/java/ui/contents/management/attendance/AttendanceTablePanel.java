@@ -60,6 +60,8 @@ class AttendanceTablePanel extends BasePanel {
 
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
+        table.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
+        table.putClientProperty("FlatLaf.styleClass", "h3");
         table.setRowSelectionAllowed(false);
         table.setRowHeight(50);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
