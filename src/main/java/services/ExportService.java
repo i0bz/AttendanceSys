@@ -23,7 +23,7 @@ public class ExportService {
         this.attendanceService = attendanceService;
     }
 
-    public void exportExcel(File file) {
+    public void exportExcel(File file) throws IOException {
         try (Workbook workbook = new XSSFWorkbook()) {
             writeStudentsExcel(workbook);
             writeEventsExcel(workbook);
@@ -33,8 +33,6 @@ public class ExportService {
             try (FileOutputStream outputFile = new FileOutputStream(file)) {
                 workbook.write(outputFile);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

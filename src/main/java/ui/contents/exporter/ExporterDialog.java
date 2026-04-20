@@ -29,7 +29,7 @@ public class ExporterDialog {
         try {
             controller.exportFile(file);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Unable to save file!", "IO error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Unable to save file!", "IO error: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
     }
 }
