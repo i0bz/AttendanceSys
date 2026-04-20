@@ -31,7 +31,7 @@ public class ImporterDialog {
         try {
             controller.importAttendances(file);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Unable to load file!", "IO error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Unable to load file!: " + e.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
