@@ -3,9 +3,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 import controllers.ControllerBootstrap;
 import repository.AttendanceRegistry;
 import repository.StudentRoster;
-import services.SaveStateTracker;
 import ui.MainWindow;
-import utility.Persist;
+import utility.DataSaver;
 import utility.PersistenceFlusher;
 
 import javax.swing.*;
@@ -14,8 +13,8 @@ import java.awt.*;
 public class  Main {
 
     static void main(String[] args) {
-        StudentRoster roster = Persist.loadRoster();
-        AttendanceRegistry registry = Persist.loadRegistry();
+        StudentRoster roster = DataSaver.loadRoster();
+        AttendanceRegistry registry = DataSaver.loadRegistry();
 
         ControllerBootstrap bootstrap = new ControllerBootstrap(roster, registry);
 

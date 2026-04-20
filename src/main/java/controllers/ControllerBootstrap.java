@@ -5,7 +5,7 @@ import repository.StudentRoster;
 import services.AttendanceService;
 import services.SaveStateTracker;
 import services.StudentService;
-import utility.Persist;
+import utility.DataSaver;
 
 
 public class ControllerBootstrap {
@@ -26,8 +26,8 @@ public class ControllerBootstrap {
     public synchronized void saveData() {
         if (!saveStateTracker.isDirty()) return;
         saveStateTracker.unMarkDirty();
-        Persist.saveRosterFile(roster);
-        Persist.saveRegistry(registry);
+        DataSaver.saveRosterFile(roster);
+        DataSaver.saveRegistry(registry);
 
     }
 }

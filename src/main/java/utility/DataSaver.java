@@ -7,8 +7,8 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Persist {
-    private static final Logger logger = Logger.getLogger(Persist.class.getName());
+public class DataSaver {
+    private static final Logger logger = Logger.getLogger(DataSaver.class.getName());
 
     static final String attendanceFile = "./attendances.dat";
     static final String studentRosterFile = "./roster.dat";
