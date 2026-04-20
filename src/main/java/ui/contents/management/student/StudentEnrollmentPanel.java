@@ -105,7 +105,7 @@ class StudentEnrollmentPanel extends BasePanel {
         }
         try {
             controller.enrollStudent(name, studId);
-        } catch (RuntimeException e) {
+        } catch (IllegalArgumentException e) {
             studentNameInput.setText("");
             studentIdInput.setText("Invalid ID!");
             studentIdInput.setForeground(Color.RED);

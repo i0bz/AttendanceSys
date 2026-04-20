@@ -2,16 +2,14 @@ package utility;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class ParseUtility {
     private ParseUtility() {}
 
-
-
-    public static LocalDate parseDate(String date) {
+    public static LocalDate parseDate(String date) throws DateTimeParseException {
         return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
-
 
     public static int parseUID(String uid) throws IllegalArgumentException {
         uid = uid.replaceAll("-", "");

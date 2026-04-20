@@ -7,6 +7,7 @@ import ui.utility.ConstraintUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.format.DateTimeParseException;
 
 
 class AttendanceCreationPanel extends BasePanel {
@@ -103,7 +104,7 @@ class AttendanceCreationPanel extends BasePanel {
         }
         try {
             controller.createAttendance(eventInputText, dateInputText);
-        } catch (RuntimeException e) {
+        } catch (DateTimeParseException e) {
             eventNameInput.setText("");
             dateInput.setText("Invalid Date Format!");
             dateInput.setForeground(Color.RED);
