@@ -31,18 +31,18 @@ class StudentEnrollmentPanel extends BasePanel {
 
         drawComponents();
         dynamicPadding();
-        focusEventListeners();
-        enrollEventListeners();
+        focusEventHandlers();
+        enrollEventHandlers();
     }
 
 
-    private void enrollEventListeners() {
+    private void enrollEventHandlers() {
         enrollButton.addActionListener(e -> {
             enrollingStudent();
         });
     }
 
-    private void focusEventListeners() {
+    private void focusEventHandlers() {
 
         //Backspace button event
         studentIdInput.addKeyListener(new KeyAdapter() {
@@ -67,7 +67,7 @@ class StudentEnrollmentPanel extends BasePanel {
         studentIdInput.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (studentIdInput.getText().equals("YY-CCXXXX") || studentIdInput.getText().equals("Invalid ID!")) {
+                if (studentIdInput.getForeground().equals(Color.GRAY) || studentIdInput.getForeground().equals(Color.RED)) {
                     studentIdInput.setText("");
                     studentIdInput.setForeground(Color.BLACK);
                 }
@@ -85,7 +85,7 @@ class StudentEnrollmentPanel extends BasePanel {
         studentNameInput.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (studentNameInput.getText().equals("Empty Name!!!") || studentNameInput.getText().isEmpty()) {
+                if (studentNameInput.getForeground().equals(Color.RED)) {
                     studentNameInput.setText("");
                     studentNameInput.setForeground(Color.BLACK);
                 }
@@ -107,7 +107,7 @@ class StudentEnrollmentPanel extends BasePanel {
             controller.enrollStudent(name, studId);
         } catch (IllegalArgumentException e) {
             studentNameInput.setText("");
-            studentIdInput.setText("Invalid ID!");
+            studentIdInput.setText(e.getMessage());
             studentIdInput.setForeground(Color.RED);
             return;
         }

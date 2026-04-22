@@ -13,13 +13,13 @@ public class ParseUtility {
 
     public static int parseUID(String uid) throws IllegalArgumentException {
         uid = uid.replaceAll("-", "");
-        if (uid.length() != 8) throw new IllegalArgumentException("Invalid UID");
+        if (uid.length() != 8) throw new IllegalArgumentException("Invalid ID!");
         return  Integer.parseInt(uid);
     }
 
     public static String unparseUID(int uid) throws IllegalArgumentException {
         String stringUID = String.valueOf(uid);
-        if (stringUID.length() != 8) throw new IllegalArgumentException("Invalid UID");
+        if (stringUID.length() != 8) throw new IllegalArgumentException("Invalid ID!");
         StringBuilder sb = new StringBuilder(stringUID);
         sb.insert(2, '-');
         return sb.toString();
