@@ -9,9 +9,7 @@ import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
 import java.awt.*;
 import java.util.List;
 
@@ -60,11 +58,19 @@ class AttendanceTablePanel extends BasePanel {
 
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+        sorter.setSortable(0, true);
+        sorter.setSortable(1, true);
+        table.setRowSorter(sorter);
+
         table.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
         table.putClientProperty("FlatLaf.styleClass", "h3");
+
         table.setRowSelectionAllowed(false);
         table.setRowHeight(50);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
         table.getColumnModel().getColumn(2).setCellRenderer(new AttTableBtnRenderer());
         table.getColumnModel().getColumn(2).setCellEditor(new AttTableBtnEditor(new JCheckBox(), controller));
 

@@ -9,6 +9,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.Map;
 
@@ -21,7 +23,7 @@ class AttendanceSystemPanel extends BasePanel {
         public boolean isCellEditable(int row, int column) {
             return column == 2;
         }
-
+        @Override
         public Class<?> getColumnClass(int col) {
             return (col == 2) ? Boolean.class : super.getColumnClass(col);
         }
@@ -64,10 +66,15 @@ class AttendanceSystemPanel extends BasePanel {
         tableView.setRowSelectionAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
         tableView.getTableHeader().setReorderingAllowed(false);
-        tableView.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
-        tableView.putClientProperty("FlatLaf.styleClass", "h3");
         tableView.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
+        tableView.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
+        tableView.putClientProperty("FlatLaf.styleClass", "h3");
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableView.getModel());
+        sorter.setSortable(0, true);
+        sorter.setSortable(1, true);
+        tableView.setRowSorter(sorter);
 
         TableColumnModel columnModel = tableView.getColumnModel();
 

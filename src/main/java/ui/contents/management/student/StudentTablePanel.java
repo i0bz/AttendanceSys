@@ -9,9 +9,7 @@ import ui.utility.ConstraintUtils;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
 import java.awt.*;
 import java.util.Map;
 
@@ -56,15 +54,24 @@ class StudentTablePanel extends BasePanel {
     }
 
     private void drawComponents() {
+
         tableView.setRowSelectionAllowed(false);
+        tableView.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         tableView.setRowHeight(50);
+
         tableView.getTableHeader().setReorderingAllowed(false);
         tableView.getTableHeader().setResizingAllowed(false);
+
         tableView.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
         tableView.putClientProperty("FlatLaf.styleClass", "h3");
-        tableView.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
         tableView.getColumnModel().getColumn(2).setCellRenderer(new StudTableBtnRenderer());
         tableView.getColumnModel().getColumn(2).setCellEditor(new StudTableBtnEditor(new JCheckBox(), controller));
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableView.getModel());
+        sorter.setSortable(0, true);
+        sorter.setSortable(1, true);
+        tableView.setRowSorter(sorter);
 
         TableColumnModel columnModel = tableView.getColumnModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
