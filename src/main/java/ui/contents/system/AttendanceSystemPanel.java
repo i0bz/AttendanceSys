@@ -7,10 +7,7 @@ import ui.contents.components.BasePanel;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.event.TableModelEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
+import javax.swing.table.*;
 import java.awt.*;
 import java.util.Map;
 
@@ -71,13 +68,17 @@ class AttendanceSystemPanel extends BasePanel {
         tableView.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
         tableView.putClientProperty("FlatLaf.styleClass", "h3");
 
+        TableColumnModel columnModel = tableView.getColumnModel();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        columnModel.getColumn(1).setCellRenderer(centerRenderer);
+
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableView.getModel());
         sorter.setSortable(0, true);
         sorter.setSortable(1, true);
         sorter.setSortable(2, false);
         tableView.setRowSorter(sorter);
 
-        TableColumnModel columnModel = tableView.getColumnModel();
 
         int totalWidth = tableView.getWidth();
         if (totalWidth <= 0) totalWidth = 400;

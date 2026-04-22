@@ -79,7 +79,7 @@ class AttendanceTablePanel extends BasePanel {
 
         DefaultTableCellRenderer centeredRendered = new DefaultTableCellRenderer();
         centeredRendered.setHorizontalAlignment(JLabel.CENTER);
-        columnModel.getColumn(0).setCellRenderer(centeredRendered);
+        columnModel.getColumn(1).setCellRenderer(centeredRendered);
 
         int totalWidth = table.getWidth();
         if (totalWidth <= 0) totalWidth = 400;
