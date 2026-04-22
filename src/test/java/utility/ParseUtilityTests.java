@@ -30,5 +30,7 @@ public class ParseUtilityTests {
         assertThrows(IllegalArgumentException.class, () -> ParseUtility.parseUID("25-14001"));
         assertThrows(IllegalArgumentException.class, () -> ParseUtility.unparseUID(251400011));
         assertThrows(IllegalArgumentException.class, () -> ParseUtility.unparseUID(2514001));
+        assertThrows(IllegalArgumentException.class, () -> ParseUtility.parseUID("25-14ab0a"));
+        assertThrows(IllegalArgumentException.class, () -> ParseUtility.parseUID("-_.*!ab0a"));
     }
 }
