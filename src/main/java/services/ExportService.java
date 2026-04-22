@@ -2,6 +2,7 @@ package services;
 
 import entity.Student;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import utility.ParseUtility;
 
@@ -44,14 +45,17 @@ public class ExportService {
         Row header = sheet.createRow(0);
         header.createCell(0).setCellValue("ID");
         header.createCell(1).setCellValue("Name");
+        header.createCell(2).setCellValue("Absents");
 
         Map<Integer, Student> students = studentManagement.getAllStudentsByID();
+        int eventAmount = attendanceService.queryEvents().size();
         AtomicInteger iterator = new AtomicInteger(1);
 
         students.forEach((id, student) -> {
             Row row = sheet.createRow(iterator.get());
             row.createCell(0).setCellValue(ParseUtility.unparseUID(id));
             row.createCell(1).setCellValue(student.name());
+            row.createCell(2).setCellFormula("COUNTIF('Attendance Sheet'!B" + (iterator.get() + 1) + ":" + CellReference.convertNumToColString(eventAmount) + (iterator.get() + 1)+ ", \"Absent\")");
             iterator.getAndIncrement();
         });
     }
