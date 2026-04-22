@@ -34,12 +34,12 @@ class AttendanceCreationPanel extends BasePanel {
 
         dynamicPadding();
         drawComponents();
-        focusListeners();
-        buttonListeners();
+        focusEventHandlers();
+        buttonEventHandlers();
 
     }
 
-    private void buttonListeners() {
+    private void buttonEventHandlers() {
         addAttendanceButton.addActionListener(e -> {
             createAttendance();
         });
@@ -61,14 +61,14 @@ class AttendanceCreationPanel extends BasePanel {
         });
     }
 
-    private void focusListeners() {
+    private void focusEventHandlers() {
         dateInput.setText("YYYY-MM-DD");
         dateInput.setForeground(Color.GRAY);
 
         dateInput.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (dateInput.getText().equals("YYYY-MM-DD") || dateInput.getText().equals("Invalid Date Format!")) {
+                if (dateInput.getForeground().equals(Color.GRAY) || dateInput.getForeground().equals(Color.RED)) {
                     dateInput.setText("");
                     dateInput.setForeground(Color.BLACK);
                 }

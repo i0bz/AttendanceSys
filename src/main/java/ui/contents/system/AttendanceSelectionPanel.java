@@ -26,8 +26,8 @@ class AttendanceSelectionPanel extends BasePanel {
 
         dynamicPadding();
         drawComponents();
-        refreshEvents();
-        controller.addPropertyChangeListener(e -> refreshEvents());
+        refreshEventLists();
+        controller.addPropertyChangeListener(e -> refreshEventLists());
     }
 
 
@@ -56,7 +56,7 @@ class AttendanceSelectionPanel extends BasePanel {
         ConstraintUtils.reset(constraints);
     }
 
-    private void refreshEvents() {
+    private void refreshEventLists() {
         List<String> registryEventList = controller.attendanceEventList();
         eventList.clear();
         eventList.add("Select Attendance");
