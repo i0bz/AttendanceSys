@@ -78,9 +78,9 @@ class QuickAttendanceView extends BasePanel {
     }
 
     private void addEventHandlers() {
-        changeDateBtn.addActionListener(e -> {
-            parentCardLayout.show(parentPanel, parentViews[0]);
-        });
+        changeDateBtn.addActionListener(e ->
+            parentCardLayout.show(parentPanel, parentViews[0])
+        );
         inputField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -93,12 +93,12 @@ class QuickAttendanceView extends BasePanel {
             public void focusLost(FocusEvent e) {
             }
         });
-        markPresentBtn.addActionListener(e -> {
-            markPresent();
-        });
-        inputField.addActionListener(e -> {
-            markPresent();
-        });
+        markPresentBtn.addActionListener(e ->
+            markPresent()
+        );
+        inputField.addActionListener(e ->
+            markPresent()
+        );
     }
 
     private void drawComponents() {
