@@ -26,6 +26,12 @@ public class ExporterDialog {
         if (!(file.getAbsolutePath().endsWith(".xlsx") || file.getAbsolutePath().endsWith(".xls")))
             file = new File(file.getAbsolutePath() + ".xlsx");
 
+        if (file.exists()) {
+            int response = JOptionPane.showConfirmDialog(null, "Would you like to overwrite existing file?", "File exists!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (response == JOptionPane.NO_OPTION || response == JOptionPane.CLOSED_OPTION) return;
+        }
+
+
         try {
             controller.exportFile(file);
         } catch (IOException e) {
