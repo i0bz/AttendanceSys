@@ -40,15 +40,15 @@ class AttendanceCreationPanel extends BasePanel {
     }
 
     private void buttonEventHandlers() {
-        addAttendanceButton.addActionListener(e -> {
-            createAttendance();
-        });
+        addAttendanceButton.addActionListener(_ ->
+            createAttendance()
+        );
 
-        eventNameInput.addActionListener(e -> {
-            dateInput.requestFocusInWindow();
-        });
+        eventNameInput.addActionListener(_ ->
+            dateInput.requestFocusInWindow()
+        );
 
-        dateInput.addActionListener(e -> {
+        dateInput.addActionListener(_ -> {
             createAttendance();
             dateInput.getParent().requestFocusInWindow();
         });

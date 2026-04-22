@@ -30,7 +30,7 @@ class StudentTablePanel extends BasePanel {
 
     StudentTablePanel(AttendanceSystemController controller) {
         this.controller = controller;
-        controller.addPropertyChangeListener(e -> refreshTableByName());
+        controller.addPropertyChangeListener(_ -> refreshTableByName());
 
         super.padding = new FlatEmptyBorder(0,0,0,0);
         super.border = new CompoundBorder(super.line_border, super.padding);

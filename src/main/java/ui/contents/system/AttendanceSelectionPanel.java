@@ -27,7 +27,7 @@ class AttendanceSelectionPanel extends BasePanel {
         dynamicPadding();
         drawComponents();
         refreshEventLists();
-        controller.addPropertyChangeListener(e -> refreshEventLists());
+        controller.addPropertyChangeListener(_ -> refreshEventLists());
     }
 
 

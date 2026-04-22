@@ -27,7 +27,7 @@ class AttendanceTablePanel extends BasePanel {
 
     AttendanceTablePanel(AttendanceSystemController controller) {
         this.controller = controller;
-        controller.addPropertyChangeListener(e -> refreshTable());
+        controller.addPropertyChangeListener(_ -> refreshTable());
 
         super.padding = new FlatEmptyBorder(0, 0, 0, 0);
         super.border = new CompoundBorder(super.line_border, super.padding);

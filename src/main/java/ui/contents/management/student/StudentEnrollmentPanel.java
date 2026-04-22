@@ -37,9 +37,9 @@ class StudentEnrollmentPanel extends BasePanel {
 
 
     private void enrollEventHandlers() {
-        enrollButton.addActionListener(e -> {
-            enrollingStudent();
-        });
+        enrollButton.addActionListener( _ ->
+            enrollingStudent()
+        );
     }
 
     private void focusEventHandlers() {
@@ -53,10 +53,10 @@ class StudentEnrollmentPanel extends BasePanel {
         });
 
         //Enter button events
-        studentNameInput.addActionListener(e -> {
-            studentIdInput.requestFocusInWindow();
-        });
-        studentIdInput.addActionListener(e -> {
+        studentNameInput.addActionListener(_ ->
+            studentIdInput.requestFocusInWindow()
+        );
+        studentIdInput.addActionListener(_ -> {
             enrollingStudent();
             studentIdInput.getParent().requestFocusInWindow();
         });
