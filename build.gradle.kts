@@ -1,5 +1,5 @@
 val groupID = "i0bz"
-val versionID = "1.2.1"
+val versionID = "1.2.2-rc"
 
 group = groupID
 version = versionID
@@ -45,6 +45,18 @@ tasks.jar {
         attributes["Main-Class"] = "Main"
     }
 }
+
+tasks.register<Jar>("fatJar") {
+    group = "build"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveClassifier.set("FatJar")
+    manifest {
+        attributes["Main-Class"] = "Main"
+    }
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    with(tasks.jar.get())
+}
+
 tasks.register<JavaExec>("runRecentBuild") {
     val jarFile = tasks.jar.get().archiveFile.get().asFile
 
