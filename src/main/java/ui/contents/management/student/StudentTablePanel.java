@@ -71,6 +71,7 @@ class StudentTablePanel extends BasePanel {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableView.getModel());
         sorter.setSortable(0, true);
         sorter.setSortable(1, true);
+        sorter.setSortable(2, false);
         tableView.setRowSorter(sorter);
 
         TableColumnModel columnModel = tableView.getColumnModel();

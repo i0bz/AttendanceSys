@@ -84,7 +84,7 @@ class QuickAttendanceView extends BasePanel {
         inputField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (inputField.getText().equals("Student not enrolled!") || inputField.getText().equals("Invalid UID!"))
+                if (inputField.getForeground().equals(Color.RED))
                     inputField.setText("");
                 inputField.setForeground(Color.BLACK);
             }
@@ -199,8 +199,8 @@ class QuickAttendanceView extends BasePanel {
             inputField.setForeground(Color.RED);
             inputField.getParent().requestFocusInWindow();
             return;
-        } catch (RuntimeException e) {
-            inputField.setText("Invalid UID!");
+        } catch (IllegalArgumentException e) {
+            inputField.setText("Invalid ID!");
             inputField.setForeground(Color.RED);
             inputField.getParent().requestFocusInWindow();
             return;

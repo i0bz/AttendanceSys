@@ -62,6 +62,7 @@ class AttendanceTablePanel extends BasePanel {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
         sorter.setSortable(0, true);
         sorter.setSortable(1, true);
+        sorter.setSortable(2, false);
         table.setRowSorter(sorter);
 
         table.getTableHeader().putClientProperty("FlatLaf.styleClass", "h2");
